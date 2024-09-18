@@ -10,16 +10,21 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <!-- Include AR.js -->
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
+    <!-- Include Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 
-<body style="margin: 0; overflow: hidden;">
-    <a-scene embedded arjs>
+<body style="margin: 0; overflow: hidden; background-color: black;">
+    <!-- AR Scene -->
+    <a-scene embedded arjs="debugUIEnabled: false;" vr-mode-ui="enabled: false">
         <!-- Marker -->
         <a-marker preset="hiro">
             <!-- Model -->
             <a-plane id="animatedPlane" position="0 0.5 -2" rotation="-90 0 0" width="2.1" height="2.97"></a-plane>
 
-            <!-- Histogram -->
+            <!-- Histogram (existing elements) -->
             <a-box id="box1" position="-0.75 0 -2" depth="0.3" width="0.3" height="1" color="#E61A62" visible="false"
                 scale="1 0 1" target-scale="0.5"></a-box>
             <a-box id="box2" position="0 0 -2" depth="0.3" width="0.3" height="1" color="#E61A62" visible="false"
@@ -42,14 +47,19 @@
         </a-assets>
     </a-scene>
 
-    <!-- Buttons to switch image sets -->
-    <div style="position: fixed; bottom: 20px; left: 20px; z-index: 1000;">
-        <button onclick="setImageSet('animation')">A</button>
-        <button onclick="setImageSet('single1')">B</button>
-        <button onclick="setImageSet('single2')">C</button>
-        <button onclick="setImageSet('histogram')">D</button>
+    <!-- Show Info Button -->
+    <button id="showInfoBtn" class="btn btn-primary"
+        style="position: fixed; top: 20px; right: 20px; z-index: 1000; display: none;">Show Info</button>
+
+    <!-- Overlay -->
+    <div id="overlay" style="display: none;">
+        <!-- Content will be injected dynamically -->
     </div>
 
+    <!-- Include Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AR.js Script -->
     <script>
         var plane, boxes, animationImages, singleImage1, singleImage2, histogramImage, index, currentSet, interval;
 
@@ -119,6 +129,12 @@
             setImageSet('animation');
         });
     </script>
+
+    <!-- Include your custom JavaScript file -->
+    <script src="scripts.js"></script>
+
+    
 </body>
 
 </html>
+
