@@ -1,0 +1,40 @@
+{
+    "markers": [
+        {
+            "preset": "hiro",
+            "id": "marker1",
+            "title": "Building 1",
+            "story": [
+                {
+                    "title": "Introduction",
+                    "text": "This is the introduction to the building.",
+                    "image": "media/story1.png"
+                },
+                {
+                    "title": "Development",
+                    "text": "Details about the development phase.",
+                    "image": "media/story2.png"
+                }
+            ],
+            "project": {
+                "timeline": [
+                    {
+                        "year": "2020",
+                        "details": "Project kickoff.",
+                        "image": "media/timeline2020.png"
+                    },
+                    {
+                        "year": "2021",
+                        "details": "First phase completed.",
+                        "image": "media/timeline2021.png"
+                    }
+                ],
+                "images": [
+                    "media/project1.png",
+                    "media/project2.png",
+                    "media/project3.png"
+                ]
+            }
+        }
+    ]
+}

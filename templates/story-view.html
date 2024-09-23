@@ -1,0 +1,24 @@
+<div class="container mt-5">
+    <h1 class="text-center">Story</h1>
+    <!-- Carousel -->
+    <div id="storyCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {{#story}}
+            <div class="carousel-item">
+                <h2>{{title}}</h2>
+                <p>{{text}}</p>
+                <img src="{{image}}" class="d-block w-100" alt="{{title}}">
+            </div>
+            {{/story}}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#storyCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#storyCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+    </div>
+    <div class="mt-4 text-center">
+        <button id="backBtn" class="btn btn-secondary back-btn">Back to Main Menu</button>
+    </div>
+</div>

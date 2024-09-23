@@ -20,7 +20,7 @@
     <!-- AR Scene -->
     <a-scene embedded arjs="debugUIEnabled: false;" vr-mode-ui="enabled: false">
         <!-- Marker -->
-        <a-marker preset="hiro">
+        <a-marker preset="hiro" id="marker1">
             <!-- Model -->
             <a-plane id="animatedPlane" position="0 0.5 -2" rotation="-90 0 0" width="2.1" height="2.97"></a-plane>
 
@@ -31,6 +31,11 @@
                 scale="1 0 1" target-scale="1.0"></a-box>
             <a-box id="box3" position="0.75 0 -2" depth="0.3" width="0.3" height="1" color="#E61A62" visible="false"
                 scale="1 0 1" target-scale="1.5"></a-box>
+        </a-marker>
+
+        <!-- Marker 2 -->
+        <a-marker preset="kanji" id="marker2">
+            <!-- Content specific to marker2 if needed -->
         </a-marker>
 
         <!-- Camera -->
