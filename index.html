@@ -21,37 +21,17 @@
 <body style="margin: 0; overflow: hidden; background-color: black;">
     <!-- AR Scene -->
     <a-scene embedded arjs="debugUIEnabled: false;" vr-mode-ui="enabled: false">
-        <!-- Marker -->
-        <a-marker preset="hiro" id="marker1">
-            <!-- Model -->
-            <a-plane id="animatedPlane" position="0 0.5 -2" rotation="-90 0 0" width="2.1" height="2.97"></a-plane>
-
-            <!-- Histogram (existing elements) -->
-            <a-box id="box1" position="-0.75 0 -2" depth="0.3" width="0.3" height="1" color="#E61A62" visible="false"
-                scale="1 0 1" target-scale="0.5"></a-box>
-            <a-box id="box2" position="0 0 -2" depth="0.3" width="0.3" height="1" color="#E61A62" visible="false"
-                scale="1 0 1" target-scale="1.0"></a-box>
-            <a-box id="box3" position="0.75 0 -2" depth="0.3" width="0.3" height="1" color="#E61A62" visible="false"
-                scale="1 0 1" target-scale="1.5"></a-box>
-        </a-marker>
-
-        <!-- Marker 2 -->
-        <a-marker preset="kanji" id="marker2">
-            <!-- Content specific to marker2 if needed -->
-        </a-marker>
 
         <!-- Camera -->
         <a-entity camera></a-entity>
 
-        <!-- Assets -->
-        <a-assets>
-            <img id="image1" src="media/percorsi-1.png" crossorigin="anonymous">
-            <img id="image2" src="media/percorsi-2.png" crossorigin="anonymous">
-            <img id="image3" src="media/percorsi-3.png" crossorigin="anonymous">
-            <img id="singleImage1" src="media/info.png" crossorigin="anonymous">
-            <img id="singleImage2" src="media/contorni.png" crossorigin="anonymous">
-            <img id="histogramImage" src="media/dati.png" crossorigin="anonymous">
+        <!-- Assets Container -->
+        <a-assets id="assetsContainer">
+            <!-- Assets will be added dynamically -->
         </a-assets>
+        
+        <!-- Markers will be added dynamically -->
+         
     </a-scene>
 
     <!-- Show Info Button -->
@@ -69,77 +49,6 @@
 
     <!-- Include Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- AR.js Script -->
-    <script>
-        var plane, boxes, animationImages, singleImage1, singleImage2, histogramImage, index, currentSet, interval;
-
-        document.addEventListener('DOMContentLoaded', function () {
-            plane = document.querySelector('#animatedPlane');
-            boxes = [
-                document.querySelector('#box1'),
-                document.querySelector('#box2'),
-                document.querySelector('#box3')
-            ];
-            animationImages = ['#image1', '#image2', '#image3'];
-            singleImage1 = '#singleImage1';
-            singleImage2 = '#singleImage2';
-            histogramImage = '#histogramImage';
-            index = 0;
-            currentSet = 'animation';
-
-            function changeImage() {
-                if (currentSet === 'animation') {
-                    plane.setAttribute('src', animationImages[index]);
-                    index = (index + 1) % animationImages.length;
-                }
-            }
-
-            window.setImageSet = function (set) {
-                currentSet = set;
-                console.log('Current set:', currentSet); // Debugging log
-                clearInterval(interval);
-
-                // Hide all boxes initially
-                boxes.forEach(box => box.setAttribute('visible', 'false'));
-                plane.setAttribute('visible', 'true');
-
-                if (set === 'animation') {
-                    console.log('Switching to animation');
-                    interval = setInterval(changeImage, 100); // Change image every 1 second
-                } else if (set === 'single1') {
-                    console.log('Switching to single image 1');
-                    plane.setAttribute('src', singleImage1);
-                } else if (set === 'single2') {
-                    console.log('Switching to single image 2');
-                    plane.setAttribute('src', singleImage2);
-                } else if (set === 'histogram') {
-                    console.log('Switching to histogram');
-                    plane.setAttribute('visible', 'false');
-                    plane.setAttribute('src', histogramImage);
-                    plane.setAttribute('visible', 'true');
-                    boxes.forEach((box) => {
-                        box.setAttribute('visible', 'true');
-                        box.setAttribute('scale', '1 0 1');
-                        box.removeAttribute('animation');
-                        let targetScale = box.getAttribute('target-scale');
-                        let position = box.getAttribute('position');
-                        let newY = 0.55 + (targetScale / 2);
-                        box.setAttribute('position', `${position.x} ${newY} ${position.z}`);
-                        box.setAttribute('animation', {
-                            property: 'scale',
-                            to: `1 ${targetScale} 1`,
-                            dur: 1000,
-                            easing: 'easeInOutQuad'
-                        });
-                    });
-                }
-            }
-
-            // Start with the animation set
-            setImageSet('animation');
-        });
-    </script>
 
     <!-- Include your custom JavaScript file -->
     <script src="scripts.js"></script>

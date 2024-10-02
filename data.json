@@ -4,16 +4,26 @@
             "preset": "hiro",
             "id": "marker1",
             "title": "Building 1",
+            "augmentedContent": {
+                "animation": [
+                    "percorsi-1.png",
+                    "percorsi-2.png",
+                    "percorsi-3.png"
+                ],
+                "single1": "info.png",
+                "single2": "contorni.png",
+                "model": "model.obj"
+            },
             "story": [
                 {
                     "title": "Introduction",
                     "text": "This is the introduction to the building.",
-                    "image": "media/story1.png"
+                    "image": "story1.png"
                 },
                 {
                     "title": "Development",
                     "text": "Details about the development phase.",
-                    "image": "media/story2.png"
+                    "image": "story2.png"
                 }
             ],
             "project": {
@@ -22,18 +32,65 @@
                     {
                         "year": "2020",
                         "details": "Project kickoff.",
-                        "image": "media/timeline2020.png"
+                        "image": "timeline2020.png"
                     },
                     {
                         "year": "2021",
                         "details": "First phase completed.",
-                        "image": "media/timeline2021.png"
+                        "image": "timeline2021.png"
                     }
                 ],
                 "images": [
-                    "media/project1.png",
-                    "media/project2.png",
-                    "media/project3.png"
+                    "project1.png",
+                    "project2.png",
+                    "project3.png"
+                ]
+            }
+        },
+        {
+            "preset": "kanji",
+            "id": "marker2",
+            "title": "Building 2",
+            "augmentedContent": {
+                "animation": [
+                    "percorsi-1.png",
+                    "percorsi-2.png",
+                    "percorsi-3.png"
+                ],
+                "single1": "info.png",
+                "single2": "contorni.png",
+                "model": "model.obj"
+            },
+            "story": [
+                {
+                    "title": "Introduction",
+                    "text": "This is the introduction to the building.",
+                    "image": "story1.png"
+                },
+                {
+                    "title": "Development",
+                    "text": "Details about the development phase.",
+                    "image": "story2.png"
+                }
+            ],
+            "project": {
+                "introduction": "An overview of the building project.",
+                "timeline": [
+                    {
+                        "year": "2020",
+                        "details": "Project kickoff.",
+                        "image": "timeline2020.png"
+                    },
+                    {
+                        "year": "2021",
+                        "details": "First phase completed.",
+                        "image": "timeline2021.png"
+                    }
+                ],
+                "images": [
+                    "project1.png",
+                    "project2.png",
+                    "project3.png"
                 ]
             }
         }

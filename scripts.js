@@ -3,10 +3,18 @@
 document.addEventListener('DOMContentLoaded', function () {
     let markerData = []; // To store data from data.json
     let currentMarker = null; // To keep track of the currently active marker
+    let currentAugmentedContent = null; // Store the augmented content for the current marker
+    let currentPlane = null; // The plane element for the current marker
+    let currentModel = null; // The model element for the current marker
+    let interval = null; // For the animation interval
+    let currentSetIndex = 0; // To keep track of the current image set
+    const imageSets = ['animation', 'single1', 'single2', 'model'];
 
     const showInfoBtn = document.getElementById('showInfoBtn');
+    const changeViewBtn = document.getElementById('changeViewBtn');
     const overlay = document.getElementById('overlay');
     const sceneEl = document.querySelector('a-scene');
+    const assetsContainer = document.getElementById('assetsContainer');
 
     console.log('DOM fully loaded and parsed.');
 
@@ -21,19 +29,99 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             markerData = data.markers;
             console.log('Marker Data Loaded:', markerData);
-            initializeMarkers();
+            initializeScene();
         })
         .catch(error => {
             console.error('Error loading data:', error);
         });
 
-    // Initialize markers with event listeners
-    function initializeMarkers() {
-        if (markerData.length === 0) {
-            console.warn('No markers found in data.json.');
-            return;
+    function initializeScene() {
+        markerData.forEach(marker => {
+            // Add assets
+            addAssets(marker);
+
+            // Add marker to the scene
+            addMarker(marker);
+        });
+
+        // Initialize markers with event listeners
+        initializeMarkers();
+    }
+
+    function addAssets(marker) {
+        const augmentedContent = marker.augmentedContent;
+
+        // Add animation images
+        if (augmentedContent.animation) {
+            augmentedContent.animation.forEach(imgName => {
+                const imgSrc = `media/${marker.id}/${imgName}`
+                const imgId = getAssetId(imgSrc);
+                const imgElement = document.createElement('img');
+                imgElement.setAttribute('id', imgId);
+                imgElement.setAttribute('src', imgSrc);
+                imgElement.setAttribute('crossorigin', 'anonymous');
+                assetsContainer.appendChild(imgElement);
+            });
         }
 
+        // Add single images
+        ['single1', 'single2'].forEach(key => {
+            if (augmentedContent[key]) {
+                const imgName = augmentedContent[key];
+                const imgSrc = `media/${marker.id}/${imgName}`
+                const imgId = getAssetId(imgSrc);
+                const imgElement = document.createElement('img');
+                imgElement.setAttribute('id', imgId);
+                imgElement.setAttribute('src', imgSrc);
+                imgElement.setAttribute('crossorigin', 'anonymous');
+                assetsContainer.appendChild(imgElement);
+            }
+        });
+
+        // Add model asset (OBJ)
+        if (augmentedContent.model) {
+            const modelName = augmentedContent.model;
+            const modelSrc = `media/${marker.id}/${modelName}`
+            const modelId = getAssetId(modelSrc);
+            const assetItem = document.createElement('a-asset-item');
+            assetItem.setAttribute('id', modelId);
+            assetItem.setAttribute('src', modelSrc);
+            assetsContainer.appendChild(assetItem);
+        }
+    }
+
+    function addMarker(marker) {
+        const aMarker = document.createElement('a-marker');
+        aMarker.setAttribute('preset', 'custom');
+        aMarker.setAttribute('type', 'pattern');
+        aMarker.setAttribute('url', `media/${marker.id}/pattern.patt`); // Assuming pattern files are named accordingly
+        aMarker.setAttribute('id', marker.id);
+
+        // Create a plane for images
+        const plane = document.createElement('a-plane');
+        plane.setAttribute('id', `plane-${marker.id}`);
+        plane.setAttribute('position', '0 0.5 0');
+        plane.setAttribute('rotation', '-90 0 0');
+        plane.setAttribute('width', '2');
+        plane.setAttribute('height', '2');
+        plane.setAttribute('visible', 'false'); // Initially hidden
+        aMarker.appendChild(plane);
+
+        // Create an entity for the model
+        const model = document.createElement('a-entity');
+        model.setAttribute('id', `model-${marker.id}`);
+        model.setAttribute('position', '0 0 0');
+        model.setAttribute('rotation', '0 0 0');
+        model.setAttribute('scale', '0.5 0.5 0.5'); // Adjust scale as needed
+        model.setAttribute('visible', 'false'); // Initially hidden
+        aMarker.appendChild(model);
+
+        // Append the marker to the scene
+        sceneEl.appendChild(aMarker);
+    }
+
+    // Initialize markers with event listeners
+    function initializeMarkers() {
         markerData.forEach(marker => {
             const aMarker = document.getElementById(marker.id);
             if (aMarker) {
@@ -41,20 +129,118 @@ document.addEventListener('DOMContentLoaded', function () {
                 aMarker.addEventListener('markerFound', () => {
                     currentMarker = marker.id;
                     console.log(`Marker Found: ${marker.id}`);
-                    showInfoBtn.classList.add('visible');
                     showInfoBtn.style.display = 'block';
+                    changeViewBtn.style.display = 'block';
+
+                    // Load augmented content for this marker
+                    currentAugmentedContent = marker.augmentedContent;
+                    currentSetIndex = 0; // Reset the image set index
+
+                    // Get the plane and model specific to this marker
+                    currentPlane = aMarker.querySelector(`#plane-${marker.id}`);
+                    currentModel = aMarker.querySelector(`#model-${marker.id}`);
+
+                    // Start with the first image set
+                    setImageSet(imageSets[currentSetIndex]);
                 });
 
                 aMarker.addEventListener('markerLost', () => {
                     console.log(`Marker Lost: ${marker.id}`);
                     currentMarker = null;
-                    showInfoBtn.classList.remove('visible');
                     showInfoBtn.style.display = 'none';
+                    changeViewBtn.style.display = 'none';
+
+                    // Clear interval and hide elements
+                    clearInterval(interval);
+                    if (currentPlane) {
+                        currentPlane.setAttribute('visible', 'false');
+                    }
+                    if (currentModel) {
+                        currentModel.setAttribute('visible', 'false');
+                    }
                 });
             } else {
                 console.warn(`Marker element with id "${marker.id}" not found in DOM`);
             }
         });
+    }
+
+    function setImageSet(set) {
+        if (!currentAugmentedContent || (!currentPlane && !currentModel)) {
+            console.warn('No augmented content or elements available for the current marker.');
+            return;
+        }
+
+        console.log('Current set:', set);
+        clearInterval(interval);
+
+        // Hide plane and model initially
+        if (currentPlane) {
+            currentPlane.setAttribute('visible', 'false');
+        }
+        if (currentModel) {
+            currentModel.setAttribute('visible', 'false');
+            // Remove previous model components to avoid conflicts
+            currentModel.removeAttribute('obj-model');
+        }
+
+        if (set === 'animation') {
+            console.log('Switching to animation');
+            let animationImages = currentAugmentedContent.animation.map(
+                imgName => `#${getAssetId(`media/${currentMarker}/${imgName}`)}`
+            );
+            let index = 0;
+
+            function changeImage() {
+                currentPlane.setAttribute('visible', 'true');
+                currentPlane.setAttribute('src', animationImages[index]);
+                index = (index + 1) % animationImages.length;
+            }
+
+            changeImage(); // Show the first image immediately
+            interval = setInterval(changeImage, 100); // Adjust the interval as needed
+        } else if (set === 'single1' || set === 'single2') {
+            console.log(`Switching to ${set}`);
+            const imgName = currentAugmentedContent[set];
+            const imgSrc = `media/${currentMarker}/${imgName}`;
+            if (imgSrc) {
+                currentPlane.setAttribute('visible', 'true');
+                currentPlane.setAttribute('src', `#${getAssetId(imgSrc)}`);
+            } else {
+                console.warn(`No image found for ${set}`);
+            }
+        } else if (set === 'model') {
+            console.log('Switching to model');
+            if (currentAugmentedContent.model) {
+                const modelName = currentAugmentedContent.model; // e.g., 'model.obj'
+                const modelObjSrc = `media/${currentMarker}/${modelName}`;
+                const modelObjId = `#${getAssetId(modelObjSrc)}`;
+
+                // Derive MTL filename
+                const modelMtlName = modelName.replace('.obj', '.mtl');
+                const modelMtlSrc = `media/${currentMarker}/${modelMtlName}`;
+                const modelMtlId = `#${getAssetId(modelMtlSrc)}`;
+
+                console.log(`OBJ ID: ${modelObjId}, MTL ID: ${modelMtlId}`);
+
+                currentModel.setAttribute('visible', 'true');
+                currentModel.setAttribute('obj-model', `obj: ${modelObjId}; mtl: ${modelMtlId}`);
+            } else {
+                console.warn('No model found for this marker.');
+            }
+        }
+    }
+
+    function getAssetId(src) {
+        const parts = src.split('/');
+        if (parts.length < 3) {
+            console.warn(`Unexpected media path format: ${src}`);
+            return src; // Fallback to the full path if format is unexpected
+        }
+        const markerId = parts[1]; // 'marker1'
+        const filename = parts[2]; // 'model.obj'
+        const nameWithoutExt = filename.substring(0, filename.lastIndexOf('.')); // 'model'
+        return `${markerId}_${nameWithoutExt}`; // 'marker1_model'
     }
 
     // Handle "Show Info" button click
@@ -68,6 +254,19 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             console.warn('Show Info clicked, but no marker is currently active.');
         }
+    });
+
+    // Event listener for the Change View button
+    changeViewBtn.addEventListener('click', function () {
+        if (!currentAugmentedContent) {
+            console.warn('No augmented content available for the current marker.');
+            return;
+        }
+        console.log('Change View button clicked.');
+        // Cycle to the next image set
+        currentSetIndex = (currentSetIndex + 1) % imageSets.length;
+        const newSet = imageSets[currentSetIndex];
+        setImageSet(newSet);
     });
 
     // Event Delegation: Handle clicks on dynamically added backBtn

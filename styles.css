@@ -104,15 +104,17 @@
 /* "Show Info" Button Animations */
 
 /* Initial state (hidden with opacity 0) */
-#showInfoBtn {
+/* #showInfoBtn,
+#changeViewBtn {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
-}
+} */
 
 /* Visible state */
-#showInfoBtn.visible {
+/* #showInfoBtn.visible, 
+#changeViewBtn.visible {
     opacity: 1;
-}
+} */
 
 /* Position the Close and Back buttons at the bottom center */
 #overlay .close-btn,
