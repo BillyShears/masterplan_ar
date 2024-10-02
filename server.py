@@ -4,7 +4,7 @@ import ssl
 # Use '0.0.0.0' to listen on all interfaces
 server_address = "0.0.0.0"
 port = 8000
-ip = "192.168.1.106"
+ip = "192.168.1.148"
 
 server_address = (server_address, port)
 handler_class = http.server.SimpleHTTPRequestHandler

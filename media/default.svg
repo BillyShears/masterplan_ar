@@ -1,0 +1,6 @@
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="300" height="200" fill="#D3D3D3"/>
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#555555" font-family="Arial, sans-serif" font-size="20">
+        No Image Available
+    </text>
+</svg>

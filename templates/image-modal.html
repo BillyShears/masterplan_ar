@@ -1,8 +1,14 @@
+<!-- templates/image-modal.html -->
 <div id="imageModal" class="modal" tabindex="-1">
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-body">
-        <img src="{{src}}" id="modalImage" class="img-fluid" alt="Enlarged Image">
+        {{#src}}
+            <img src="{{src}}" id="modalImage" class="img-fluid" alt="Enlarged Image" onerror="this.onerror=null; this.src='media/default.svg';">
+        {{/src}}
+        {{^src}}
+            <img src="media/default.svg" id="modalImage" class="img-fluid" alt="Default Modal Image">
+        {{/src}}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

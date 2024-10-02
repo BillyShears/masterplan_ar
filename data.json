@@ -17,6 +17,7 @@
                 }
             ],
             "project": {
+                "introduction": "An overview of the building project.",
                 "timeline": [
                     {
                         "year": "2020",

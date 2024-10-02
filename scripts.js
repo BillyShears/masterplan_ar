@@ -1,17 +1,4 @@
-// Helper function to replace placeholders in the template
-function replacePlaceholders(template, data) {
-    return template.replace(/{{\s*([^{}\s]+)\s*}}/g, (match, key) => {
-        return data[key] || '';
-    });
-}
-
-// Helper function to replace array placeholders (e.g., story, timeline, images)
-function replaceArrayPlaceholders(template, arrayData, loopStart, loopEnd, replacer) {
-    const regex = new RegExp(`${loopStart}([\\s\\S]*?)${loopEnd}`, 'g');
-    return template.replace(regex, () => {
-        return arrayData.map((item, index) => replacer(item, index)).join('');
-    });
-}
+// scripts.js
 
 document.addEventListener('DOMContentLoaded', function () {
     let markerData = []; // To store data from data.json
@@ -20,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var showInfoBtn = document.getElementById('showInfoBtn');
     var overlay = document.getElementById('overlay');
     var sceneEl = document.querySelector('a-scene');
+
+    console.log('DOM fully loaded and parsed.');
 
     // Fetch the JSON data
     fetch('data.json')
@@ -34,10 +23,17 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('Marker Data Loaded:', markerData);
             initializeMarkers();
         })
-        .catch(error => console.error('Error loading data:', error));
+        .catch(error => {
+            console.error('Error loading data:', error);
+        });
 
     // Initialize markers with event listeners
     function initializeMarkers() {
+        if (markerData.length === 0) {
+            console.warn('No markers found in data.json.');
+            return;
+        }
+
         markerData.forEach(marker => {
             var aMarker = document.getElementById(marker.id);
             if (aMarker) {
@@ -63,11 +59,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Handle "Show Info" button click
     showInfoBtn.addEventListener('click', function () {
+        console.log('Show Info button clicked.');
         if (currentMarker) {
             console.log(`Show Info clicked for marker: ${currentMarker}`);
             sceneEl.pause(); // Pause the AR scene
             overlay.style.display = 'block'; // Show the overlay
             loadContent(currentMarker); // Load content based on current marker
+        } else {
+            console.warn('Show Info clicked, but no marker is currently active.');
         }
     });
 
@@ -87,8 +86,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     return response.text();
                 })
                 .then(template => {
-                    let populated = replacePlaceholders(template, { title: data.title });
-                    overlay.innerHTML = populated;
+                    // Use Mustache to render the template with data
+                    // Ensure that the template expects only the necessary data
+                    let rendered = Mustache.render(template, { title: data.title });
+                    overlay.innerHTML = rendered;
+                    console.log('First-view template loaded and rendered with Mustache.');
 
                     // Add event listeners for the buttons
                     var storyBtn = document.getElementById('storyBtn');
@@ -99,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         storyBtn.addEventListener('click', () => loadStoryView(data));
                         projectBtn.addEventListener('click', () => loadProjectView(data));
                         closeBtn.addEventListener('click', closeOverlay);
+                        console.log('Event listeners added to buttons.');
                     } else {
                         console.warn('One or more buttons (storyBtn, projectBtn, closeBtn) not found in the template.');
                     }
@@ -142,21 +145,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.text();
             })
             .then(template => {
-                // Replace static placeholders
-                let populated = replacePlaceholders(template, {});
-
-                // Handle story slides with activeClass
-                populated = replaceArrayPlaceholders(populated, data.story, '{{#story}}', '{{/story}}', (item, index) => {
-                    return `
-                        <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                            <h2>${item.title}</h2>
-                            <p>${item.text}</p>
-                            <img src="${item.image}" class="d-block w-100" alt="${item.title}">
-                        </div>
-                    `;
-                });
-
-                overlay.innerHTML = populated;
+                // Use Mustache to render the template with data
+                let rendered = Mustache.render(template, data);
+                overlay.innerHTML = rendered;
+                console.log('Story-view template loaded and rendered with Mustache.');
 
                 // Initialize the carousel
                 var carouselElement = document.querySelector('#storyCarousel');
@@ -209,27 +201,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.text();
             })
             .then(template => {
-                let populated = replacePlaceholders(template, {});
-
-                // Handle timeline events
-                populated = replaceArrayPlaceholders(populated, data.project.timeline, '{{#project.timeline}}', '{{/project.timeline}}', (item) => {
-                    return `
-                        <li class="list-group-item">
-                            <button class="btn btn-link timeline-year" data-year="${item.year}">${item.year}</button>
-                        </li>
-                    `;
-                });
-
-                // Handle project images
-                populated = replaceArrayPlaceholders(populated, data.project.images, '{{#project.images}}', '{{/project.images}}', (image) => {
-                    return `
-                        <div class="carousel-item">
-                            <img src="${image}" class="d-block w-100" alt="Project Image">
-                        </div>
-                    `;
-                });
-
-                overlay.innerHTML = populated;
+                // Use Mustache to render the template with data
+                let rendered = Mustache.render(template, data);
+                overlay.innerHTML = rendered;
+                console.log('Project-view template loaded and rendered with Mustache.');
 
                 // Initialize the carousel
                 var carouselElement = document.querySelector('#projectCarousel');
@@ -286,14 +261,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     return response.text();
                 })
                 .then(template => {
-                    let populated = replacePlaceholders(template, {
-                        year: yearData.year,
-                        details: yearData.details,
-                        image: yearData.image
-                    });
-                    overlay.innerHTML += populated;
+                    // Use Mustache to render the template with yearData
+                    let rendered = Mustache.render(template, yearData);
+                    overlay.innerHTML += rendered;
+                    console.log('Year-overlay template loaded and rendered with Mustache.');
 
-                    // Event listener for the close button
+                    // Add event listener for the close button
                     var closeYearBtn = document.getElementById('closeYearBtn');
                     if (closeYearBtn) {
                         closeYearBtn.addEventListener('click', function () {
@@ -351,8 +324,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.text();
             })
             .then(template => {
-                let populated = replacePlaceholders(template, { src: src });
-                overlay.innerHTML += populated;
+                // Use Mustache to render the template with src
+                let rendered = Mustache.render(template, { src: src });
+                overlay.innerHTML += rendered;
+                console.log('Image-modal template loaded and rendered with Mustache.');
 
                 // Initialize the modal
                 var modalElement = document.getElementById('imageModal');
@@ -378,6 +353,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to close the overlay and resume AR scene
     function closeOverlay() {
         console.log('Closing overlay and resuming AR scene.');
+        overlay.innerHTML = ''; // Clear overlay content
         overlay.style.display = 'none';
         sceneEl.play(); // Resume the AR scene
     }

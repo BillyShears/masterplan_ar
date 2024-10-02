@@ -1,13 +1,23 @@
+<!-- templates/project-view.html -->
 <div class="container mt-5">
     <h1 class="text-center">Project</h1>
     <!-- Carousel -->
     <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <!-- Introduction Page -->
+            {{#project.introduction}}
             <div class="carousel-item active">
                 <h2>Introduction</h2>
                 <p>{{project.introduction}}</p>
             </div>
+            {{/project.introduction}}
+            {{^project.introduction}}
+            <div class="carousel-item active">
+                <h2>Introduction</h2>
+                <p>No introduction available for this project.</p>
+            </div>
+            {{/project.introduction}}
+            
             <!-- Timeline Page -->
             <div class="carousel-item">
                 <h2>Timeline</h2>
@@ -17,20 +27,33 @@
                         <button class="btn btn-link timeline-year" data-year="{{year}}">{{year}}</button>
                     </li>
                     {{/project.timeline}}
+                    {{^project.timeline}}
+                    <li class="list-group-item">
+                        <p>No timeline data available.</p>
+                    </li>
+                    {{/project.timeline}}
                 </ul>
             </div>
+            
             <!-- Images Pages -->
             {{#project.images}}
             <div class="carousel-item">
-                <img src="{{.}}" class="d-block w-100" alt="Project Image">
+                <img src="{{.}}" class="d-block w-100" alt="Project Image" onerror="this.onerror=null; this.src='media/default.svg';">
+            </div>
+            {{/project.images}}
+            {{^project.images}}
+            <div class="carousel-item">
+                <img src="media/default.svg" class="d-block w-100" alt="Default Project Image">
             </div>
             {{/project.images}}
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
         </button>
     </div>
     <div class="mt-4 text-center">
