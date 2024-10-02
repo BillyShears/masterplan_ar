@@ -105,14 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.warn(`story is missing or invalid for marker "${markerId}". Assigned default story.`);
             }
 
-            // Mark the first story item as active
-            const storiesWithIndex = data.story.map((storyItem, index) => {
-                return {
-                    ...storyItem,
-                    isFirst: index === 0
-                };
-            });
-
             // Load the main menu with marker-specific title
             fetch('templates/first-view.html')
                 .then(response => {
@@ -127,8 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     overlay.innerHTML = rendered;
                     console.log('First-view template loaded and rendered with Mustache.');
 
-                    // Attach event listeners to the buttons are no longer needed for backBtn due to event delegation
-                    // However, storyBtn and projectBtn still need their listeners
+                    // Attach event listeners to the buttons (except backBtn due to event delegation)
                     const storyBtn = document.getElementById('storyBtn');
                     const projectBtn = document.getElementById('projectBtn');
                     const closeBtn = document.getElementById('closeBtn');
@@ -172,8 +163,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.text();
             })
             .then(template => {
-                // Render the story-view template with story data
-                const rendered = Mustache.render(template, { story: data.story });
+                // Add isFirst flag to the first story item
+                const storiesWithFlags = data.story.map((storyItem, index) => {
+                    return {
+                        ...storyItem,
+                        isFirst: index === 0
+                    };
+                });
+
+                // Render the story-view template with updated story data
+                const rendered = Mustache.render(template, { story: storiesWithFlags });
                 overlay.innerHTML = rendered;
                 console.log('Story-view template loaded and rendered with Mustache.');
 
@@ -186,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.warn('Story Carousel element (#storyCarousel) not found.');
                 }
 
-                // Attach event listener to the back button is no longer needed due to event delegation
+                // No need to attach event listener to backBtn due to event delegation
 
                 // Add click event to images to enlarge
                 const images = overlay.querySelectorAll('img');
@@ -236,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                 });
 
-                // Attach event listener to the back button is no longer needed due to event delegation
+                // No need to attach event listener to backBtn due to event delegation
             })
             .catch(err => {
                 console.warn('Failed to load project-view template:', err);

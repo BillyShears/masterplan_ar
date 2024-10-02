@@ -9,10 +9,10 @@
                 <h2>{{title}}</h2>
                 <p>{{text}}</p>
                 {{#image}}
-                    <img src="{{image}}" class="d-block w-100" alt="{{title}}" onerror="this.onerror=null; this.src='media/default-story.png';">
+                    <img src="{{image}}" class="d-block w-100" alt="{{title}}" onerror="this.onerror=null; this.src='media/default.svg';">
                 {{/image}}
                 {{^image}}
-                    <img src="media/default-story.png" class="d-block w-100" alt="Default Story Image">
+                    <img src="media/default.svg" class="d-block w-100" alt="Default Story Image">
                 {{/image}}
             </div>
             {{/story}}
@@ -20,7 +20,7 @@
             <div class="carousel-item active">
                 <h2>No Story Available</h2>
                 <p>There is no story data available for this marker.</p>
-                <img src="media/default-story.png" class="d-block w-100" alt="Default Story Image">
+                <img src="media/default.svg" class="d-block w-100" alt="Default Story Image">
             </div>
             {{/story}}
         </div>
