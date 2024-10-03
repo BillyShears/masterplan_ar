@@ -10,9 +10,9 @@
                     "percorsi-2.png",
                     "percorsi-3.png"
                 ],
-                "single1": "info.png",
-                "single2": "contorni.png",
-                "model": "model.obj"
+                "single1": "test-1.png",
+                "single2": "test-2.png",
+                "model": "test-model.obj"
             },
             "story": [
                 {

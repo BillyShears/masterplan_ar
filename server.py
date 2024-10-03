@@ -13,7 +13,7 @@ httpd = http.server.HTTPServer(server_address, handler_class)
 
 # Load the new certificate and key
 context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-context.load_cert_chain(certfile=f"{ip}.pem", keyfile=f"{ip}-key.pem")
+context.load_cert_chain(certfile=f"dev/{ip}.pem", keyfile=f"dev/{ip}-key.pem")
 
 httpd.socket = context.wrap_socket(httpd.socket, server_side=True)
 

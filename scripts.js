@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
         model.setAttribute('id', `model-${marker.id}`);
         model.setAttribute('position', '0 0 0');
         model.setAttribute('rotation', '0 0 0');
-        model.setAttribute('scale', '0.5 0.5 0.5'); // Adjust scale as needed
+        model.setAttribute('scale', '0.01 0.01 0.01'); // Adjust scale as needed
         model.setAttribute('visible', 'false'); // Initially hidden
         aMarker.appendChild(model);
 

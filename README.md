@@ -108,6 +108,7 @@ mkcert 192.168.1.5
 - This command creates two files:
   - `192.168.1.5.pem` (certificate)
   - `192.168.1.5-key.pem` (private key)
+- Move the new `.pem` files inside a `dev` folder.
 
 ### 4. Modify `server.py`
 
@@ -130,7 +131,7 @@ Your server is now running with HTSP on port 8000.
 
 ### 6. Serve the Certificate for Installation on iPhone
 
-To trust the SSL root certificate on your iPhone, you need to install it. You can serve the certificate file (e.g. `192.168.1.5.pem`) over HTTP and download it using Safari on your iPhone.
+To trust the SSL root certificate on your iPhone, you need to install it. You can serve the certificate file (e.g. `dev/192.168.1.5.pem`) over HTTP and download it using Safari on your iPhone.
 
 First, start a simple HTTP server to serve the certificate:
 
@@ -142,7 +143,7 @@ python3 -m http.server 8001 --bind 0.0.0.0
 
 On your iPhone:
 
-1. Open Safari (be sure not to use other browsers) and navigate to `http://192.168.1.5:8001/192.168.1.5.pem`
+1. Open Safari (be sure not to use other browsers) and navigate to `http://192.168.1.5:8001/dev/192.168.1.5.pem`
 
   - Replace **192.168.1.5** with your Mac's IP address.
 
