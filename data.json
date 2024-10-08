@@ -3,7 +3,6 @@
         {
             "preset": "hiro",
             "id": "marker1",
-            "title": "Building 1",
             "augmentedContent": {
                 "animation": [
                     "percorsi-1.png",
@@ -14,43 +13,82 @@
                 "single2": "test-2.png",
                 "model": "test-model.obj"
             },
-            "story": [
+            "buildings": [
                 {
-                    "title": "Introduction",
-                    "text": "This is the introduction to the building.",
-                    "image": "story1.png"
+                    "title": "Building 1A",
+                    "story": [
+                        {
+                            "title": "Introduction",
+                            "text": "This is the introduction to Building 1A.",
+                            "image": "story1A.png"
+                        },
+                        {
+                            "title": "Development",
+                            "text": "Details about the development phase of Building 1A.",
+                            "image": "story2A.png"
+                        }
+                    ],
+                    "project": {
+                        "introduction": "An overview of Building 1A project.",
+                        "timeline": [
+                            {
+                                "year": "2020",
+                                "details": "Project kickoff for Building 1A.",
+                                "image": "timeline2020A.png"
+                            },
+                            {
+                                "year": "2021",
+                                "details": "First phase of Building 1A completed.",
+                                "image": "timeline2021A.png"
+                            }
+                        ],
+                        "images": [
+                            "project1A.png",
+                            "project2A.png",
+                            "project3A.png"
+                        ]
+                    }
                 },
                 {
-                    "title": "Development",
-                    "text": "Details about the development phase.",
-                    "image": "story2.png"
-                }
-            ],
-            "project": {
-                "introduction": "An overview of the building project.",
-                "timeline": [
-                    {
-                        "year": "2020",
-                        "details": "Project kickoff.",
-                        "image": "timeline2020.png"
-                    },
-                    {
-                        "year": "2021",
-                        "details": "First phase completed.",
-                        "image": "timeline2021.png"
+                    "title": "Building 1B",
+                    "story": [
+                        {
+                            "title": "Introduction",
+                            "text": "This is the introduction to Building 1B.",
+                            "image": "story1B.png"
+                        },
+                        {
+                            "title": "Development",
+                            "text": "Details about the development phase of Building 1B.",
+                            "image": "story2B.png"
+                        }
+                    ],
+                    "project": {
+                        "introduction": "An overview of Building 1B project.",
+                        "timeline": [
+                            {
+                                "year": "2020",
+                                "details": "Project kickoff for Building 1B.",
+                                "image": "timeline2020B.png"
+                            },
+                            {
+                                "year": "2021",
+                                "details": "First phase of Building 1B completed.",
+                                "image": "timeline2021B.png"
+                            }
+                        ],
+                        "images": [
+                            "project1B.png",
+                            "project2B.png",
+                            "project3B.png"
+                        ]
                     }
-                ],
-                "images": [
-                    "project1.png",
-                    "project2.png",
-                    "project3.png"
-                ]
-            }
+                }
+            ]
         },
         {
             "preset": "kanji",
             "id": "marker2",
-            "title": "Building 2",
             "augmentedContent": {
                 "animation": [
                     "percorsi-1.png",
@@ -61,38 +99,78 @@
                 "single2": "contorni.png",
                 "model": "model.obj"
             },
-            "story": [
+            "buildings": [
                 {
-                    "title": "Introduction",
-                    "text": "This is the introduction to the building.",
-                    "image": "story1.png"
+                    "title": "Building 2A",
+                    "story": [
+                        {
+                            "title": "Introduction",
+                            "text": "This is the introduction to Building 2A.",
+                            "image": "story1A.png"
+                        },
+                        {
+                            "title": "Development",
+                            "text": "Details about the development phase of Building 2A.",
+                            "image": "story2A.png"
+                        }
+                    ],
+                    "project": {
+                        "introduction": "An overview of Building 2A project.",
+                        "timeline": [
+                            {
+                                "year": "2020",
+                                "details": "Project kickoff for Building 2A.",
+                                "image": "timeline2020A.png"
+                            },
+                            {
+                                "year": "2021",
+                                "details": "First phase of Building 2A completed.",
+                                "image": "timeline2021A.png"
+                            }
+                        ],
+                        "images": [
+                            "project1A.png",
+                            "project2A.png",
+                            "project3A.png"
+                        ]
+                    }
                 },
                 {
-                    "title": "Development",
-                    "text": "Details about the development phase.",
-                    "image": "story2.png"
-                }
-            ],
-            "project": {
-                "introduction": "An overview of the building project.",
-                "timeline": [
-                    {
-                        "year": "2020",
-                        "details": "Project kickoff.",
-                        "image": "timeline2020.png"
-                    },
-                    {
-                        "year": "2021",
-                        "details": "First phase completed.",
-                        "image": "timeline2021.png"
+                    "title": "Building 2B",
+                    "story": [
+                        {
+                            "title": "Introduction",
+                            "text": "This is the introduction to Building 2B.",
+                            "image": "story1B.png"
+                        },
+                        {
+                            "title": "Development",
+                            "text": "Details about the development phase of Building 2B.",
+                            "image": "story2B.png"
+                        }
+                    ],
+                    "project": {
+                        "introduction": "An overview of Building 2B project.",
+                        "timeline": [
+                            {
+                                "year": "2020",
+                                "details": "Project kickoff for Building 2B.",
+                                "image": "timeline2020B.png"
+                            },
+                            {
+                                "year": "2021",
+                                "details": "First phase of Building 2B completed.",
+                                "image": "timeline2021B.png"
+                            }
+                        ],
+                        "images": [
+                            "project1B.png",
+                            "project2B.png",
+                            "project3B.png"
+                        ]
                     }
-                ],
-                "images": [
-                    "project1.png",
-                    "project2.png",
-                    "project3.png"
-                ]
-            }
+                }
+            ]
         }
     ]
 }

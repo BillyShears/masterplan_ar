@@ -21,7 +21,6 @@
 <body style="margin: 0; overflow: hidden; background-color: black;">
     <!-- AR Scene -->
     <a-scene embedded arjs="debugUIEnabled: false;" vr-mode-ui="enabled: false">
-
         <!-- Camera -->
         <a-entity camera></a-entity>
 
@@ -29,14 +28,16 @@
         <a-assets id="assetsContainer">
             <!-- Assets will be added dynamically -->
         </a-assets>
-        
+
         <!-- Markers will be added dynamically -->
-         
+
     </a-scene>
 
-    <!-- Show Info Button -->
-    <button id="showInfoBtn" class="btn btn-primary"
-        style="position: fixed; top: 20px; right: 20px; z-index: 1000; display: none;">Show Info</button>
+    <!-- Dynamic Buttons Container -->
+    <div id="buttonContainer"
+        style="position: fixed; top: 20px; right: 20px; z-index: 1000; display: none; flex-direction: column;">
+        <!-- Dynamic buttons will be injected here -->
+    </div>
 
     <!-- Change View Button -->
     <button id="changeViewBtn" class="btn btn-secondary"
@@ -52,8 +53,6 @@
 
     <!-- Include your custom JavaScript file -->
     <script src="scripts.js"></script>
-
-    
 </body>
 
 </html>

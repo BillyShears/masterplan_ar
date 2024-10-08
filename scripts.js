@@ -1,16 +1,14 @@
-// scripts.js
-
 document.addEventListener('DOMContentLoaded', function () {
     let markerData = []; // To store data from data.json
     let currentMarker = null; // To keep track of the currently active marker
     let currentAugmentedContent = null; // Store the augmented content for the current marker
     let currentPlane = null; // The plane element for the current marker
     let currentModel = null; // The model element for the current marker
+    let currentBuildings = null; // Store the list of buildings for the current marker
+    let currentBuilding = null; // To keep track of the currently selected building
     let interval = null; // For the animation interval
     let currentSetIndex = 0; // To keep track of the current image set
     const imageSets = ['animation', 'single1', 'single2', 'model'];
-
-    const showInfoBtn = document.getElementById('showInfoBtn');
     const changeViewBtn = document.getElementById('changeViewBtn');
     const overlay = document.getElementById('overlay');
     const sceneEl = document.querySelector('a-scene');
@@ -54,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add animation images
         if (augmentedContent.animation) {
             augmentedContent.animation.forEach(imgName => {
-                const imgSrc = `media/${marker.id}/${imgName}`
+                const imgSrc = `media/${marker.id}/${imgName}`;
                 const imgId = getAssetId(imgSrc);
                 const imgElement = document.createElement('img');
                 imgElement.setAttribute('id', imgId);
@@ -68,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ['single1', 'single2'].forEach(key => {
             if (augmentedContent[key]) {
                 const imgName = augmentedContent[key];
-                const imgSrc = `media/${marker.id}/${imgName}`
+                const imgSrc = `media/${marker.id}/${imgName}`;
                 const imgId = getAssetId(imgSrc);
                 const imgElement = document.createElement('img');
                 imgElement.setAttribute('id', imgId);
@@ -81,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add model asset (OBJ)
         if (augmentedContent.model) {
             const modelName = augmentedContent.model;
-            const modelSrc = `media/${marker.id}/${modelName}`
+            const modelSrc = `media/${marker.id}/${modelName}`;
             const modelId = getAssetId(modelSrc);
             const assetItem = document.createElement('a-asset-item');
             assetItem.setAttribute('id', modelId);
@@ -128,8 +126,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(`Initializing listeners for marker: ${marker.id}`);
                 aMarker.addEventListener('markerFound', () => {
                     currentMarker = marker.id;
+                    currentBuildings = marker.buildings; // Store buildings array
                     console.log(`Marker Found: ${marker.id}`);
-                    showInfoBtn.style.display = 'block';
+
+                    // Generate dynamic buttons
+                    generateBuildingButtons(currentBuildings);
+
                     changeViewBtn.style.display = 'block';
 
                     // Load augmented content for this marker
@@ -147,7 +149,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 aMarker.addEventListener('markerLost', () => {
                     console.log(`Marker Lost: ${marker.id}`);
                     currentMarker = null;
-                    showInfoBtn.style.display = 'none';
+
+                    // Hide the button container
+                    const buttonContainer = document.getElementById('buttonContainer');
+                    buttonContainer.style.display = 'none';
+
                     changeViewBtn.style.display = 'none';
 
                     // Clear interval and hide elements
@@ -243,16 +249,197 @@ document.addEventListener('DOMContentLoaded', function () {
         return `${markerId}_${nameWithoutExt}`; // 'marker1_model'
     }
 
-    // Handle "Show Info" button click
-    showInfoBtn.addEventListener('click', function () {
-        console.log('Show Info button clicked.');
-        if (currentMarker) {
-            console.log(`Show Info clicked for marker: ${currentMarker}`);
-            sceneEl.pause(); // Pause the AR scene
-            overlay.style.display = 'block'; // Show the overlay
-            loadContent(currentMarker); // Load content based on current marker
-        } else {
-            console.warn('Show Info clicked, but no marker is currently active.');
+    function generateBuildingButtons(buildings) {
+        // Get the button container
+        const buttonContainer = document.getElementById('buttonContainer');
+        // Clear any existing buttons
+        buttonContainer.innerHTML = '';
+
+        buildings.forEach((building) => {
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-primary';
+            btn.style.marginBottom = '5px'; // Add spacing between buttons
+            btn.innerText = building.title;
+            btn.addEventListener('click', () => {
+                showBuildingInfo(building);
+            });
+            buttonContainer.appendChild(btn);
+        });
+
+        // Show the button container
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.flexDirection = 'column';
+    }
+
+    function showBuildingInfo(building) {
+        console.log(`Showing info for building: ${building.title}`);
+        currentBuilding = building; // Set the current building
+        sceneEl.pause(); // Pause the AR scene
+        overlay.style.display = 'block'; // Show the overlay
+        loadBuildingContent(building); // Load content based on the selected building
+    }
+
+    function loadBuildingContent(building) {
+        console.log(`Loading content for building: ${building.title}`);
+        fetch('templates/first-view.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(template => {
+                const rendered = Mustache.render(template, { title: building.title });
+                overlay.innerHTML = rendered;
+
+                document.getElementById('storyBtn').addEventListener('click', () => loadStoryView(building));
+                document.getElementById('projectBtn').addEventListener('click', () => loadProjectView(building));
+                document.getElementById('closeBtn').addEventListener('click', closeOverlay);
+            })
+            .catch(err => {
+                console.warn('Failed to load first-view template:', err);
+                displayError('There was an error loading the content for this building.');
+            });
+    }
+
+    function loadStoryView(building) {
+        fetch('templates/story-view.html')
+            .then(response => response.text())
+            .then(template => {
+                const storiesWithFlags = building.story.map((storyItem, index) => {
+                    return {
+                        ...storyItem,
+                        isFirst: index === 0
+                    };
+                });
+
+                const rendered = Mustache.render(template, { story: storiesWithFlags });
+                overlay.innerHTML = rendered;
+
+                const carouselElement = document.querySelector('#storyCarousel');
+                if (carouselElement) {
+                    new bootstrap.Carousel(carouselElement);
+                }
+
+                overlay.querySelectorAll('img').forEach(img => {
+                    img.addEventListener('click', function () {
+                        showImageModal(img.src);
+                    });
+                });
+            })
+            .catch(err => {
+                console.warn('Failed to load story-view template:', err);
+                displayError('There was an error loading the story for this building.');
+            });
+    }
+
+    function loadProjectView(building) {
+        fetch('templates/project-view.html')
+            .then(response => response.text())
+            .then(template => {
+                const rendered = Mustache.render(template, building);
+                overlay.innerHTML = rendered;
+
+                const carouselElement = document.querySelector('#projectCarousel');
+                if (carouselElement) {
+                    new bootstrap.Carousel(carouselElement);
+                }
+
+                const years = overlay.querySelectorAll('.timeline-year');
+                years.forEach(yearBtn => {
+                    yearBtn.addEventListener('click', function () {
+                        const year = yearBtn.getAttribute('data-year');
+                        showYearOverlay(building, year);
+                    });
+                });
+            })
+            .catch(err => {
+                console.warn('Failed to load project-view template:', err);
+                displayError('There was an error loading the project details for this building.');
+            });
+    }
+
+    function showYearOverlay(building, year) {
+        const yearData = building.project.timeline.find(item => item.year === year);
+        if (yearData) {
+            fetch('templates/year-overlay.html')
+                .then(response => response.text())
+                .then(template => {
+                    const rendered = Mustache.render(template, yearData);
+                    overlay.innerHTML += rendered;
+
+                    document.getElementById('closeYearBtn').addEventListener('click', function () {
+                        const yearOverlay = document.getElementById('yearOverlay');
+                        if (yearOverlay) {
+                            yearOverlay.parentNode.removeChild(yearOverlay);
+                        }
+                    });
+
+                    const img = document.getElementById('yearImage');
+                    if (img) {
+                        img.addEventListener('click', function () {
+                            showImageModal(img.src);
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.warn('Failed to load year-overlay template:', err);
+                    displayError(`There was an error loading the details for the year ${year}.`);
+                });
+        }
+    }
+
+    function showImageModal(src) {
+        fetch('templates/image-modal.html')
+            .then(response => response.text())
+            .then(template => {
+                const rendered = Mustache.render(template, { src });
+                overlay.innerHTML = rendered;
+
+                const modalElement = document.getElementById('imageModal');
+                if (modalElement) {
+                    const imageModal = new bootstrap.Modal(modalElement, {});
+                    imageModal.show();
+
+                    modalElement.querySelector('[data-bs-dismiss="modal"]').addEventListener('click', function () {
+                        imageModal.hide();
+                    });
+
+                    modalElement.addEventListener('hidden.bs.modal', function () {
+                        modalElement.parentNode.removeChild(modalElement);
+                    });
+                }
+            })
+            .catch(err => {
+                console.warn('Failed to load image-modal template:', err);
+                displayError('There was an error displaying the image.');
+            });
+    }
+
+    function displayError(message) {
+        overlay.innerHTML = `
+            <div class="container mt-5">
+                <h1 class="text-center">Error</h1>
+                <p class="text-center">${message}</p>
+                <div class="mt-4 text-center">
+                    <button id="closeBtn" class="btn btn-danger close-btn">Close</button>
+                </div>
+            </div>
+        `;
+        document.getElementById('closeBtn').addEventListener('click', closeOverlay);
+    }
+
+    function closeOverlay() {
+        overlay.innerHTML = '';
+        overlay.style.display = 'none';
+        sceneEl.play();
+    }
+
+    // Event Delegation: Handle clicks on dynamically added backBtn
+    overlay.addEventListener('click', function (event) {
+        if (event.target && event.target.id === 'backBtn') {
+            console.log('Back to Main Menu button clicked.');
+            loadBuildingContent(currentBuilding);
         }
     });
 
@@ -268,319 +455,4 @@ document.addEventListener('DOMContentLoaded', function () {
         const newSet = imageSets[currentSetIndex];
         setImageSet(newSet);
     });
-
-    // Event Delegation: Handle clicks on dynamically added backBtn
-    overlay.addEventListener('click', function (event) {
-        if (event.target && event.target.id === 'backBtn') {
-            console.log('Back to Main Menu button clicked.');
-            loadContent(currentMarker);
-        }
-    });
-
-    // Function to load content based on marker ID
-    function loadContent(markerId) {
-        console.log(`Loading content for marker ID: ${markerId}`);
-        const data = markerData.find(m => m.id === markerId);
-        if (data) {
-            console.log(`Marker Data Found for "${markerId}":`, data);
-
-            // Assign default values if necessary
-            if (!data.project.introduction) {
-                data.project.introduction = "No introduction available for this project.";
-                console.warn(`project.introduction is missing for marker "${markerId}". Assigned default value.`);
-            }
-
-            if (!data.project.images || !Array.isArray(data.project.images) || data.project.images.length === 0) {
-                data.project.images = ["media/default-project.png"];
-                console.warn(`project.images is missing or invalid for marker "${markerId}". Assigned default image.`);
-            }
-
-            if (!data.story || !Array.isArray(data.story) || data.story.length === 0) {
-                data.story = [{
-                    title: "No Story Available",
-                    text: "There is no story data available for this marker.",
-                    image: "media/default-story.png"
-                }];
-                console.warn(`story is missing or invalid for marker "${markerId}". Assigned default story.`);
-            }
-
-            // Load the main menu with marker-specific title
-            fetch('templates/first-view.html')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.text();
-                })
-                .then(template => {
-                    // Use Mustache to render the template with data
-                    const rendered = Mustache.render(template, { title: data.title });
-                    overlay.innerHTML = rendered;
-                    console.log('First-view template loaded and rendered with Mustache.');
-
-                    // Attach event listeners to the buttons (except backBtn due to event delegation)
-                    const storyBtn = document.getElementById('storyBtn');
-                    const projectBtn = document.getElementById('projectBtn');
-                    const closeBtn = document.getElementById('closeBtn');
-
-                    if (storyBtn && projectBtn && closeBtn) {
-                        storyBtn.addEventListener('click', () => loadStoryView(data));
-                        projectBtn.addEventListener('click', () => loadProjectView(data));
-                        closeBtn.addEventListener('click', closeOverlay);
-                        console.log('Event listeners added to Story, Project, and Close buttons.');
-                    } else {
-                        console.warn('One or more buttons (storyBtn, projectBtn, closeBtn) not found in the template.');
-                    }
-                })
-                .catch(err => {
-                    console.warn('Failed to load first-view template:', err);
-                    displayError('There was an error loading the content for this marker.');
-                });
-        } else {
-            console.warn(`No data found for marker ID: "${markerId}"`);
-            overlay.innerHTML = `
-                <div class="container mt-5">
-                    <h1 class="text-center">Content Not Found</h1>
-                    <p>No data available for this marker.</p>
-                    <div class="mt-4 text-center">
-                        <button id="closeBtn" class="btn btn-danger close-btn">Close</button>
-                    </div>
-                </div>
-            `;
-            document.getElementById('closeBtn').addEventListener('click', closeOverlay);
-        }
-    }
-
-    // Function to load the Story view
-    function loadStoryView(data) {
-        console.log(`Loading Story View for marker: ${currentMarker}`);
-        fetch('templates/story-view.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(template => {
-                // Add isFirst flag to the first story item
-                const storiesWithFlags = data.story.map((storyItem, index) => {
-                    return {
-                        ...storyItem,
-                        isFirst: index === 0
-                    };
-                });
-
-                // Render the story-view template with updated story data
-                const rendered = Mustache.render(template, { story: storiesWithFlags });
-                overlay.innerHTML = rendered;
-                console.log('Story-view template loaded and rendered with Mustache.');
-
-                // Initialize the carousel
-                const carouselElement = document.querySelector('#storyCarousel');
-                if (carouselElement) {
-                    const storyCarousel = new bootstrap.Carousel(carouselElement);
-                    console.log('Story Carousel Initialized.');
-                } else {
-                    console.warn('Story Carousel element (#storyCarousel) not found.');
-                }
-
-                // No need to attach event listener to backBtn due to event delegation
-
-                // Add click event to images to enlarge
-                const images = overlay.querySelectorAll('img');
-                images.forEach(function (img) {
-                    img.addEventListener('click', function () {
-                        showImageModal(img.src);
-                    });
-                });
-            })
-            .catch(err => {
-                console.warn('Failed to load story-view template:', err);
-                displayError('There was an error loading the story for this marker.');
-            });
-    }
-
-    // Function to load the Project view
-    function loadProjectView(data) {
-        console.log(`Loading Project View for marker: ${currentMarker}`);
-        fetch('templates/project-view.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(template => {
-                // Render the project-view template with project data
-                const rendered = Mustache.render(template, data);
-                overlay.innerHTML = rendered;
-                console.log('Project-view template loaded and rendered with Mustache.');
-
-                // Initialize the carousel
-                const carouselElement = document.querySelector('#projectCarousel');
-                if (carouselElement) {
-                    const projectCarousel = new bootstrap.Carousel(carouselElement);
-                    console.log('Project Carousel Initialized.');
-                } else {
-                    console.warn('Project Carousel element (#projectCarousel) not found.');
-                }
-
-                // Attach event listeners to the timeline year buttons
-                const years = overlay.querySelectorAll('.timeline-year');
-                years.forEach(function (yearBtn) {
-                    yearBtn.addEventListener('click', function () {
-                        const year = yearBtn.getAttribute('data-year');
-                        showYearOverlay(data, year);
-                    });
-                });
-
-                // No need to attach event listener to backBtn due to event delegation
-            })
-            .catch(err => {
-                console.warn('Failed to load project-view template:', err);
-                displayError('There was an error loading the project details for this marker.');
-            });
-    }
-
-    // Function to show year details
-    function showYearOverlay(data, year) {
-        console.log(`Showing details for year: ${year}`);
-        // Find the timeline item for the selected year
-        let yearData = data.project.timeline.find(item => item.year === year);
-        if (yearData) {
-            fetch('templates/year-overlay.html')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.text();
-                })
-                .then(template => {
-                    // Use Mustache to render the template with yearData
-                    let rendered = Mustache.render(template, yearData);
-                    overlay.innerHTML += rendered; // Append to existing overlay content
-                    console.log('Year-overlay template loaded and rendered with Mustache.');
-
-                    // Attach event listener to "Close" button
-                    const closeYearBtn = document.getElementById('closeYearBtn');
-                    if (closeYearBtn) {
-                        closeYearBtn.addEventListener('click', function () {
-                            console.log(`Close Year button clicked for year: ${year}`);
-                            const yearOverlay = document.getElementById('yearOverlay');
-                            if (yearOverlay) {
-                                yearOverlay.parentNode.removeChild(yearOverlay);
-                                console.log('Year overlay removed.');
-                            }
-                        });
-                    } else {
-                        console.warn('Close Year button (#closeYearBtn) not found in year-overlay template.');
-                    }
-
-                    // Add click event to image to enlarge
-                    const img = document.getElementById('yearImage');
-                    if (img) {
-                        img.addEventListener('click', function () {
-                            showImageModal(img.src);
-                        });
-                    } else {
-                        console.warn('Year image (#yearImage) not found in year-overlay template.');
-                    }
-                })
-                .catch(err => {
-                    console.warn('Failed to load year-overlay template:', err);
-                    displayError(`There was an error loading the details for the year ${year}.`);
-                });
-        } else {
-            console.warn(`No data found for year: "${year}"`);
-            displayError(`No data available for the year ${year}.`);
-        }
-    }
-
-    // Function to show enlarged images
-    function showImageModal(src) {
-        console.log(`Showing image modal for src: ${src}`);
-        fetch('templates/image-modal.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(template => {
-                // Render the image-modal template with src
-                let rendered = Mustache.render(template, { src: src });
-                overlay.innerHTML = rendered; // Replace existing overlay content
-                console.log('Image-modal template loaded and rendered with Mustache.');
-
-                // Initialize the modal
-                const modalElement = document.getElementById('imageModal');
-                if (modalElement) {
-                    const imageModal = new bootstrap.Modal(modalElement, {});
-                    imageModal.show();
-                    console.log('Image Modal Initialized.');
-
-                    // Attach event listener to the Close button in the modal
-                    const closeModalBtn = modalElement.querySelector('[data-bs-dismiss="modal"]');
-                    if (closeModalBtn) {
-                        closeModalBtn.addEventListener('click', function () {
-                            imageModal.hide();
-                            console.log('Image Modal closed.');
-                        });
-                    } else {
-                        console.warn('Close button in image-modal template not found.');
-                    }
-
-                    // Attach event listener to the image for error handling
-                    const modalImage = document.getElementById('modalImage');
-                    if (modalImage) {
-                        modalImage.addEventListener('error', function () {
-                            console.warn(`Image failed to load: ${src}. Replacing with default image.`);
-                            this.src = 'media/default-modal.png';
-                        });
-                    } else {
-                        console.warn('Modal image (#modalImage) not found in image-modal template.');
-                    }
-
-                    // Remove the modal from DOM after it's hidden
-                    modalElement.addEventListener('hidden.bs.modal', function () {
-                        modalElement.parentNode.removeChild(modalElement);
-                        console.log('Image modal removed from DOM.');
-                    });
-                } else {
-                    console.warn('Image Modal element (#imageModal) not found in image-modal template.');
-                }
-            })
-            .catch(err => {
-                console.warn('Failed to load image-modal template:', err);
-                displayError('There was an error displaying the image.');
-            });
-    }
-
-    // Function to display error messages
-    function displayError(message) {
-        overlay.innerHTML = `
-            <div class="container mt-5">
-                <h1 class="text-center">Error</h1>
-                <p class="text-center">${message}</p>
-                <div class="mt-4 text-center">
-                    <button id="closeBtn" class="btn btn-danger close-btn">Close</button>
-                </div>
-            </div>
-        `;
-        // Attach event listener to the close button
-        const closeBtn = document.getElementById('closeBtn');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closeOverlay);
-        } else {
-            console.warn('Close button (#closeBtn) not found in error display.');
-        }
-    }
-
-    // Function to close the overlay and resume AR scene
-    function closeOverlay() {
-        console.log('Closing overlay and resuming AR scene.');
-        overlay.innerHTML = ''; // Clear overlay content
-        overlay.style.display = 'none';
-        sceneEl.play(); // Resume the AR scene
-    }
 });
