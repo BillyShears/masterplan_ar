@@ -102,8 +102,8 @@ document.addEventListener('DOMContentLoaded', function () {
         plane.setAttribute('id', `plane-${marker.id}`);
         plane.setAttribute('position', '0 0.5 0');
         plane.setAttribute('rotation', '-90 0 0');
-        plane.setAttribute('width', '2');
-        plane.setAttribute('height', '2');
+        plane.setAttribute('width', '4');
+        plane.setAttribute('height', '4');
         plane.setAttribute('visible', 'false'); // Initially hidden
         aMarker.appendChild(plane);
 
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
         model.setAttribute('id', `model-${marker.id}`);
         model.setAttribute('position', '0 0 0');
         model.setAttribute('rotation', '0 0 0');
-        model.setAttribute('scale', '0.01 0.01 0.01'); // Adjust scale as needed
+        model.setAttribute('scale', '0.1 0.1 0.1'); // Adjust scale as needed
         model.setAttribute('visible', 'false'); // Initially hidden
         aMarker.appendChild(model);
 
