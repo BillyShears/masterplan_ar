@@ -1,3 +1,5 @@
+// scripts.js
+
 document.addEventListener('DOMContentLoaded', function () {
     let markerData = []; // To store data from data.json
     let currentMarker = null; // To keep track of the currently active marker
@@ -6,10 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentModel = null; // The model element for the current marker
     let currentBuildings = null; // Store the list of buildings for the current marker
     let currentBuilding = null; // To keep track of the currently selected building
+    let currentARLayer = 'img0'; // Default AR layer
     let interval = null; // For the animation interval
-    let currentSetIndex = 0; // To keep track of the current image set
-    const imageSets = ['animation', 'single1', 'single2', 'model'];
-    const changeViewBtn = document.getElementById('changeViewBtn');
+
     const overlay = document.getElementById('overlay');
     const sceneEl = document.querySelector('a-scene');
     const assetsContainer = document.getElementById('assetsContainer');
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Add single images
-        ['single1', 'single2'].forEach(key => {
+        ['img0', 'img1', 'img2'].forEach(key => {
             if (augmentedContent[key]) {
                 const imgName = augmentedContent[key];
                 const imgSrc = `media/${marker.id}/${imgName}`;
@@ -81,10 +82,23 @@ document.addEventListener('DOMContentLoaded', function () {
             const modelName = augmentedContent.model;
             const modelSrc = `media/${marker.id}/${modelName}`;
             const modelId = getAssetId(modelSrc);
-            const assetItem = document.createElement('a-asset-item');
-            assetItem.setAttribute('id', modelId);
-            assetItem.setAttribute('src', modelSrc);
-            assetsContainer.appendChild(assetItem);
+            
+            const assetItemObj = document.createElement('a-asset-item');
+            assetItemObj.setAttribute('id', modelId);
+            assetItemObj.setAttribute('src', modelSrc);
+            assetItemObj.setAttribute('crossorigin', 'anonymous');
+            assetsContainer.appendChild(assetItemObj);
+            
+            // Add MTL file if it exists
+            const modelMtlName = modelName.replace('.obj', '.mtl');
+            const modelMtlSrc = `media/${marker.id}/${modelMtlName}`;
+            const modelMtlId = getAssetId(modelMtlSrc);
+            
+            const assetItemMtl = document.createElement('a-asset-item');
+            assetItemMtl.setAttribute('id', modelMtlId);
+            assetItemMtl.setAttribute('src', modelMtlSrc);
+            assetItemMtl.setAttribute('crossorigin', 'anonymous');
+            assetsContainer.appendChild(assetItemMtl);
         }
     }
 
@@ -129,21 +143,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     currentBuildings = marker.buildings; // Store buildings array
                     console.log(`Marker Found: ${marker.id}`);
 
+                    // Load augmented content for this marker
+                    currentAugmentedContent = marker.augmentedContent;
+
                     // Generate dynamic buttons
                     generateBuildingButtons(currentBuildings);
 
-                    changeViewBtn.style.display = 'block';
-
-                    // Load augmented content for this marker
-                    currentAugmentedContent = marker.augmentedContent;
-                    currentSetIndex = 0; // Reset the image set index
+                    // Generate AR Layer buttons
+                    generateARLayerButtons();
 
                     // Get the plane and model specific to this marker
                     currentPlane = aMarker.querySelector(`#plane-${marker.id}`);
                     currentModel = aMarker.querySelector(`#model-${marker.id}`);
 
-                    // Start with the first image set
-                    setImageSet(imageSets[currentSetIndex]);
+                    // Set the current AR layer
+                    setImageSet(currentARLayer);
                 });
 
                 aMarker.addEventListener('markerLost', () => {
@@ -154,7 +168,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     const buttonContainer = document.getElementById('buttonContainer');
                     buttonContainer.style.display = 'none';
 
-                    changeViewBtn.style.display = 'none';
+                    // Hide AR Layer buttons
+                    const arLayerButtonsContainer = document.getElementById('arLayerButtons');
+                    arLayerButtonsContainer.style.display = 'none';
 
                     // Clear interval and hide elements
                     clearInterval(interval);
@@ -171,12 +187,110 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Generate Building Buttons
+    function generateBuildingButtons(buildings) {
+        // Get the button container
+        const buttonContainer = document.getElementById('buttonContainer');
+        // Clear any existing buttons
+        buttonContainer.innerHTML = '';
+
+        buildings.forEach((building) => {
+            const btn = document.createElement('button');
+            btn.className = 'btn btn-primary';
+            btn.style.marginBottom = '5px'; // Add spacing between buttons
+            btn.innerText = building.title;
+            btn.addEventListener('click', () => {
+                showBuildingInfo(building);
+            });
+            buttonContainer.appendChild(btn);
+        });
+
+        // Show the button container
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.flexDirection = 'column';
+    }
+
+    // Generate AR Layer Buttons
+    function generateARLayerButtons() {
+        const arLayers = ['img0', 'img1', 'img2', 'animation', 'model'];
+        const arLayerButtonsContainer = document.getElementById('arLayerButtons');
+        // Clear existing buttons
+        arLayerButtonsContainer.innerHTML = '';
+
+        arLayers.forEach((layer) => {
+            // Check if the current layer's data is available in markerData
+            if (
+                currentAugmentedContent &&
+                (
+                    !currentAugmentedContent[layer] ||
+                    currentAugmentedContent[layer].length === 0
+                )
+            ) {
+                console.warn(`Skipping layer ${layer} as it is empty or not available.`);
+                return; // Skip this iteration if the layer is empty
+            }
+
+            const btn = document.createElement('button');
+            btn.className = 'btn ar-layer-btn';
+            btn.style.marginBottom = '5px';
+
+            // Button label
+            labels = { 
+                'animation': 'Usi di TOExpo',
+                'img0': 'Area',
+                'img1': 'Dati',
+                'img2': 'Accessi',
+                'model': 'Fasi del cantiere',
+            }
+            label = labels[layer]
+            btn.innerText = label;
+
+            // Add 'btn-primary' class if this is the current layer, else 'btn-secondary'
+            if (layer === currentARLayer) {
+                btn.classList.add('btn-primary');
+            } else {
+                btn.classList.add('btn-secondary');
+            }
+
+            btn.addEventListener('click', () => {
+                setImageSet(layer);
+                updateARLayerButtons(layer);
+            });
+
+            btn.setAttribute('data-layer', layer); // Set data attribute for later reference
+
+            arLayerButtonsContainer.appendChild(btn);
+        });
+
+        // Show the container
+        arLayerButtonsContainer.style.display = 'flex';
+        arLayerButtonsContainer.style.flexDirection = 'column';
+    }
+
+    // Update AR Layer Buttons
+    function updateARLayerButtons(selectedLayer) {
+        const arLayerButtonsContainer = document.getElementById('arLayerButtons');
+        const buttons = arLayerButtonsContainer.querySelectorAll('.ar-layer-btn');
+        buttons.forEach((btn) => {
+            const layer = btn.getAttribute('data-layer');
+            if (layer === selectedLayer) {
+                btn.classList.remove('btn-secondary');
+                btn.classList.add('btn-primary');
+            } else {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-secondary');
+            }
+        });
+    }
+
+    // Set Image Set (AR Layer)
     function setImageSet(set) {
         if (!currentAugmentedContent || (!currentPlane && !currentModel)) {
             console.warn('No augmented content or elements available for the current marker.');
             return;
         }
 
+        currentARLayer = set; // Update the current AR layer
         console.log('Current set:', set);
         clearInterval(interval);
 
@@ -204,8 +318,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             changeImage(); // Show the first image immediately
-            interval = setInterval(changeImage, 100); // Adjust the interval as needed
-        } else if (set === 'single1' || set === 'single2') {
+            interval = setInterval(changeImage, 1000); // Adjust the interval as needed
+        } else if (set === 'img0' || set === 'img1' || set === 'img2') {
             console.log(`Switching to ${set}`);
             const imgName = currentAugmentedContent[set];
             const imgSrc = `media/${currentMarker}/${imgName}`;
@@ -218,23 +332,30 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (set === 'model') {
             console.log('Switching to model');
             if (currentAugmentedContent.model) {
-                const modelName = currentAugmentedContent.model; // e.g., 'model.obj'
+                const modelName = currentAugmentedContent.model;
                 const modelObjSrc = `media/${currentMarker}/${modelName}`;
                 const modelObjId = `#${getAssetId(modelObjSrc)}`;
 
-                // Derive MTL filename
                 const modelMtlName = modelName.replace('.obj', '.mtl');
                 const modelMtlSrc = `media/${currentMarker}/${modelMtlName}`;
                 const modelMtlId = `#${getAssetId(modelMtlSrc)}`;
 
-                console.log(`OBJ ID: ${modelObjId}, MTL ID: ${modelMtlId}`);
 
                 currentModel.setAttribute('visible', 'true');
                 currentModel.setAttribute('obj-model', `obj: ${modelObjId}; mtl: ${modelMtlId}`);
+
+                console.log(`OBJ ID: ${modelObjId}, MTL ID: ${modelMtlId}`);
+
+                // Set the model position based on the JSON data
+                const modelPosition = currentAugmentedContent.model_position || '0 0 0';
+                currentModel.setAttribute('position', modelPosition);
             } else {
                 console.warn('No model found for this marker.');
             }
         }
+
+        // Update the AR Layer buttons to reflect the current selection
+        updateARLayerButtons(set);
     }
 
     function getAssetId(src) {
@@ -243,32 +364,11 @@ document.addEventListener('DOMContentLoaded', function () {
             console.warn(`Unexpected media path format: ${src}`);
             return src; // Fallback to the full path if format is unexpected
         }
-        const markerId = parts[1]; // 'marker1'
-        const filename = parts[2]; // 'model.obj'
-        const nameWithoutExt = filename.substring(0, filename.lastIndexOf('.')); // 'model'
-        return `${markerId}_${nameWithoutExt}`; // 'marker1_model'
-    }
-
-    function generateBuildingButtons(buildings) {
-        // Get the button container
-        const buttonContainer = document.getElementById('buttonContainer');
-        // Clear any existing buttons
-        buttonContainer.innerHTML = '';
-
-        buildings.forEach((building) => {
-            const btn = document.createElement('button');
-            btn.className = 'btn btn-primary';
-            btn.style.marginBottom = '5px'; // Add spacing between buttons
-            btn.innerText = building.title;
-            btn.addEventListener('click', () => {
-                showBuildingInfo(building);
-            });
-            buttonContainer.appendChild(btn);
-        });
-
-        // Show the button container
-        buttonContainer.style.display = 'flex';
-        buttonContainer.style.flexDirection = 'column';
+        const markerId = parts[1]; // e.g., 'marker1'
+        const filename = parts[2]; // e.g., 'model.obj' or 'model.mtl'
+        const nameWithoutExt = filename.substring(0, filename.lastIndexOf('.')); // e.g., 'model'
+        const ext = filename.substring(filename.lastIndexOf('.') + 1); // e.g., 'obj' or 'mtl'
+        return `${markerId}_${nameWithoutExt}_${ext}`; // e.g., 'marker1_model_obj' or 'marker1_model_mtl'
     }
 
     function showBuildingInfo(building) {
@@ -441,18 +541,5 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('Back to Main Menu button clicked.');
             loadBuildingContent(currentBuilding);
         }
-    });
-
-    // Event listener for the Change View button
-    changeViewBtn.addEventListener('click', function () {
-        if (!currentAugmentedContent) {
-            console.warn('No augmented content available for the current marker.');
-            return;
-        }
-        console.log('Change View button clicked.');
-        // Cycle to the next image set
-        currentSetIndex = (currentSetIndex + 1) % imageSets.length;
-        const newSet = imageSets[currentSetIndex];
-        setImageSet(newSet);
     });
 });

@@ -4,14 +4,16 @@
             "preset": "hiro",
             "id": "marker1",
             "augmentedContent": {
+                "img0": "contorni.png",
+                "img1": "test-1.png",
+                "img2": "test-2.png",
                 "animation": [
                     "percorsi-1.png",
                     "percorsi-2.png",
                     "percorsi-3.png"
                 ],
-                "single1": "test-1.png",
-                "single2": "test-2.png",
-                "model": "test-model.obj"
+                "model": "test-model.obj",
+                "model_position": "0 0 0"
             },
             "buildings": [
                 {
@@ -83,6 +85,41 @@
                             "project3B.png"
                         ]
                     }
+                },
+                {
+                    "title": "Building 1C",
+                    "story": [
+                        {
+                            "title": "Introduction",
+                            "text": "This is the introduction to Building 1C.",
+                            "image": "story1C.png"
+                        },
+                        {
+                            "title": "Development",
+                            "text": "Details about the development phase of Building 1C.",
+                            "image": "story2B.png"
+                        }
+                    ],
+                    "project": {
+                        "introduction": "An overview of Building 1C project.",
+                        "timeline": [
+                            {
+                                "year": "2020",
+                                "details": "Project kickoff for Building 1C.",
+                                "image": "timeline2020B.png"
+                            },
+                            {
+                                "year": "2021",
+                                "details": "First phase of Building 1C completed.",
+                                "image": "timeline2021C.png"
+                            }
+                        ],
+                        "images": [
+                            "project1C.png",
+                            "project2C.png",
+                            "project3C.png"
+                        ]
+                    }
                 }
             ]
         },
@@ -90,14 +127,16 @@
             "preset": "kanji",
             "id": "marker2",
             "augmentedContent": {
+                "img0": "contorni.png",
+                "img1": "info.png",
+                "img2": "contorni.png",
                 "animation": [
                     "percorsi-1.png",
                     "percorsi-2.png",
                     "percorsi-3.png"
                 ],
-                "single1": "info.png",
-                "single2": "contorni.png",
-                "model": "model.obj"
+                "model": "model.obj",
+                "model_position": "0 1 0"
             },
             "buildings": [
                 {
