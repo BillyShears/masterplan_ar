@@ -393,8 +393,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 overlay.innerHTML = rendered;
 
                 document.getElementById('storyBtn').addEventListener('click', () => loadStoryView(building));
-                document.getElementById('projectBtn').addEventListener('click', () => loadProjectView(building));
                 document.getElementById('closeBtn').addEventListener('click', closeOverlay);
+
+                // FIXME: not working if building.project is not set in data.json
+                let button = document.getElementById('projectBtn');
+                if (building.project) {
+                    button.style.display = 'block';
+                    button.addEventListener('click', () => loadProjectView(building));
+                } else {
+                    button.style.display = 'none';
+                }
             })
             .catch(err => {
                 console.warn('Failed to load first-view template:', err);
