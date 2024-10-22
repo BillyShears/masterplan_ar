@@ -49,7 +49,19 @@
                             "project2A.png",
                             "project3A.png"
                         ]
-                    }
+                    },
+                    "before_after": [
+                        {
+                            "title": "Prima - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "before.png"
+                        },
+                        {
+                            "title": "Dopo - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "after.png"
+                        }
+                    ]
                 },
                 {
                     "title": "Building 1B",
