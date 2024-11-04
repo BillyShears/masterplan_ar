@@ -12,6 +12,8 @@
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
     <!-- Include Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <!-- Include Mustache.js -->
     <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
     <!-- Include Custom CSS -->
@@ -35,7 +37,7 @@
 
     <!-- Dynamic Buttons Container -->
     <div id="buttonContainer"
-        style="position: fixed; top: 20px; right: 20px; z-index: 1000; display: none; flex-direction: column;">
+        style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; display: none; flex-direction: column;">
         <!-- Dynamic buttons will be injected here -->
     </div>
 
@@ -45,8 +47,15 @@
     </div-->
 
     <!-- Single 'Change Layer' Button -->
-    <div id="arLayerChangeButton" style="position: fixed; top: 20px; left: 20px; z-index: 1000; display: none;">
-        <button id="changeLayerBtn" class="btn btn-primary">Change Layer</button>
+    <div id="arLayerChangeButton" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; display: none;">
+        <div class="d-flex align-items-center layer-button-wrapper">
+            <button id="changeLayerBtn" class="btn btn-primary d-flex align-items-center" aria-label="Change AR Layer">
+                <i class="bi bi-layers"></i> Change Layer
+            </button>
+            <div class="icon-section">
+                <i class="bi bi-gear"></i> <!-- Replace with your desired icon -->
+            </div>
+        </div>
     </div>
 
     <!-- Overlay -->

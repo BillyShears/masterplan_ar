@@ -99,22 +99,32 @@
     opacity: 1;
 }
 
-/* BUTTONS */
+/* AR BUTTONS */
 
-/* "Show Info" Button Animations */
+.layer-button-wrapper {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    padding-right: 10px;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+}
 
-/* Initial state (hidden with opacity 0) */
-/* #showInfoBtn,
-#changeViewBtn {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-} */
+#changeLayerBtn {
+    margin-right: 10px;
+    /* Space between button and icon */
+}
 
-/* Visible state */
-/* #showInfoBtn.visible, 
-#changeViewBtn.visible {
-    opacity: 1;
-} */
+.icon-section {
+    padding: 5px;
+    /* Adjust padding as necessary */
+    color: white;
+    /* Color for the icon */
+    display: flex;
+    align-items: center;
+}
+
+/* PAGE BUTTONS */
 
 /* Position the Close and Back buttons at the bottom center */
 #overlay .close-btn,
@@ -133,7 +143,7 @@
     /* Ensure buttons have a consistent width */
 }
 
-/* Responsive Adjustments */
+/* RESPONSIVE ADJUSTMENTS */
 
 /* Ensure the overlay content is scrollable on smaller screens */
 @media (max-width: 768px) {

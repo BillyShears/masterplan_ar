@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const btn = document.createElement('button');
             btn.className = 'btn btn-primary';
             btn.style.marginBottom = '5px'; // Add spacing between buttons
-            btn.innerText = "Show Info"; // Or building.title if more than one
+            btn.innerHTML = '<i class="bi bi-info-circle"></i>'; // Or building.title if more than one
             btn.addEventListener('click', () => {
                 showBuildingInfo(building);
             });
@@ -334,7 +334,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        currentARLayer = set; // Update the current AR layer
         console.log('Current set:', set);
         clearInterval(interval);
 
@@ -384,7 +383,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const modelMtlSrc = `media/${currentMarker}/${modelMtlName}`;
                 const modelMtlId = `#${getAssetId(modelMtlSrc)}`;
 
-
                 currentModel.setAttribute('visible', 'true');
                 currentModel.setAttribute('obj-model', `obj: ${modelObjId}; mtl: ${modelMtlId}`);
 
@@ -398,12 +396,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Update the AR Layer buttons to reflect the current selection
-        // updateARLayerButtons(set);
-
-        // Update the button label to show the current layer
-        changeLayerBtn.innerText = getLayerLabel(set);
+        // Update the button label and icon using getLayerLabel
+        const layerInfo = getLayerLabel(set);
+        changeLayerBtn.innerHTML = `<i class="${layerInfo.icon} me-2"></i> ${layerInfo.text}`;
     }
+
 
     function getAssetId(src) {
         const parts = src.split('/');
@@ -440,6 +437,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 overlay.innerHTML = rendered;
 
                 document.getElementById('storyBtn').addEventListener('click', () => loadStoryView(building));
+                document.getElementById('beforeBtn').addEventListener('click', () => loadBeforeView(building));
                 document.getElementById('closeBtn').addEventListener('click', closeOverlay);
 
                 // FIXME: not working if building.project is not set in data.json
@@ -484,7 +482,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(err => {
                 console.warn('Failed to load story-view template:', err);
-                displayError('There was an error loading the story for this building.');
+                displayError('There was an error loading the story pages for this building.');
             });
     }
 
@@ -510,7 +508,38 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(err => {
                 console.warn('Failed to load project-view template:', err);
-                displayError('There was an error loading the project details for this building.');
+                displayError('There was an error loading the project pages for this building.');
+            });
+    }
+
+    function loadBeforeView(building) {
+        fetch('templates/before-view.html')
+            .then(response => response.text())
+            .then(template => {
+                const storiesWithFlags = building.before.map((deforeItem, index) => {
+                    return {
+                        ...deforeItem,
+                        isFirst: index === 0
+                    };
+                });
+
+                const rendered = Mustache.render(template, { before: storiesWithFlags });
+                overlay.innerHTML = rendered;
+
+                const carouselElement = document.querySelector('#beforeCarousel');
+                if (carouselElement) {
+                    new bootstrap.Carousel(carouselElement);
+                }
+
+                overlay.querySelectorAll('img').forEach(img => {
+                    img.addEventListener('click', function () {
+                        showImageModal(img.src);
+                    });
+                });
+            })
+            .catch(err => {
+                console.warn('Failed to load before-view template:', err);
+                displayError('There was an error loading the before/after pages for this building.');
             });
     }
 
@@ -545,31 +574,32 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showImageModal(src) {
-        fetch('templates/image-modal.html')
-            .then(response => response.text())
-            .then(template => {
-                const rendered = Mustache.render(template, { src });
-                overlay.innerHTML = rendered;
+    fetch('templates/image-modal.html')
+        .then(response => response.text())
+        .then(template => {
+            const rendered = Mustache.render(template, { src });
+            // Append the modal to the overlay without overwriting existing content
+            overlay.insertAdjacentHTML('beforeend', rendered);
 
-                const modalElement = document.getElementById('imageModal');
-                if (modalElement) {
-                    const imageModal = new bootstrap.Modal(modalElement, {});
-                    imageModal.show();
+            const modalElement = document.getElementById('imageModal');
+            if (modalElement) {
+                const imageModal = new bootstrap.Modal(modalElement, {});
+                imageModal.show();
 
-                    modalElement.querySelector('[data-bs-dismiss="modal"]').addEventListener('click', function () {
-                        imageModal.hide();
-                    });
+                modalElement.querySelector('[data-bs-dismiss="modal"]').addEventListener('click', function () {
+                    imageModal.hide();
+                });
 
-                    modalElement.addEventListener('hidden.bs.modal', function () {
-                        modalElement.parentNode.removeChild(modalElement);
-                    });
-                }
-            })
-            .catch(err => {
-                console.warn('Failed to load image-modal template:', err);
-                displayError('There was an error displaying the image.');
-            });
-    }
+                modalElement.addEventListener('hidden.bs.modal', function () {
+                    modalElement.parentNode.removeChild(modalElement);
+                });
+            }
+        })
+        .catch(err => {
+            console.warn('Failed to load image-modal template:', err);
+            displayError('There was an error displaying the image.');
+        });
+}
 
     function displayError(message) {
         overlay.innerHTML = `
@@ -577,7 +607,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <h1 class="text-center">Error</h1>
                 <p class="text-center">${message}</p>
                 <div class="mt-4 text-center">
-                    <button id="closeBtn" class="btn btn-danger close-btn">Close</button>
+                    <button id="closeBtn" class="btn btn-danger close-btn">Chiudi</button>
                 </div>
             </div>
         `;
@@ -599,13 +629,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function getLayerLabel(layer) {
-        const labels = {
-            'animation': 'Usi di TOExpo',
-            'img0': 'Area',
-            'img1': 'Dati',
-            'img2': 'Accessi',
-            'model': 'Fasi del cantiere',
+        const layerInfo = {
+            'animation': { text: 'Usi di TOExpo', icon: 'bi bi-play-circle' },
+            'img0': { text: 'Area', icon: 'bi bi-image' },
+            'img1': { text: 'Dati', icon: 'bi bi-bar-chart' },
+            'img2': { text: 'Accessi', icon: 'bi bi-door-open' },
+            'model': { text: 'Fasi del cantiere', icon: 'bi bi-cube' },
         };
-        return labels[layer] || 'Change Layer';
+        // Return the corresponding layer info or default values
+        return layerInfo[layer] || { text: 'Change Layer', icon: 'bi bi-layers' };
     }
 });
