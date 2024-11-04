@@ -1,4 +1,9 @@
 /* Overlay styling */
+h1 {
+    font-weight: bold;
+    padding-bottom: 36px;
+}
+
 #overlay {
     position: fixed;
     top: 0;
@@ -7,7 +12,6 @@
     height: 100%;
     z-index: 2000;
     background-color: rgba(255, 255, 255, 0.95);
-    /* Slight transparency for better UX */
     overflow-y: auto;
     padding: 20px;
 }
@@ -18,19 +22,8 @@
     position: relative;
     padding-left: 2em;
     cursor: pointer;
-    /* Indicate that it's clickable */
-}
-
-/* Circle before each timeline year */
-.timeline-year::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.3em;
-    width: 1em;
-    height: 1em;
-    background-color: #0d6efd;
-    border-radius: 50%;
+    color: #222;
+    text-decoration: none !important;
 }
 
 /* Carousel Controls Styling */
@@ -50,7 +43,6 @@
     width: 100%;
     height: 100%;
     background-color: black;
-    /* Set arrow color to black */
     mask-size: contain;
     mask-repeat: no-repeat;
     mask-position: center;
@@ -68,28 +60,21 @@
 .carousel-control-prev,
 .carousel-control-next {
     position: fixed;
-    /* Changed from absolute to fixed to keep them at the bottom of the viewport */
-    bottom: 70px;
-    /* Position above the Close/Back buttons */
+    bottom: 20px;
     top: auto;
-    /* Remove top positioning */
     width: auto;
     opacity: 1;
-    /* Fully opaque */
     background: transparent;
-    /* Remove any background */
 }
 
 /* Position the previous arrow to the left */
 .carousel-control-prev {
     left: 20px;
-    /* Adjust as needed */
 }
 
 /* Position the next arrow to the right */
 .carousel-control-next {
     right: 20px;
-    /* Adjust as needed */
 }
 
 /* Remove default hover effects and maintain consistent color */
@@ -100,10 +85,6 @@
 }
 
 /* BUTTON STYLE */
-
-.btn {
-    min-width: 120px;
-}
 
 /* Primary Button Override */
 .btn-primary {
@@ -168,7 +149,7 @@
 #overlay .close-btn,
 #overlay .back-btn {
     position: fixed;
-    bottom: 20px;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1001;
@@ -185,15 +166,8 @@
 
     .carousel-control-prev,
     .carousel-control-next {
-        bottom: 60px;
+        bottom: 10px;
         /* Slightly adjust for smaller screens */
-    }
-
-    /* Reduce button sizes on smaller screens */
-    .btn {
-        min-width: 100px;
-        padding: 8px 16px;
-        font-size: 0.9rem;
     }
 
     /* Adjust timeline-year font size */

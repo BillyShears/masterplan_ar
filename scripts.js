@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentBuildings = null; // Store the list of buildings for the current marker
     let currentBuilding = null; // To keep track of the currently selected building
     let currentARLayer = 'model'; // Default AR layer
+    let currentARLayerIndex = 2; // To keep track of the current layer index
     let interval = null; // For the animation interval
     let availableARLayers = []; // To store available layers for the current marker
-    let currentARLayerIndex = 0; // To keep track of the current layer index
 
     const overlay = document.getElementById('overlay');
     const sceneEl = document.querySelector('a-scene');
@@ -118,8 +118,8 @@ document.addEventListener('DOMContentLoaded', function () {
         plane.setAttribute('id', `plane-${marker.id}`);
         plane.setAttribute('position', '0 0.5 0');
         plane.setAttribute('rotation', '-90 0 0');
-        plane.setAttribute('width', '2');
-        plane.setAttribute('height', '2');
+        plane.setAttribute('width', '1');
+        plane.setAttribute('height', '1');
         plane.setAttribute('visible', 'false'); // Initially hidden
         aMarker.appendChild(plane);
 
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
         model.setAttribute('id', `model-${marker.id}`);
         model.setAttribute('position', '0 0 0');
         model.setAttribute('rotation', '0 0 0');
-        model.setAttribute('scale', '0.01 0.01 0.01'); // Adjust scale as needed
+        model.setAttribute('scale', '1 1 1');
         model.setAttribute('visible', 'false'); // Initially hidden
         aMarker.appendChild(model);
 
@@ -361,6 +361,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 currentPlane.setAttribute('visible', 'true');
                 currentPlane.setAttribute('src', animationImages[index]);
                 index = (index + 1) % animationImages.length;
+
+                // Fix scale and position based on the JSON data
+                const position = currentAugmentedContent.position[set] || '0 0 0';
+                const scale = currentAugmentedContent.scale[set] || '1 1 1';
+                currentPlane.setAttribute('position', position);
+                currentPlane.setAttribute('scale', scale);
             }
 
             changeImage(); // Show the first image immediately
@@ -372,6 +378,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if (imgSrc) {
                 currentPlane.setAttribute('visible', 'true');
                 currentPlane.setAttribute('src', `#${getAssetId(imgSrc)}`);
+
+                // Fix scale and position based on the JSON data
+                const position = currentAugmentedContent.position[set] || '0 0 0';
+                const scale = currentAugmentedContent.scale[set] || '1 1 1';
+                currentPlane.setAttribute('position', position);
+                currentPlane.setAttribute('scale', scale);
             } else {
                 console.warn(`No image found for ${set}`);
             }
@@ -391,9 +403,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 console.log(`OBJ ID: ${modelObjId}, MTL ID: ${modelMtlId}`);
 
-                // Set the model position based on the JSON data
-                const modelPosition = currentAugmentedContent.model_position || '0 0 0';
-                currentModel.setAttribute('position', modelPosition);
+                // Fix scale and position based on the JSON data
+                const position = currentAugmentedContent.position[set] || '0 0 0';
+                const scale = currentAugmentedContent.scale[set] || '1 1 1';
+                currentModel.setAttribute('position', position);
+                currentModel.setAttribute('scale', scale);
             } else {
                 console.warn('No model found for this marker.');
             }
@@ -553,7 +567,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(response => response.text())
                 .then(template => {
                     const rendered = Mustache.render(template, yearData);
-                    overlay.innerHTML += rendered;
+                    // Use insertAdjacentHTML instead of innerHTML +=
+                    overlay.insertAdjacentHTML('beforeend', rendered);
 
                     document.getElementById('closeYearBtn').addEventListener('click', function () {
                         const yearOverlay = document.getElementById('yearOverlay');
@@ -610,7 +625,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <h1 class="text-center">Error</h1>
                 <p class="text-center">${message}</p>
                 <div class="mt-4 text-center">
-                    <button id="closeBtn" class="btn btn-danger close-btn">Chiudi</button>
+                    <button id="closeBtn" class="btn btn-secondary close-btn"><i class="bi bi-x"></i></button>
                 </div>
             </div>
         `;
@@ -625,7 +640,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Event Delegation: Handle clicks on dynamically added backBtn
     overlay.addEventListener('click', function (event) {
-        if (event.target && event.target.id === 'backBtn') {
+        const backButton = document.getElementById('backBtn');
+        if (event.target === backButton || backButton.contains(event.target)) {
             console.log('Back to Main Menu button clicked.');
             loadBuildingContent(currentBuilding);
         }
@@ -636,7 +652,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'animation': { text: 'anim', icon: 'bi bi-bug' },
             'img0': { text: 'img0', icon: 'bi bi-bug' },
             'img1': { text: 'Accessi', icon: 'bi bi-box-arrow-in-right' },
-            'img2': { text: 'Flussi', icon: 'bi bi-signpost' },
+            'img2': { text: 'Flussi', icon: 'bi bi-shuffle' },
             'model': { text: 'Dati', icon: 'bi bi-bar-chart' },
         };
         // Return the corresponding layer info or default values

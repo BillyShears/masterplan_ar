@@ -2,11 +2,11 @@
 <div class="container mt-5">
     <h1 class="text-center">La Storia</h1>
     <!-- Carousel -->
-    <div id="storyCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div id="storyCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
         <div class="carousel-inner">
             {{#story}}
             <div class="carousel-item {{#isFirst}}active{{/isFirst}}">
-                <h2>{{title}}</h2>
+                <h3>{{title}}</h3>
                 <p>{{text}}</p>
                 {{#image}}
                     <img src="{{image}}" class="d-block w-100" alt="{{title}}" onerror="this.onerror=null; this.src='media/default.svg';">
@@ -18,22 +18,22 @@
             {{/story}}
             {{^story}}
             <div class="carousel-item active">
-                <h2>No Story Available</h2>
+                <h3>No Story Available</h3>
                 <p>There is no story data available for this marker.</p>
                 <img src="media/default.svg" class="d-block w-100" alt="Default Story Image">
             </div>
             {{/story}}
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#storyCarousel" data-bs-slide="prev">
+        <button class="carousel-control-prev" data-bs-target="#storyCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#storyCarousel" data-bs-slide="next">
+        <button class="carousel-control-next" data-bs-target="#storyCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
     </div>
     <div class="mt-4 text-center">
-        <button id="backBtn" class="btn btn-secondary back-btn">Menu</button>
+        <button id="backBtn" class="btn btn-secondary back-btn"><i class="bi bi-list"></i></button>
     </div>
 </div>

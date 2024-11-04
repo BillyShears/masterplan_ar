@@ -2,29 +2,31 @@
 <div class="container mt-5">
     <h1 class="text-center">Il Progetto</h1>
     <!-- Carousel -->
-    <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
         <div class="carousel-inner">
             <!-- Introduction Page -->
             {{#project.introduction}}
             <div class="carousel-item active">
-                <h2>Introduzione</h2>
+                <h3>Introduzione</h3>
                 <p>{{project.introduction}}</p>
             </div>
             {{/project.introduction}}
             {{^project.introduction}}
             <div class="carousel-item active">
-                <h2>Introduzione</h2>
+                <h3>Introduzione</h3>
                 <p>No introduction available for this project.</p>
             </div>
             {{/project.introduction}}
             
             <!-- Timeline Page -->
             <div class="carousel-item">
-                <h2>Timeline</h2>
+                <h3 class="mb-3">Timeline</h3>
                 <ul class="list-group">
                     {{#project.timeline}}
                     <li class="list-group-item">
-                        <button class="btn btn-link timeline-year" data-year="{{year}}">{{year}}</button>
+                        <button class="btn btn-link timeline-year" data-year="{{year}}">
+                            <i class="bi bi-circle-fill me-5"></i>{{year}}
+                        </button>
                     </li>
                     {{/project.timeline}}
                     {{^project.timeline}}
@@ -47,16 +49,16 @@
             </div>
             {{/project.images}}
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+        <button class="carousel-control-prev" data-bs-target="#projectCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+        <button class="carousel-control-next" data-bs-target="#projectCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
     </div>
     <div class="mt-4 text-center">
-        <button id="backBtn" class="btn btn-secondary back-btn">Menu</button>
+        <button id="backBtn" class="btn btn-secondary back-btn"><i class="bi bi-list"></i></button>
     </div>
 </div>

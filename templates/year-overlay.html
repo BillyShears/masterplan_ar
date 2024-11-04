@@ -16,14 +16,15 @@
         {{/details}}
 
         {{#image}}
-            <img id="yearImage" src="{{image}}" class="img-fluid" alt="Year {{year}}" onerror="this.onerror=null; this.src='media/default.svg';">
+            <img id="yearImage" src="{{image}}" class="d-block w-100" alt="Year {{year}}" onerror="this.onerror=null; this.src='media/default.svg';">
         {{/image}}
         {{^image}}
-            <img id="yearImage" src="media/default.svg" class="img-fluid" alt="Default Year Image">
+            <img id="yearImage" src="media/default.svg" class="d-block w-100" alt="Default Year Image">
         {{/image}}
 
-        <div class="mt-4 text-center">
-            <button id="closeYearBtn" class="btn btn-danger">Chiudi</button>
-        </div>
     </div>
+        <div class="mt-4 text-center">
+            <button id="closeYearBtn" class="btn btn-secondary close-btn"><i class="bi bi-x"></i></button>
+        </div>
+
 </div>
