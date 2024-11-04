@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentModel = null; // The model element for the current marker
     let currentBuildings = null; // Store the list of buildings for the current marker
     let currentBuilding = null; // To keep track of the currently selected building
-    let currentARLayer = 'img0'; // Default AR layer
+    let currentARLayer = 'model'; // Default AR layer
     let interval = null; // For the animation interval
     let availableARLayers = []; // To store available layers for the current marker
     let currentARLayerIndex = 0; // To keep track of the current layer index
@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const sceneEl = document.querySelector('a-scene');
     const assetsContainer = document.getElementById('assetsContainer');
     const changeLayerBtn = document.getElementById('changeLayerBtn');
+    const currentLayerIcon = document.getElementById('currentLayerIcon');
 
     console.log('DOM fully loaded and parsed.');
 
@@ -175,8 +176,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     currentMarker = null;
 
                     // Hide the button container
-                    // const buttonContainer = document.getElementById('buttonContainer');
-                    // buttonContainer.style.display = 'none';
+                    const buttonContainer = document.getElementById('buttonContainer');
+                    buttonContainer.style.display = 'none';
 
                     // Hide AR Layer buttons
                     // const arLayerButtonsContainer = document.getElementById('arLayerButtons');
@@ -303,7 +304,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (availableARLayers.length > 0) {
             // Move to the next layer
             currentARLayerIndex = (currentARLayerIndex + 1) % availableARLayers.length;
-            setImageSet(availableARLayers[currentARLayerIndex]);
+            const newLayer = availableARLayers[currentARLayerIndex]
+            currentARLayer = newLayer
+            setImageSet(newLayer);
         } else {
             console.warn('No available AR layers to cycle through.');
         }
@@ -320,7 +323,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (availableARLayers.length > 0) {
-            currentARLayerIndex = 0;
+            console.log(`Available AR layers: ${availableARLayers.length}`);
             setImageSet(availableARLayers[currentARLayerIndex]);
         } else {
             console.warn('No available AR layers for this marker.');
@@ -398,7 +401,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Update the button label and icon using getLayerLabel
         const layerInfo = getLayerLabel(set);
-        changeLayerBtn.innerHTML = `<i class="${layerInfo.icon} me-2"></i> ${layerInfo.text}`;
+        currentLayerIcon.innerHTML = `<i class="${layerInfo.icon} me-2"></i> ${layerInfo.text}`;
     }
 
 
@@ -630,11 +633,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function getLayerLabel(layer) {
         const layerInfo = {
-            'animation': { text: 'Usi di TOExpo', icon: 'bi bi-play-circle' },
-            'img0': { text: 'Area', icon: 'bi bi-image' },
-            'img1': { text: 'Dati', icon: 'bi bi-bar-chart' },
-            'img2': { text: 'Accessi', icon: 'bi bi-door-open' },
-            'model': { text: 'Fasi del cantiere', icon: 'bi bi-cube' },
+            'animation': { text: 'anim', icon: 'bi bi-bug' },
+            'img0': { text: 'img0', icon: 'bi bi-bug' },
+            'img1': { text: 'Accessi', icon: 'bi bi-box-arrow-in-right' },
+            'img2': { text: 'Flussi', icon: 'bi bi-signpost' },
+            'model': { text: 'Dati', icon: 'bi bi-bar-chart' },
         };
         // Return the corresponding layer info or default values
         return layerInfo[layer] || { text: 'Change Layer', icon: 'bi bi-layers' };

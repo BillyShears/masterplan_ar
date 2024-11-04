@@ -99,6 +99,44 @@
     opacity: 1;
 }
 
+/* BUTTON STYLE */
+
+.btn {
+    min-width: 120px;
+}
+
+/* Primary Button Override */
+.btn-primary {
+    background-color: #222222;
+    border-color: #222222;
+    color: #fff;
+}
+
+/* Hover State */
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #000;
+    border-color: #000;
+    color: #fff;
+}
+
+/* Active State */
+.btn-primary:active,
+.btn-primary.active {
+    background-color: #000;
+    border-color: #000;
+    color: #fff;
+}
+
+/* Disabled State */
+.btn-primary:disabled,
+.btn-primary.disabled {
+    background-color: #555;
+    border-color: #555;
+    opacity: 0.65;
+    color: #fff;
+}
+
 /* AR BUTTONS */
 
 .layer-button-wrapper {
@@ -135,12 +173,6 @@
     transform: translateX(-50%);
     z-index: 1001;
     /* Ensure they are above other elements */
-}
-
-/* Optional: Enhance button appearance */
-.btn {
-    min-width: 120px;
-    /* Ensure buttons have a consistent width */
 }
 
 /* RESPONSIVE ADJUSTMENTS */

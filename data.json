@@ -4,14 +4,10 @@
             "preset": "hiro",
             "id": "marker1",
             "augmentedContent": {
-                "img0": "contorni.png",
+                "img0": "",
                 "img1": "test-1.png",
                 "img2": "test-2.png",
-                "animation": [
-                    "percorsi-1.png",
-                    "percorsi-2.png",
-                    "percorsi-3.png"
-                ],
+                "animation": [],
                 "model": "test-model.obj",
                 "model_position": "0 0 0"
             },
