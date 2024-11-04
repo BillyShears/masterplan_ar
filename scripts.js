@@ -10,10 +10,13 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentBuilding = null; // To keep track of the currently selected building
     let currentARLayer = 'img0'; // Default AR layer
     let interval = null; // For the animation interval
+    let availableARLayers = []; // To store available layers for the current marker
+    let currentARLayerIndex = 0; // To keep track of the current layer index
 
     const overlay = document.getElementById('overlay');
     const sceneEl = document.querySelector('a-scene');
     const assetsContainer = document.getElementById('assetsContainer');
+    const changeLayerBtn = document.getElementById('changeLayerBtn');
 
     console.log('DOM fully loaded and parsed.');
 
@@ -150,7 +153,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     generateBuildingButtons(currentBuildings);
 
                     // Generate AR Layer buttons
-                    generateARLayerButtons();
+                    // generateARLayerButtons();
+
+                    // Show the Change Layer button
+                    const arLayerChangeButton = document.getElementById('arLayerChangeButton');
+                    arLayerChangeButton.style.display = 'block';
+
+                    // Initialize the AR layers for the current marker
+                    initializeARLayers();
 
                     // Get the plane and model specific to this marker
                     currentPlane = aMarker.querySelector(`#plane-${marker.id}`);
@@ -165,12 +175,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     currentMarker = null;
 
                     // Hide the button container
-                    const buttonContainer = document.getElementById('buttonContainer');
-                    buttonContainer.style.display = 'none';
+                    // const buttonContainer = document.getElementById('buttonContainer');
+                    // buttonContainer.style.display = 'none';
 
                     // Hide AR Layer buttons
-                    const arLayerButtonsContainer = document.getElementById('arLayerButtons');
-                    arLayerButtonsContainer.style.display = 'none';
+                    // const arLayerButtonsContainer = document.getElementById('arLayerButtons');
+                    // arLayerButtonsContainer.style.display = 'none';
+
+                    // Hide the Change Layer button
+                    const arLayerChangeButton = document.getElementById('arLayerChangeButton');
+                    arLayerChangeButton.style.display = 'none';
 
                     // Clear interval and hide elements
                     clearInterval(interval);
@@ -198,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const btn = document.createElement('button');
             btn.className = 'btn btn-primary';
             btn.style.marginBottom = '5px'; // Add spacing between buttons
-            btn.innerText = building.title;
+            btn.innerText = "Show Info"; // Or building.title if more than one
             btn.addEventListener('click', () => {
                 showBuildingInfo(building);
             });
@@ -210,77 +224,107 @@ document.addEventListener('DOMContentLoaded', function () {
         buttonContainer.style.flexDirection = 'column';
     }
 
-    // Generate AR Layer Buttons
-    function generateARLayerButtons() {
+    // // Generate AR Layer Buttons
+    // function generateARLayerButtons() {
+    //     const arLayers = ['img0', 'img1', 'img2', 'animation', 'model'];
+    //     const arLayerButtonsContainer = document.getElementById('arLayerButtons');
+    //     // Clear existing buttons
+    //     arLayerButtonsContainer.innerHTML = '';
+
+    //     arLayers.forEach((layer) => {
+    //         // Check if the current layer's data is available in markerData
+    //         if (
+    //             currentAugmentedContent &&
+    //             (
+    //                 !currentAugmentedContent[layer] ||
+    //                 currentAugmentedContent[layer].length === 0
+    //             )
+    //         ) {
+    //             console.warn(`Skipping layer ${layer} as it is empty or not available.`);
+    //             return; // Skip this iteration if the layer is empty
+    //         }
+
+    //         const btn = document.createElement('button');
+    //         btn.className = 'btn ar-layer-btn';
+    //         btn.style.marginBottom = '5px';
+
+    //         // Button label
+    //         labels = {
+    //             'animation': 'Usi di TOExpo',
+    //             'img0': 'Area',
+    //             'img1': 'Dati',
+    //             'img2': 'Accessi',
+    //             'model': 'Fasi del cantiere',
+    //         }
+    //         label = labels[layer]
+    //         btn.innerText = label;
+
+    //         // Add 'btn-primary' class if this is the current layer, else 'btn-secondary'
+    //         if (layer === currentARLayer) {
+    //             btn.classList.add('btn-primary');
+    //         } else {
+    //             btn.classList.add('btn-secondary');
+    //         }
+
+    //         btn.addEventListener('click', () => {
+    //             setImageSet(layer);
+    //             updateARLayerButtons(layer);
+    //         });
+
+    //         btn.setAttribute('data-layer', layer); // Set data attribute for later reference
+
+    //         arLayerButtonsContainer.appendChild(btn);
+    //     });
+
+    //     // Show the container
+    //     arLayerButtonsContainer.style.display = 'flex';
+    //     arLayerButtonsContainer.style.flexDirection = 'column';
+    // }
+
+    // // Update AR Layer Buttons
+    // function updateARLayerButtons(selectedLayer) {
+    //     const arLayerButtonsContainer = document.getElementById('arLayerButtons');
+    //     const buttons = arLayerButtonsContainer.querySelectorAll('.ar-layer-btn');
+    //     buttons.forEach((btn) => {
+    //         const layer = btn.getAttribute('data-layer');
+    //         if (layer === selectedLayer) {
+    //             btn.classList.remove('btn-secondary');
+    //             btn.classList.add('btn-primary');
+    //         } else {
+    //             btn.classList.remove('btn-primary');
+    //             btn.classList.add('btn-secondary');
+    //         }
+    //     });
+    // }
+
+    // Change layer button
+
+    changeLayerBtn.addEventListener('click', () => {
+        if (availableARLayers.length > 0) {
+            // Move to the next layer
+            currentARLayerIndex = (currentARLayerIndex + 1) % availableARLayers.length;
+            setImageSet(availableARLayers[currentARLayerIndex]);
+        } else {
+            console.warn('No available AR layers to cycle through.');
+        }
+    });
+
+    // Initialize AR layers
+    
+    function initializeARLayers() {
         const arLayers = ['img0', 'img1', 'img2', 'animation', 'model'];
-        const arLayerButtonsContainer = document.getElementById('arLayerButtons');
-        // Clear existing buttons
-        arLayerButtonsContainer.innerHTML = '';
 
-        arLayers.forEach((layer) => {
-            // Check if the current layer's data is available in markerData
-            if (
-                currentAugmentedContent &&
-                (
-                    !currentAugmentedContent[layer] ||
-                    currentAugmentedContent[layer].length === 0
-                )
-            ) {
-                console.warn(`Skipping layer ${layer} as it is empty or not available.`);
-                return; // Skip this iteration if the layer is empty
-            }
-
-            const btn = document.createElement('button');
-            btn.className = 'btn ar-layer-btn';
-            btn.style.marginBottom = '5px';
-
-            // Button label
-            labels = { 
-                'animation': 'Usi di TOExpo',
-                'img0': 'Area',
-                'img1': 'Dati',
-                'img2': 'Accessi',
-                'model': 'Fasi del cantiere',
-            }
-            label = labels[layer]
-            btn.innerText = label;
-
-            // Add 'btn-primary' class if this is the current layer, else 'btn-secondary'
-            if (layer === currentARLayer) {
-                btn.classList.add('btn-primary');
-            } else {
-                btn.classList.add('btn-secondary');
-            }
-
-            btn.addEventListener('click', () => {
-                setImageSet(layer);
-                updateARLayerButtons(layer);
-            });
-
-            btn.setAttribute('data-layer', layer); // Set data attribute for later reference
-
-            arLayerButtonsContainer.appendChild(btn);
+        availableARLayers = arLayers.filter(layer => {
+            const content = currentAugmentedContent[layer];
+            return content && content.length > 0;
         });
 
-        // Show the container
-        arLayerButtonsContainer.style.display = 'flex';
-        arLayerButtonsContainer.style.flexDirection = 'column';
-    }
-
-    // Update AR Layer Buttons
-    function updateARLayerButtons(selectedLayer) {
-        const arLayerButtonsContainer = document.getElementById('arLayerButtons');
-        const buttons = arLayerButtonsContainer.querySelectorAll('.ar-layer-btn');
-        buttons.forEach((btn) => {
-            const layer = btn.getAttribute('data-layer');
-            if (layer === selectedLayer) {
-                btn.classList.remove('btn-secondary');
-                btn.classList.add('btn-primary');
-            } else {
-                btn.classList.remove('btn-primary');
-                btn.classList.add('btn-secondary');
-            }
-        });
+        if (availableARLayers.length > 0) {
+            currentARLayerIndex = 0;
+            setImageSet(availableARLayers[currentARLayerIndex]);
+        } else {
+            console.warn('No available AR layers for this marker.');
+        }
     }
 
     // Set Image Set (AR Layer)
@@ -355,7 +399,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Update the AR Layer buttons to reflect the current selection
-        updateARLayerButtons(set);
+        // updateARLayerButtons(set);
+
+        // Update the button label to show the current layer
+        changeLayerBtn.innerText = getLayerLabel(set);
     }
 
     function getAssetId(src) {
@@ -550,4 +597,15 @@ document.addEventListener('DOMContentLoaded', function () {
             loadBuildingContent(currentBuilding);
         }
     });
+
+    function getLayerLabel(layer) {
+        const labels = {
+            'animation': 'Usi di TOExpo',
+            'img0': 'Area',
+            'img1': 'Dati',
+            'img2': 'Accessi',
+            'model': 'Fasi del cantiere',
+        };
+        return labels[layer] || 'Change Layer';
+    }
 });
