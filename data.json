@@ -8,7 +8,7 @@
                 "img1": "test-1.png",
                 "img2": "test-2.png",
                 "animation": [],
-                "model": "test-model.obj",
+                "model": "padiglione.obj",
                 "position": {
                     "img0": "0 0 0",
                     "img1": "0 0 0.5",
