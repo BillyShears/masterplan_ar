@@ -1,3 +1,86 @@
+// camara hack
+
+const backCameraKeywords = [
+    "rear",
+    "back",
+    "rück",
+    "arrière",
+    "trasera",
+    "trás",
+    "traseira",
+    "posteriore",
+    "后面",
+    "後面",
+    "背面",
+    "后置", // alternative
+    "後置", // alternative
+    "背置", // alternative
+    "задней",
+    "الخلفية",
+    "후",
+    "arka",
+    "achterzijde",
+    "หลัง",
+    "baksidan",
+    "bagside",
+    "sau",
+    "bak",
+    "tylny",
+    "takakamera",
+    "belakang",
+    "אחורית",
+    "πίσω",
+    "spate",
+    "hátsó",
+    "zadní",
+    "darrere",
+    "zadná",
+    "задня",
+    "stražnja",
+    "belakang",
+    "बैक"
+];
+
+// get available devices
+navigator.mediaDevices.enumerateDevices().then(function (devices) {
+
+    const mainBackCamera = devices
+        .filter(x => x.kind === "videoinput")
+        .filter(camera => {
+            const lowercaseLabel = camera.label.toLowerCase();
+            return backCameraKeywords.some(keyword => lowercaseLabel.includes(keyword));
+        })
+        .sort((camera1, camera2) => camera1.label.localeCompare(camera2.label))[0];
+
+    var userMediaConstraints = {
+        audio: false,
+        video: {
+            facingMode: 'environment',
+            focusMode: "continuous",
+            width: {
+                ideal: _this.parameters.sourceWidth,
+                // min: 1024,
+                // max: 1920
+            },
+            height: {
+                ideal: _this.parameters.sourceHeight,
+                // min: 776,
+                // max: 1080
+            }
+        }
+    };
+
+    const deviceId = _this.parameters.deviceId || (mainBackCamera ? mainBackCamera.deviceId : null);
+
+    if (deviceId) {
+        userMediaConstraints.video.deviceId = {
+            exact: deviceId
+        };
+    }
+});
+
+
+
 // scripts.js
 
 document.addEventListener('DOMContentLoaded', function () {
