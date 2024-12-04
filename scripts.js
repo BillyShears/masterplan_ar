@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentModel = null; // The model element for the current marker
     let currentBuildings = null; // Store the list of buildings for the current marker
     let currentBuilding = null; // To keep track of the currently selected building
-    let currentARLayer = 'model'; // Default AR layer
-    let currentARLayerIndex = 2; // To keep track of the current layer index
+    let currentARLayer = 'model0'; // Default AR layer
+    let currentARLayerIndex = 1; // To keep track of the current layer index
     let interval = null; // For the animation interval
     let availableARLayers = []; // To store available layers for the current marker
 
@@ -83,8 +83,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Add model assets (OBJ)
         ['model0', 'model1'].forEach(key => {
-            if (augmentedContent.model) {
-                const modelName = augmentedContent.model;
+            if (augmentedContent[key]) {
+                const modelName = augmentedContent[key];
                 const modelSrc = `media/${marker.id}/${modelName}`;
                 const modelId = getAssetId(modelSrc);
                 
@@ -318,8 +318,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         } else if (set === 'model0' || set === 'model1') {
             console.log('Switching to model');
-            if (currentAugmentedContent.model) {
-                const modelName = currentAugmentedContent.model;
+            if (currentAugmentedContent[set]) {
+                const modelName = currentAugmentedContent[set];
                 const modelObjSrc = `media/${currentMarker}/${modelName}`;
                 const modelObjId = `#${getAssetId(modelObjSrc)}`;
 
@@ -581,8 +581,8 @@ document.addEventListener('DOMContentLoaded', function () {
             'animation': { text: 'anim', icon: 'bi bi-bug' },
             'img0': { text: '', icon: 'bi bi-bug' },
             'img1': { text: 'Accessi', icon: 'bi bi-box-arrow-in-right' },
-            'model0': { text: 'Accessi', icon: 'bi bi-box-arrow-in-right' },
             'img2': { text: 'Flussi', icon: 'bi bi-shuffle' },
+            'model0': { text: 'Accessi', icon: 'bi bi-box-arrow-in-right' },
             'model1': { text: 'Dati', icon: 'bi bi-bar-chart' },
         };
         // Return the corresponding layer info or default values
