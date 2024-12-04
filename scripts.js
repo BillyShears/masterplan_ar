@@ -81,29 +81,31 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Add model asset (OBJ)
-        if (augmentedContent.model) {
-            const modelName = augmentedContent.model;
-            const modelSrc = `media/${marker.id}/${modelName}`;
-            const modelId = getAssetId(modelSrc);
-            
-            const assetItemObj = document.createElement('a-asset-item');
-            assetItemObj.setAttribute('id', modelId);
-            assetItemObj.setAttribute('src', modelSrc);
-            assetItemObj.setAttribute('crossorigin', 'anonymous');
-            assetsContainer.appendChild(assetItemObj);
-            
-            // Add MTL file if it exists
-            const modelMtlName = modelName.replace('.obj', '.mtl');
-            const modelMtlSrc = `media/${marker.id}/${modelMtlName}`;
-            const modelMtlId = getAssetId(modelMtlSrc);
-            
-            const assetItemMtl = document.createElement('a-asset-item');
-            assetItemMtl.setAttribute('id', modelMtlId);
-            assetItemMtl.setAttribute('src', modelMtlSrc);
-            assetItemMtl.setAttribute('crossorigin', 'anonymous');
-            assetsContainer.appendChild(assetItemMtl);
-        }
+        // Add model assets (OBJ)
+        ['model0', 'model1'].forEach(key => {
+            if (augmentedContent.model) {
+                const modelName = augmentedContent.model;
+                const modelSrc = `media/${marker.id}/${modelName}`;
+                const modelId = getAssetId(modelSrc);
+                
+                const assetItemObj = document.createElement('a-asset-item');
+                assetItemObj.setAttribute('id', modelId);
+                assetItemObj.setAttribute('src', modelSrc);
+                assetItemObj.setAttribute('crossorigin', 'anonymous');
+                assetsContainer.appendChild(assetItemObj);
+                
+                // Add MTL file if it exists
+                const modelMtlName = modelName.replace('.obj', '.mtl');
+                const modelMtlSrc = `media/${marker.id}/${modelMtlName}`;
+                const modelMtlId = getAssetId(modelMtlSrc);
+                
+                const assetItemMtl = document.createElement('a-asset-item');
+                assetItemMtl.setAttribute('id', modelMtlId);
+                assetItemMtl.setAttribute('src', modelMtlSrc);
+                assetItemMtl.setAttribute('crossorigin', 'anonymous');
+                assetsContainer.appendChild(assetItemMtl);
+            }
+        });
     }
 
     function addMarker(marker) {
@@ -225,79 +227,6 @@ document.addEventListener('DOMContentLoaded', function () {
         buttonContainer.style.flexDirection = 'column';
     }
 
-    // // Generate AR Layer Buttons
-    // function generateARLayerButtons() {
-    //     const arLayers = ['img0', 'img1', 'img2', 'animation', 'model'];
-    //     const arLayerButtonsContainer = document.getElementById('arLayerButtons');
-    //     // Clear existing buttons
-    //     arLayerButtonsContainer.innerHTML = '';
-
-    //     arLayers.forEach((layer) => {
-    //         // Check if the current layer's data is available in markerData
-    //         if (
-    //             currentAugmentedContent &&
-    //             (
-    //                 !currentAugmentedContent[layer] ||
-    //                 currentAugmentedContent[layer].length === 0
-    //             )
-    //         ) {
-    //             console.warn(`Skipping layer ${layer} as it is empty or not available.`);
-    //             return; // Skip this iteration if the layer is empty
-    //         }
-
-    //         const btn = document.createElement('button');
-    //         btn.className = 'btn ar-layer-btn';
-    //         btn.style.marginBottom = '5px';
-
-    //         // Button label
-    //         labels = {
-    //             'animation': 'Usi di TOExpo',
-    //             'img0': 'Area',
-    //             'img1': 'Dati',
-    //             'img2': 'Accessi',
-    //             'model': 'Fasi del cantiere',
-    //         }
-    //         label = labels[layer]
-    //         btn.innerText = label;
-
-    //         // Add 'btn-primary' class if this is the current layer, else 'btn-secondary'
-    //         if (layer === currentARLayer) {
-    //             btn.classList.add('btn-primary');
-    //         } else {
-    //             btn.classList.add('btn-secondary');
-    //         }
-
-    //         btn.addEventListener('click', () => {
-    //             setImageSet(layer);
-    //             updateARLayerButtons(layer);
-    //         });
-
-    //         btn.setAttribute('data-layer', layer); // Set data attribute for later reference
-
-    //         arLayerButtonsContainer.appendChild(btn);
-    //     });
-
-    //     // Show the container
-    //     arLayerButtonsContainer.style.display = 'flex';
-    //     arLayerButtonsContainer.style.flexDirection = 'column';
-    // }
-
-    // // Update AR Layer Buttons
-    // function updateARLayerButtons(selectedLayer) {
-    //     const arLayerButtonsContainer = document.getElementById('arLayerButtons');
-    //     const buttons = arLayerButtonsContainer.querySelectorAll('.ar-layer-btn');
-    //     buttons.forEach((btn) => {
-    //         const layer = btn.getAttribute('data-layer');
-    //         if (layer === selectedLayer) {
-    //             btn.classList.remove('btn-secondary');
-    //             btn.classList.add('btn-primary');
-    //         } else {
-    //             btn.classList.remove('btn-primary');
-    //             btn.classList.add('btn-secondary');
-    //         }
-    //     });
-    // }
-
     // Change layer button
 
     changeLayerBtn.addEventListener('click', () => {
@@ -315,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize AR layers
     
     function initializeARLayers() {
-        const arLayers = ['img0', 'img1', 'img2', 'animation', 'model'];
+        const arLayers = ['img0', 'img1', 'img2', 'animation', 'model0', 'model1'];
 
         availableARLayers = arLayers.filter(layer => {
             const content = currentAugmentedContent[layer];
@@ -387,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 console.warn(`No image found for ${set}`);
             }
-        } else if (set === 'model') {
+        } else if (set === 'model0' || set === 'model1') {
             console.log('Switching to model');
             if (currentAugmentedContent.model) {
                 const modelName = currentAugmentedContent.model;
@@ -650,10 +579,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function getLayerLabel(layer) {
         const layerInfo = {
             'animation': { text: 'anim', icon: 'bi bi-bug' },
-            'img0': { text: 'img0', icon: 'bi bi-bug' },
+            'img0': { text: '', icon: 'bi bi-bug' },
             'img1': { text: 'Accessi', icon: 'bi bi-box-arrow-in-right' },
+            'model0': { text: 'Accessi', icon: 'bi bi-box-arrow-in-right' },
             'img2': { text: 'Flussi', icon: 'bi bi-shuffle' },
-            'model': { text: 'Dati', icon: 'bi bi-bar-chart' },
+            'model1': { text: 'Dati', icon: 'bi bi-bar-chart' },
         };
         // Return the corresponding layer info or default values
         return layerInfo[layer] || { text: 'Change Layer', icon: 'bi bi-layers' };

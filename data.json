@@ -5,23 +5,26 @@
             "id": "marker1",
             "augmentedContent": {
                 "img0": "",
-                "img1": "test-1.png",
+                "img1": "",
                 "img2": "test-2.png",
                 "animation": [],
-                "model": "padiglione.obj",
+                "model0": "padiglione.obj",
+                "model1": "padiglione.obj",
                 "position": {
                     "img0": "0 0 0",
                     "img1": "0 0 0.5",
                     "img2": "1 1 0.5",
                     "animation": "0 0 0",
-                    "model": "0 0 0"
+                    "model0": "0 0 0",
+                    "model1": "0 0 0"
                 },
                 "scale": {
                     "img0": "1 1 1",
                     "img1": "2.95 2.1 1",
                     "img2": "2.95 2.1 1",
                     "animation": "1 1 1",
-                    "model": "0.05 0.05 0.05"
+                    "model0": "0.05 0.05 0.05",
+                    "model1": "0.05 0.05 0.05"
                 }
             },
             "buildings": [
@@ -86,7 +89,8 @@
                     "percorsi-2.png",
                     "percorsi-3.png"
                 ],
-                "model": "model.obj",
+                "model0": "model.obj",
+                "model1": "model.obj",
                 "model_position": "0 1 0"
             },
             "buildings": [
