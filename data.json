@@ -33,12 +33,12 @@
                         {
                             "title": "questa sezione diventerà vai al sito",
                             "text": "questa sezione diventerà vai al sito",
-                            "image": "Axo2.png"
+                            "image": ""
                         },
                         {
                             "title": "questa sezione diventerà vai al sito",
                             "text": "questa sezione diventerà vai al sito",
-                            "image": "test-1.png"
+                            "image": ""
                         }
                     ],
                     "project": {
@@ -95,21 +95,21 @@
             },
             "buildings": [
                 {
-                    "title": "Building 2A",
+                    "title": "Padiglione Sottsass",
                     "story": [
                         {
-                            "title": "Introduction",
-                            "text": "This is the introduction to Building 2A.",
-                            "image": "story1A.png"
+                            "title": "questa sezione diventerà vai al sito",
+                            "text": "questa sezione diventerà vai al sito",
+                            "image": ""
                         },
                         {
-                            "title": "Development",
-                            "text": "Details about the development phase of Building 2A.",
-                            "image": "story2A.png"
+                            "title": "questa sezione diventerà vai al sito",
+                            "text": "questa sezione diventerà vai al sito",
+                            "image": ""
                         }
                     ],
                     "project": {
-                        "introduction": "An overview of Building 2A project.",
+                        "introduction": "Il Padiglione Sottsass, costituisce l’accesso privilegiato all’intero complesso di Torino Esposizioni con il suo monumentale ingresso coperto e, avendo subito danni meno ingenti durante i bombardamenti, mantiene la sua conformazione originaria. Il grande porticato di ordine gigante, che ancora oggi ne caratterizza l’accesso, sarà oggetto di un importante restauro. Il progetto recupera la grande spazialità dell’atrio, valorizzandone la dimensione costruttiva con un intervento che unisce il modernismo degli anni ’30, le tendenze Art Déco del complesso originale e gli spunti esotici e Belle Époque degli interni. Tutto il corpo retrostante accoglierà nuove aule, con un sistema a doppio livello cadenzato sul ritmo delle strutture originali. Un sistema di grandi lucernari esalterà gli spazi interni, dando luce naturale a tutti gli spazi.",
                         "timeline": [
                             {
                                 "year": "2020",
