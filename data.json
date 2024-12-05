@@ -32,12 +32,12 @@
                     "story": [
                         {
                             "title": "questa sezione diventerà vai al sito",
-                            "text": "questa sezione diventerà vai al sito",
+                            "text": "",
                             "image": ""
                         },
                         {
                             "title": "questa sezione diventerà vai al sito",
-                            "text": "questa sezione diventerà vai al sito",
+                            "text": "",
                             "image": ""
                         }
                     ],
@@ -56,11 +56,13 @@
                             }
                         ],
                         "images": [
+                            "media/marker1/Axo1.png",
+                            "media/marker1/Axo1zoom.png",
                             "media/marker1/Axo2.png",
-                            "Layout-Conferenza.png",
-                            "Layout-Esposizione.png",
-                            "Layout-Standard.png",
-                            "Layout-Workshop.png"
+                            "media/marker1/Layout-Conferenza.png",
+                            "media/marker1/Layout-Esposizione.png",
+                            "media/marker1/Layout-Standard.png",
+                            "media/marker1/Layout-Workshop.png"
                         ]
                     },
                     "before": [
