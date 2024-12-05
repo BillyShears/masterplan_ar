@@ -29,18 +29,7 @@
             "buildings": [
                 {
                     "title": "Building 1A",
-                    "story": [
-                        {
-                            "title": "Introduction",
-                            "text": "This is the introduction to Building 1A. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                            "image": "story1A.png"
-                        },
-                        {
-                            "title": "Development",
-                            "text": "Details about the development phase of Building 1A.",
-                            "image": "story2A.png"
-                        }
-                    ],
+                    "story": "https://shazarch.com",
                     "project": {
                         "introduction": "An overview of Building 1A project.",
                         "timeline": [
@@ -79,44 +68,44 @@
         {
             "id": "marker2",
             "augmentedContent": {
-                "img0": "contorni.png",
-                "img1": "info.png",
-                "img2": "contorni.png",
-                "animation": [
-                    "percorsi-1.png",
-                    "percorsi-2.png",
-                    "percorsi-3.png"
-                ],
-                "model0": "model.obj",
-                "model1": "model.obj",
-                "model_position": "0 1 0"
+                "img0": "",
+                "img1": "",
+                "img2": "test-2.png",
+                "animation": [],
+                "model0": "padiglione.obj",
+                "model1": "padiglione.obj",
+                "position": {
+                    "img0": "0 0 0",
+                    "img1": "0 0 0.5",
+                    "img2": "1 1 0.5",
+                    "animation": "0 0 0",
+                    "model0": "0 0 0",
+                    "model1": "0 0 0"
+                },
+                "scale": {
+                    "img0": "1 1 1",
+                    "img1": "2.95 2.1 1",
+                    "img2": "2.95 2.1 1",
+                    "animation": "1 1 1",
+                    "model0": "0.05 0.05 0.05",
+                    "model1": "0.05 0.05 0.05"
+                }
             },
             "buildings": [
                 {
-                    "title": "Building 2A",
-                    "story": [
-                        {
-                            "title": "Introduction",
-                            "text": "This is the introduction to Building 2A.",
-                            "image": "story1A.png"
-                        },
-                        {
-                            "title": "Development",
-                            "text": "Details about the development phase of Building 2A.",
-                            "image": "story2A.png"
-                        }
-                    ],
+                    "title": "Building 1A",
+                    "story": "https://shazarch.com",
                     "project": {
-                        "introduction": "An overview of Building 2A project.",
+                        "introduction": "An overview of Building 1A project.",
                         "timeline": [
                             {
                                 "year": "2020",
-                                "details": "Project kickoff for Building 2A.",
+                                "details": "Project kickoff for Building 1A.",
                                 "image": "timeline2020A.png"
                             },
                             {
                                 "year": "2021",
-                                "details": "First phase of Building 2A completed.",
+                                "details": "First phase of Building 1A completed.",
                                 "image": "timeline2021A.png"
                             }
                         ],
@@ -125,42 +114,149 @@
                             "project2A.png",
                             "project3A.png"
                         ]
-                    }
-                },
-                {
-                    "title": "Building 2B",
-                    "story": [
+                    },
+                    "before": [
                         {
-                            "title": "Introduction",
-                            "text": "This is the introduction to Building 2B.",
-                            "image": "story1B.png"
+                            "title": "Prima - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "before.png"
                         },
                         {
-                            "title": "Development",
-                            "text": "Details about the development phase of Building 2B.",
-                            "image": "story2B.png"
+                            "title": "Dopo - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "after.png"
                         }
-                    ],
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "marker3",
+            "augmentedContent": {
+                "img0": "",
+                "img1": "",
+                "img2": "test-2.png",
+                "animation": [],
+                "model0": "padiglione.obj",
+                "model1": "padiglione.obj",
+                "position": {
+                    "img0": "0 0 0",
+                    "img1": "0 0 0.5",
+                    "img2": "1 1 0.5",
+                    "animation": "0 0 0",
+                    "model0": "0 0 0",
+                    "model1": "0 0 0"
+                },
+                "scale": {
+                    "img0": "1 1 1",
+                    "img1": "2.95 2.1 1",
+                    "img2": "2.95 2.1 1",
+                    "animation": "1 1 1",
+                    "model0": "0.05 0.05 0.05",
+                    "model1": "0.05 0.05 0.05"
+                }
+            },
+            "buildings": [
+                {
+                    "title": "Building 1A",
+                    "story": "https://shazarch.com",
                     "project": {
-                        "introduction": "An overview of Building 2B project.",
+                        "introduction": "An overview of Building 1A project.",
                         "timeline": [
                             {
                                 "year": "2020",
-                                "details": "Project kickoff for Building 2B.",
-                                "image": "timeline2020B.png"
+                                "details": "Project kickoff for Building 1A.",
+                                "image": "timeline2020A.png"
                             },
                             {
                                 "year": "2021",
-                                "details": "First phase of Building 2B completed.",
-                                "image": "timeline2021B.png"
+                                "details": "First phase of Building 1A completed.",
+                                "image": "timeline2021A.png"
                             }
                         ],
                         "images": [
-                            "project1B.png",
-                            "project2B.png",
-                            "project3B.png"
+                            "project1A.png",
+                            "project2A.png",
+                            "project3A.png"
                         ]
-                    }
+                    },
+                    "before": [
+                        {
+                            "title": "Prima - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "before.png"
+                        },
+                        {
+                            "title": "Dopo - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "after.png"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "marker4",
+            "augmentedContent": {
+                "img0": "",
+                "img1": "",
+                "img2": "test-2.png",
+                "animation": [],
+                "model0": "padiglione.obj",
+                "model1": "padiglione.obj",
+                "position": {
+                    "img0": "0 0 0",
+                    "img1": "0 0 0.5",
+                    "img2": "1 1 0.5",
+                    "animation": "0 0 0",
+                    "model0": "0 0 0",
+                    "model1": "0 0 0"
+                },
+                "scale": {
+                    "img0": "1 1 1",
+                    "img1": "2.95 2.1 1",
+                    "img2": "2.95 2.1 1",
+                    "animation": "1 1 1",
+                    "model0": "0.05 0.05 0.05",
+                    "model1": "0.05 0.05 0.05"
+                }
+            },
+            "buildings": [
+                {
+                    "title": "Building 1A",
+                    "story": "https://shazarch.com",
+                    "project": {
+                        "introduction": "An overview of Building 1A project.",
+                        "timeline": [
+                            {
+                                "year": "2020",
+                                "details": "Project kickoff for Building 1A.",
+                                "image": "timeline2020A.png"
+                            },
+                            {
+                                "year": "2021",
+                                "details": "First phase of Building 1A completed.",
+                                "image": "timeline2021A.png"
+                            }
+                        ],
+                        "images": [
+                            "project1A.png",
+                            "project2A.png",
+                            "project3A.png"
+                        ]
+                    },
+                    "before": [
+                        {
+                            "title": "Prima - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "before.png"
+                        },
+                        {
+                            "title": "Dopo - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "after.png"
+                        }
+                    ]
                 }
             ]
         }

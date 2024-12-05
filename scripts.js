@@ -485,35 +485,44 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function loadStoryView(building) {
-        fetch('templates/story-view.html')
-            .then(response => response.text())
-            .then(template => {
-                const storiesWithFlags = building.story.map((storyItem, index) => {
-                    return {
-                        ...storyItem,
-                        isFirst: index === 0
-                    };
-                });
-
-                const rendered = Mustache.render(template, { story: storiesWithFlags });
-                overlay.innerHTML = rendered;
-
-                const carouselElement = document.querySelector('#storyCarousel');
-                if (carouselElement) {
-                    new bootstrap.Carousel(carouselElement);
-                }
-
-                overlay.querySelectorAll('img').forEach(img => {
-                    img.addEventListener('click', function () {
-                        showImageModal(img.src);
-                    });
-                });
-            })
-            .catch(err => {
-                console.warn('Failed to load story-view template:', err);
-                displayError('There was an error loading the story pages for this building.');
-            });
+        if (building.story) {
+            window.open(building.story, '_blank');
+        } else {
+            console.warn('No story URL found for this building.');
+            displayError('There is no story URL available for this building.');
+        }
     }
+
+    // function loadStoryView(building) {
+    //     fetch('templates/story-view.html')
+    //         .then(response => response.text())
+    //         .then(template => {
+    //             const storiesWithFlags = building.story.map((storyItem, index) => {
+    //                 return {
+    //                     ...storyItem,
+    //                     isFirst: index === 0
+    //                 };
+    //             });
+
+    //             const rendered = Mustache.render(template, { story: storiesWithFlags });
+    //             overlay.innerHTML = rendered;
+
+    //             const carouselElement = document.querySelector('#storyCarousel');
+    //             if (carouselElement) {
+    //                 new bootstrap.Carousel(carouselElement);
+    //             }
+
+    //             overlay.querySelectorAll('img').forEach(img => {
+    //                 img.addEventListener('click', function () {
+    //                     showImageModal(img.src);
+    //                 });
+    //             });
+    //         })
+    //         .catch(err => {
+    //             console.warn('Failed to load story-view template:', err);
+    //             displayError('There was an error loading the story pages for this building.');
+    //         });
+    // }
 
     function loadProjectView(building) {
         fetch('templates/project-view.html')
