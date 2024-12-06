@@ -6,7 +6,7 @@
                 "img0": "",
                 "img1": "",
                 "img2": "unnamed.gif",
-                "animation": [],
+                "animation": ["unnamed.gif"],
                 "model0": "accessi.obj",
                 "model1": "DATI_1.obj",
                 "position": {
