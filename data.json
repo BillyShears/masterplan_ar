@@ -127,7 +127,7 @@
                 "img1": "",
                 "img2": "",
                 "animation": [],
-                "model0": "",
+                "model0": "media/marker2/accessi.obj",
                 "model1": "",
                 "position": {
                     "img0": "0 0 0",
@@ -142,8 +142,8 @@
                     "img1": "1 1 1",
                     "img2": "1 1 1",
                     "animation": "1 1 1",
-                    "model0": "0.01 0.01 0.01",
-                    "model1": "0.01 0.01 0.01"
+                    "model0": "0.005 0.005 0.005",
+                    "model1": "0.005 0.005 0.005"
                 }
             },
             "buildings": [
