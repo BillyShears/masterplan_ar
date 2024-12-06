@@ -5,22 +5,22 @@
             "augmentedContent": {
                 "img0": "",
                 "img1": "",
-                "img2": "test-2.png",
+                "img2": "",
                 "animation": [],
-                "model0": "padiglione.obj",
+                "model0": "",
                 "model1": "DATI_1.obj",
                 "position": {
                     "img0": "0 0 0",
-                    "img1": "0 0 0.5",
-                    "img2": "1 1 0.5",
+                    "img1": "0 0 0",
+                    "img2": "0 0 0",
                     "animation": "0 0 0",
                     "model0": "0 0 0",
                     "model1": "0 0 0"
                 },
                 "scale": {
                     "img0": "1 1 1",
-                    "img1": "2.95 2.1 1",
-                    "img2": "2.95 2.1 1",
+                    "img1": "1 1 1",
+                    "img2": "1 1 1",
                     "animation": "1 1 1",
                     "model0": "0.01 0.01 0.01",
                     "model1": "0.01 0.01 0.01"
@@ -123,88 +123,120 @@
         {
             "id": "marker2",
             "augmentedContent": {
-                "img0": "contorni.png",
-                "img1": "info.png",
-                "img2": "contorni.png",
-                "animation": [
-                    "percorsi-1.png",
-                    "percorsi-2.png",
-                    "percorsi-3.png"
-                ],
-                "model0": "model.obj",
-                "model1": "model.obj",
-                "model_position": "0 1 0"
+                "img0": "",
+                "img1": "",
+                "img2": "",
+                "animation": [],
+                "model0": "",
+                "model1": "DATI_1.obj",
+                "position": {
+                    "img0": "0 0 0",
+                    "img1": "0 0 0",
+                    "img2": "0 0 0",
+                    "animation": "0 0 0",
+                    "model0": "0 0 0",
+                    "model1": "0 0 0"
+                },
+                "scale": {
+                    "img0": "1 1 1",
+                    "img1": "1 1 1",
+                    "img2": "1 1 1",
+                    "animation": "1 1 1",
+                    "model0": "0.01 0.01 0.01",
+                    "model1": "0.01 0.01 0.01"
+                }
             },
             "buildings": [
                 {
-                    "title": "Padiglione Sottsass",
+                    "title": "Padiglione Nervi e Padiglione Nuovo",
                     "story": [
                         {
                             "title": "questa sezione diventerà vai al sito",
-                            "text": "questa sezione diventerà vai al sito",
+                            "text": "",
                             "image": ""
                         },
                         {
                             "title": "questa sezione diventerà vai al sito",
-                            "text": "questa sezione diventerà vai al sito",
+                            "text": "",
                             "image": ""
                         }
                     ],
                     "project": {
-                        "introduction": "Il Padiglione Sottsass, costituisce l’accesso privilegiato all’intero complesso di Torino Esposizioni con il suo monumentale ingresso coperto e, avendo subito danni meno ingenti durante i bombardamenti, mantiene la sua conformazione originaria. Il grande porticato di ordine gigante, che ancora oggi ne caratterizza l’accesso, sarà oggetto di un importante restauro. Il progetto recupera la grande spazialità dell’atrio, valorizzandone la dimensione costruttiva con un intervento che unisce il modernismo degli anni ’30, le tendenze Art Déco del complesso originale e gli spunti esotici e Belle Époque degli interni. Tutto il corpo retrostante accoglierà nuove aule, con un sistema a doppio livello cadenzato sul ritmo delle strutture originali. Un sistema di grandi lucernari esalterà gli spazi interni, dando luce naturale a tutti gli spazi.",
+                        "introduction": "La costruzione del Padiglione Nervi, viene affidata nel 1950 a Pier Luigi Nervi per ospitare le future edizioni dei Saloni dell’Auto e della Tecnica. Il nuovo salone è coperto da una volta a padiglione nervata sostenuta da quattro arcate inclinate in calcestruzzo armato. Il Padiglione è accessibile dalla Galleria, caratterizzata dal grande taglio di luce in copertura attraversato dalla struttura con le nervature a losanghe. Il Padiglione Nervi sarà esaltato da un intervento votato alla flessibilità dello spazio: sono previsti diversi usi – come spazio di studio, di socializzazione, per eventi, laboratoriali. Recuperando alcuni spunti iniziali di Nervi, grandi varchi saranno aperti sulle pareti laterali, in modo da ricostruire una relazione tra interno ed esterno, che il progetto rinforza con il ridisegno dello spazio pubblico. Il Padiglione Nuovo sorgerà di fianco al Padiglione Nervi, verso il parco, e costituirà il tassello conclusivo dell’intero complesso. Il corpo edilizio riprende i fili storici, articolandoli secondo uno schema distributivo a croce. Un asse è dato dalla sequenza di aperture che lega la Galleria ai Padiglioni arrivando poi al parco. L’altro collega le gradonate a nord e sud attraversando l’edificio e unendo via Petrarca con il parco, in una linea che potenzialmente arriva fino al Castello del Valentino. Minimalista nelle forme, addolcite negli angoli in armonia con il contesto verde ed esaltate da uno sbalzo verso il parco che, per differenza, sottolinea il basamento tettonico, il Padiglione è avvolto da una pelle vetrata altamente performante, tagliata in corrispondenza degli assi.",
                         "timeline": [
                             {
                                 "year": "2020",
-                                "details": "Project kickoff for Building 2A.",
+                                "details": "Project kickoff for Building 1A.",
                                 "image": "timeline2020A.png"
                             },
                             {
                                 "year": "2021",
-                                "details": "First phase of Building 2A completed.",
+                                "details": "First phase of Building 1A completed.",
                                 "image": "timeline2021A.png"
                             }
                         ],
                         "images": [
-                            "project1A.png",
-                            "project2A.png",
-                            "project3A.png"
+                            "media/marker1/Axo1.png",
+                            "media/marker1/Axo1zoom.png",
+                            "media/marker1/Axo2.png",
+                            "media/marker1/Layout-Conferenza.png",
+                            "media/marker1/Layout-Esposizione.png",
+                            "media/marker1/Layout-Standard.png",
+                            "media/marker1/Layout-Workshop.png"
                         ]
-                    }
-                },
-                {
-                    "title": "Building 2B",
-                    "story": [
+                    },
+                    "before": [
                         {
-                            "title": "Introduction",
-                            "text": "This is the introduction to Building 2B.",
-                            "image": "story1B.png"
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_1.png"
                         },
                         {
-                            "title": "Development",
-                            "text": "Details about the development phase of Building 2B.",
-                            "image": "story2B.png"
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_2.png"
+                        },
+                        {
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_3.png"
+                        },
+                        {
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_4.png"
+                        },
+                        {
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_5.png"
+                        },
+                        {
+                            "title": "Padiglione Nuovo",
+                            "text": "",
+                            "image": "media/marker1/3B_1.png"
+                        },
+                        {
+                            "title": "Padiglione Nuovo",
+                            "text": "",
+                            "image": "media/marker1/3B_2.png"
+                        },
+                        {
+                            "title": "Padiglione Nuovo",
+                            "text": "",
+                            "image": "media/marker1/3B_3.png"
+                        },
+                        {
+                            "title": "Padiglione Nuovo",
+                            "text": "",
+                            "image": "media/marker1/3B_4.png"
+                        },
+                        {
+                            "title": "Padiglione Nuovo",
+                            "text": "",
+                            "image": "media/marker1/3B_5.png"
                         }
-                    ],
-                    "project": {
-                        "introduction": "An overview of Building 2B project.",
-                        "timeline": [
-                            {
-                                "year": "2020",
-                                "details": "Project kickoff for Building 2B.",
-                                "image": "timeline2020B.png"
-                            },
-                            {
-                                "year": "2021",
-                                "details": "First phase of Building 2B completed.",
-                                "image": "timeline2021B.png"
-                            }
-                        ],
-                        "images": [
-                            "project1B.png",
-                            "project2B.png",
-                            "project3B.png"
-                        ]
-                    }
+                    ]
                 }
             ]
         }
