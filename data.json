@@ -67,14 +67,29 @@
                     },
                     "before": [
                         {
-                            "title": "Prima - o il testo che voglio",
-                            "text": "Here a text with some details.",
-                            "image": "before.png"
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_1.png"
                         },
                         {
-                            "title": "Dopo - o il testo che voglio",
-                            "text": "Here a text with some details.",
-                            "image": "after.png"
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_2.png"
+                        },
+                        {
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_3.png"
+                        },
+                        {
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_4.png"
+                        },
+                        {
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_5.png"
                         }
                     ]
                 }
