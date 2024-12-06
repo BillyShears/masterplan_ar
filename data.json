@@ -128,7 +128,7 @@
                 "img2": "",
                 "animation": [],
                 "model0": "",
-                "model1": "DATI_1.obj",
+                "model1": "",
                 "position": {
                     "img0": "0 0 0",
                     "img1": "0 0 0",
@@ -148,7 +148,7 @@
             },
             "buildings": [
                 {
-                    "title": "Padiglione Nervi e Padiglione Nuovo",
+                    "title": "Padiglione Sottsass",
                     "story": [
                         {
                             "title": "questa sezione diventerà vai al sito",
@@ -162,7 +162,7 @@
                         }
                     ],
                     "project": {
-                        "introduction": "La costruzione del Padiglione Nervi, viene affidata nel 1950 a Pier Luigi Nervi per ospitare le future edizioni dei Saloni dell’Auto e della Tecnica. Il nuovo salone è coperto da una volta a padiglione nervata sostenuta da quattro arcate inclinate in calcestruzzo armato. Il Padiglione è accessibile dalla Galleria, caratterizzata dal grande taglio di luce in copertura attraversato dalla struttura con le nervature a losanghe. Il Padiglione Nervi sarà esaltato da un intervento votato alla flessibilità dello spazio: sono previsti diversi usi – come spazio di studio, di socializzazione, per eventi, laboratoriali. Recuperando alcuni spunti iniziali di Nervi, grandi varchi saranno aperti sulle pareti laterali, in modo da ricostruire una relazione tra interno ed esterno, che il progetto rinforza con il ridisegno dello spazio pubblico. Il Padiglione Nuovo sorgerà di fianco al Padiglione Nervi, verso il parco, e costituirà il tassello conclusivo dell’intero complesso. Il corpo edilizio riprende i fili storici, articolandoli secondo uno schema distributivo a croce. Un asse è dato dalla sequenza di aperture che lega la Galleria ai Padiglioni arrivando poi al parco. L’altro collega le gradonate a nord e sud attraversando l’edificio e unendo via Petrarca con il parco, in una linea che potenzialmente arriva fino al Castello del Valentino. Minimalista nelle forme, addolcite negli angoli in armonia con il contesto verde ed esaltate da uno sbalzo verso il parco che, per differenza, sottolinea il basamento tettonico, il Padiglione è avvolto da una pelle vetrata altamente performante, tagliata in corrispondenza degli assi.",
+                        "introduction": "Il Padiglione Sottsass, costituisce l’accesso privilegiato all’intero complesso di Torino Esposizioni con il suo monumentale ingresso coperto e, avendo subito danni meno ingenti durante i bombardamenti, mantiene la sua conformazione originaria. Il grande porticato di ordine gigante, che ancora oggi ne caratterizza l’accesso, sarà oggetto di un importante restauro. Il progetto recupera la grande spazialità dell’atrio, valorizzandone la dimensione costruttiva con un intervento che unisce il modernismo degli anni ’30, le tendenze Art Déco del complesso originale e gli spunti esotici e Belle Époque degli interni. Tutto il corpo retrostante accoglierà nuove aule, con un sistema a doppio livello cadenzato sul ritmo delle strutture originali. Un sistema di grandi lucernari esalterà gli spazi interni, dando luce naturale a tutti gli spazi.",
                         "timeline": [
                             {
                                 "year": "2020",
