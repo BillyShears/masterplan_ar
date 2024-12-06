@@ -176,13 +176,9 @@
                             }
                         ],
                         "images": [
-                            "media/marker1/Axo1.png",
-                            "media/marker1/Axo1zoom.png",
-                            "media/marker1/Axo2.png",
-                            "media/marker1/Layout-Conferenza.png",
-                            "media/marker1/Layout-Esposizione.png",
-                            "media/marker1/Layout-Standard.png",
-                            "media/marker1/Layout-Workshop.png"
+                            "media/marker2/Axo1.png",
+                            "media/marker2/Axo1zoom.png",
+                            "media/marker2/Axo2.png"
                         ]
                     },
                     "before": [
