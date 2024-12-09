@@ -1,0 +1,264 @@
+{
+    "markers": [
+        {
+            "id": "marker1",
+            "augmentedContent": {
+                "img0": "",
+                "img1": "",
+                "img2": "test-2.png",
+                "animation": [],
+                "model0": "padiglione.obj",
+                "model1": "padiglione.obj",
+                "position": {
+                    "img0": "0 0 0",
+                    "img1": "0 0 0.5",
+                    "img2": "1 1 0.5",
+                    "animation": "0 0 0",
+                    "model0": "0 0 0",
+                    "model1": "0 0 0"
+                },
+                "scale": {
+                    "img0": "1 1 1",
+                    "img1": "2.95 2.1 1",
+                    "img2": "2.95 2.1 1",
+                    "animation": "1 1 1",
+                    "model0": "0.05 0.05 0.05",
+                    "model1": "0.05 0.05 0.05"
+                }
+            },
+            "buildings": [
+                {
+                    "title": "Building 1A",
+                    "story": "https://shazarch.com",
+                    "project": {
+                        "introduction": "An overview of Building 1A project.",
+                        "timeline": [
+                            {
+                                "year": "2020",
+                                "details": "Project kickoff for Building 1A.",
+                                "image": "timeline2020A.png"
+                            },
+                            {
+                                "year": "2021",
+                                "details": "First phase of Building 1A completed.",
+                                "image": "timeline2021A.png"
+                            }
+                        ],
+                        "images": [
+                            "project1A.png",
+                            "project2A.png",
+                            "project3A.png"
+                        ]
+                    },
+                    "before": [
+                        {
+                            "title": "Prima - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "before.png"
+                        },
+                        {
+                            "title": "Dopo - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "after.png"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "marker2",
+            "augmentedContent": {
+                "img0": "",
+                "img1": "",
+                "img2": "test-2.png",
+                "animation": [],
+                "model0": "padiglione.obj",
+                "model1": "padiglione.obj",
+                "position": {
+                    "img0": "0 0 0",
+                    "img1": "0 0 0.5",
+                    "img2": "1 1 0.5",
+                    "animation": "0 0 0",
+                    "model0": "0 0 0",
+                    "model1": "0 0 0"
+                },
+                "scale": {
+                    "img0": "1 1 1",
+                    "img1": "2.95 2.1 1",
+                    "img2": "2.95 2.1 1",
+                    "animation": "1 1 1",
+                    "model0": "0.05 0.05 0.05",
+                    "model1": "0.05 0.05 0.05"
+                }
+            },
+            "buildings": [
+                {
+                    "title": "Building 1A",
+                    "story": "https://shazarch.com",
+                    "project": {
+                        "introduction": "An overview of Building 1A project.",
+                        "timeline": [
+                            {
+                                "year": "2020",
+                                "details": "Project kickoff for Building 1A.",
+                                "image": "timeline2020A.png"
+                            },
+                            {
+                                "year": "2021",
+                                "details": "First phase of Building 1A completed.",
+                                "image": "timeline2021A.png"
+                            }
+                        ],
+                        "images": [
+                            "project1A.png",
+                            "project2A.png",
+                            "project3A.png"
+                        ]
+                    },
+                    "before": [
+                        {
+                            "title": "Prima - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "before.png"
+                        },
+                        {
+                            "title": "Dopo - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "after.png"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "marker3",
+            "augmentedContent": {
+                "img0": "",
+                "img1": "",
+                "img2": "test-2.png",
+                "animation": [],
+                "model0": "padiglione.obj",
+                "model1": "padiglione.obj",
+                "position": {
+                    "img0": "0 0 0",
+                    "img1": "0 0 0.5",
+                    "img2": "1 1 0.5",
+                    "animation": "0 0 0",
+                    "model0": "0 0 0",
+                    "model1": "0 0 0"
+                },
+                "scale": {
+                    "img0": "1 1 1",
+                    "img1": "2.95 2.1 1",
+                    "img2": "2.95 2.1 1",
+                    "animation": "1 1 1",
+                    "model0": "0.05 0.05 0.05",
+                    "model1": "0.05 0.05 0.05"
+                }
+            },
+            "buildings": [
+                {
+                    "title": "Building 1A",
+                    "story": "https://shazarch.com",
+                    "project": {
+                        "introduction": "An overview of Building 1A project.",
+                        "timeline": [
+                            {
+                                "year": "2020",
+                                "details": "Project kickoff for Building 1A.",
+                                "image": "timeline2020A.png"
+                            },
+                            {
+                                "year": "2021",
+                                "details": "First phase of Building 1A completed.",
+                                "image": "timeline2021A.png"
+                            }
+                        ],
+                        "images": [
+                            "project1A.png",
+                            "project2A.png",
+                            "project3A.png"
+                        ]
+                    },
+                    "before": [
+                        {
+                            "title": "Prima - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "before.png"
+                        },
+                        {
+                            "title": "Dopo - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "after.png"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "marker4",
+            "augmentedContent": {
+                "img0": "",
+                "img1": "",
+                "img2": "test-2.png",
+                "animation": [],
+                "model0": "padiglione.obj",
+                "model1": "padiglione.obj",
+                "position": {
+                    "img0": "0 0 0",
+                    "img1": "0 0 0.5",
+                    "img2": "1 1 0.5",
+                    "animation": "0 0 0",
+                    "model0": "0 0 0",
+                    "model1": "0 0 0"
+                },
+                "scale": {
+                    "img0": "1 1 1",
+                    "img1": "2.95 2.1 1",
+                    "img2": "2.95 2.1 1",
+                    "animation": "1 1 1",
+                    "model0": "0.05 0.05 0.05",
+                    "model1": "0.05 0.05 0.05"
+                }
+            },
+            "buildings": [
+                {
+                    "title": "Building 1A",
+                    "story": "https://shazarch.com",
+                    "project": {
+                        "introduction": "An overview of Building 1A project.",
+                        "timeline": [
+                            {
+                                "year": "2020",
+                                "details": "Project kickoff for Building 1A.",
+                                "image": "timeline2020A.png"
+                            },
+                            {
+                                "year": "2021",
+                                "details": "First phase of Building 1A completed.",
+                                "image": "timeline2021A.png"
+                            }
+                        ],
+                        "images": [
+                            "project1A.png",
+                            "project2A.png",
+                            "project3A.png"
+                        ]
+                    },
+                    "before": [
+                        {
+                            "title": "Prima - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "before.png"
+                        },
+                        {
+                            "title": "Dopo - o il testo che voglio",
+                            "text": "Here a text with some details.",
+                            "image": "after.png"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

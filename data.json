@@ -5,61 +5,105 @@
             "augmentedContent": {
                 "img0": "",
                 "img1": "",
-                "img2": "test-2.png",
+                "img2": "",
                 "animation": [],
-                "model0": "padiglione.obj",
-                "model1": "padiglione.obj",
+                "model0": "accessi.obj",
+                "model1": "DATI_1.obj",
                 "position": {
                     "img0": "0 0 0",
-                    "img1": "0 0 0.5",
-                    "img2": "1 1 0.5",
+                    "img1": "0 0 0",
+                    "img2": "0 0 0",
                     "animation": "0 0 0",
                     "model0": "0 0 0",
                     "model1": "0 0 0"
                 },
                 "scale": {
                     "img0": "1 1 1",
-                    "img1": "2.95 2.1 1",
-                    "img2": "2.95 2.1 1",
+                    "img1": "1 1 1",
+                    "img2": "1 1 1",
                     "animation": "1 1 1",
-                    "model0": "0.05 0.05 0.05",
-                    "model1": "0.05 0.05 0.05"
+                    "model0": "0.005 0.005 0.005",
+                    "model1": "0.005 0.005 0.005"
                 }
             },
             "buildings": [
                 {
-                    "title": "Building 1A",
+                    "title": "Padiglione Nervi e Padiglione Nuovo",
                     "story": "https://shazarch.com",
                     "project": {
-                        "introduction": "An overview of Building 1A project.",
+                        "introduction": "La costruzione del Padiglione Nervi, viene affidata nel 1950 a Pier Luigi Nervi per ospitare le future edizioni dei Saloni dell’Auto e della Tecnica. Il nuovo salone è coperto da una volta a padiglione nervata sostenuta da quattro arcate inclinate in calcestruzzo armato. Il Padiglione è accessibile dalla Galleria, caratterizzata dal grande taglio di luce in copertura attraversato dalla struttura con le nervature a losanghe. Il Padiglione Nervi sarà esaltato da un intervento votato alla flessibilità dello spazio: sono previsti diversi usi – come spazio di studio, di socializzazione, per eventi, laboratoriali. Recuperando alcuni spunti iniziali di Nervi, grandi varchi saranno aperti sulle pareti laterali, in modo da ricostruire una relazione tra interno ed esterno, che il progetto rinforza con il ridisegno dello spazio pubblico. Il Padiglione Nuovo sorgerà di fianco al Padiglione Nervi, verso il parco, e costituirà il tassello conclusivo dell’intero complesso. Il corpo edilizio riprende i fili storici, articolandoli secondo uno schema distributivo a croce. Un asse è dato dalla sequenza di aperture che lega la Galleria ai Padiglioni arrivando poi al parco. L’altro collega le gradonate a nord e sud attraversando l’edificio e unendo via Petrarca con il parco, in una linea che potenzialmente arriva fino al Castello del Valentino. Minimalista nelle forme, addolcite negli angoli in armonia con il contesto verde ed esaltate da uno sbalzo verso il parco che, per differenza, sottolinea il basamento tettonico, il Padiglione è avvolto da una pelle vetrata altamente performante, tagliata in corrispondenza degli assi.",
                         "timeline": [
                             {
                                 "year": "2020",
                                 "details": "Project kickoff for Building 1A.",
-                                "image": "timeline2020A.png"
+                                "image": "media/marker1/timeline2020A.png"
                             },
                             {
                                 "year": "2021",
                                 "details": "First phase of Building 1A completed.",
-                                "image": "timeline2021A.png"
+                                "image": "media/marker1/timeline2021A.png"
                             }
                         ],
                         "images": [
-                            "project1A.png",
-                            "project2A.png",
-                            "project3A.png"
+                            "media/marker1/Axo1.png",
+                            "media/marker1/Axo1zoom.png",
+                            "media/marker1/Axo2.png",
+                            "media/marker1/Layout-Conferenza.png",
+                            "media/marker1/Layout-Esposizione.png",
+                            "media/marker1/Layout-Standard.png",
+                            "media/marker1/Layout-Workshop.png"
                         ]
                     },
                     "before": [
                         {
-                            "title": "Prima - o il testo che voglio",
-                            "text": "Here a text with some details.",
-                            "image": "before.png"
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_0.png"
                         },
                         {
-                            "title": "Dopo - o il testo che voglio",
-                            "text": "Here a text with some details.",
-                            "image": "after.png"
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_1.png"
+                        },
+                        {
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_1b.png"
+                        },
+                        {
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_1c.png"
+                        },
+                        {
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_2.png"
+                        },
+                        {
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_3.png"
+                        },
+                        {
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_4.png"
+                        },
+                        {
+                            "title": "Padiglione Nervi",
+                            "text": "",
+                            "image": "media/marker1/3A_5.png"
+                        },
+                        {
+                            "title": "Padiglione Nuovo",
+                            "text": "",
+                            "image": "media/marker1/3B_4.png"
+                        },
+                        {
+                            "title": "Padiglione Nuovo",
+                            "text": "",
+                            "image": "media/marker1/3B_5.png"
                         }
                     ]
                 }
@@ -70,191 +114,76 @@
             "augmentedContent": {
                 "img0": "",
                 "img1": "",
-                "img2": "test-2.png",
+                "img2": "",
                 "animation": [],
-                "model0": "padiglione.obj",
-                "model1": "padiglione.obj",
+                "model0": "accessi.obj",
+                "model1": "DATI_2.obj",
                 "position": {
                     "img0": "0 0 0",
-                    "img1": "0 0 0.5",
-                    "img2": "1 1 0.5",
+                    "img1": "0 0 0",
+                    "img2": "0 0 0",
                     "animation": "0 0 0",
                     "model0": "0 0 0",
                     "model1": "0 0 0"
                 },
                 "scale": {
                     "img0": "1 1 1",
-                    "img1": "2.95 2.1 1",
-                    "img2": "2.95 2.1 1",
+                    "img1": "1 1 1",
+                    "img2": "1 1 1",
                     "animation": "1 1 1",
-                    "model0": "0.05 0.05 0.05",
-                    "model1": "0.05 0.05 0.05"
+                    "model0": "0.005 0.005 0.005",
+                    "model1": "0.005 0.005 0.005"
                 }
             },
             "buildings": [
                 {
-                    "title": "Building 1A",
+                    "title": "Padiglione Sottsass",
                     "story": "https://shazarch.com",
                     "project": {
-                        "introduction": "An overview of Building 1A project.",
+                        "introduction": "Il Padiglione Sottsass, costituisce l’accesso privilegiato all’intero complesso di Torino Esposizioni con il suo monumentale ingresso coperto e, avendo subito danni meno ingenti durante i bombardamenti, mantiene la sua conformazione originaria. Il grande porticato di ordine gigante, che ancora oggi ne caratterizza l’accesso, sarà oggetto di un importante restauro. Il progetto recupera la grande spazialità dell’atrio, valorizzandone la dimensione costruttiva con un intervento che unisce il modernismo degli anni ’30, le tendenze Art Déco del complesso originale e gli spunti esotici e Belle Époque degli interni. Tutto il corpo retrostante accoglierà nuove aule, con un sistema a doppio livello cadenzato sul ritmo delle strutture originali. Un sistema di grandi lucernari esalterà gli spazi interni, dando luce naturale a tutti gli spazi.",
                         "timeline": [
                             {
                                 "year": "2020",
                                 "details": "Project kickoff for Building 1A.",
-                                "image": "timeline2020A.png"
+                                "image": "media/marker1/timeline2020A.png"
                             },
                             {
                                 "year": "2021",
                                 "details": "First phase of Building 1A completed.",
-                                "image": "timeline2021A.png"
+                                "image": "media/marker1/timeline2021A.png"
                             }
                         ],
                         "images": [
-                            "project1A.png",
-                            "project2A.png",
-                            "project3A.png"
+                            "media/marker2/Axo1.png",
+                            "media/marker2/Axo1zoom.png",
+                            "media/marker2/Axo2.png"
                         ]
                     },
                     "before": [
                         {
-                            "title": "Prima - o il testo che voglio",
-                            "text": "Here a text with some details.",
-                            "image": "before.png"
+                            "title": "Padiglione Sottsass",
+                            "text": "",
+                            "image": "media/marker2/Sottsass_4.png"
                         },
                         {
-                            "title": "Dopo - o il testo che voglio",
-                            "text": "Here a text with some details.",
-                            "image": "after.png"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "marker3",
-            "augmentedContent": {
-                "img0": "",
-                "img1": "",
-                "img2": "test-2.png",
-                "animation": [],
-                "model0": "padiglione.obj",
-                "model1": "padiglione.obj",
-                "position": {
-                    "img0": "0 0 0",
-                    "img1": "0 0 0.5",
-                    "img2": "1 1 0.5",
-                    "animation": "0 0 0",
-                    "model0": "0 0 0",
-                    "model1": "0 0 0"
-                },
-                "scale": {
-                    "img0": "1 1 1",
-                    "img1": "2.95 2.1 1",
-                    "img2": "2.95 2.1 1",
-                    "animation": "1 1 1",
-                    "model0": "0.05 0.05 0.05",
-                    "model1": "0.05 0.05 0.05"
-                }
-            },
-            "buildings": [
-                {
-                    "title": "Building 1A",
-                    "story": "https://shazarch.com",
-                    "project": {
-                        "introduction": "An overview of Building 1A project.",
-                        "timeline": [
-                            {
-                                "year": "2020",
-                                "details": "Project kickoff for Building 1A.",
-                                "image": "timeline2020A.png"
-                            },
-                            {
-                                "year": "2021",
-                                "details": "First phase of Building 1A completed.",
-                                "image": "timeline2021A.png"
-                            }
-                        ],
-                        "images": [
-                            "project1A.png",
-                            "project2A.png",
-                            "project3A.png"
-                        ]
-                    },
-                    "before": [
-                        {
-                            "title": "Prima - o il testo che voglio",
-                            "text": "Here a text with some details.",
-                            "image": "before.png"
+                            "title": "Padiglione Sottsass",
+                            "text": "",
+                            "image": "media/marker2/Sottsass_6.png"
                         },
                         {
-                            "title": "Dopo - o il testo che voglio",
-                            "text": "Here a text with some details.",
-                            "image": "after.png"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "marker4",
-            "augmentedContent": {
-                "img0": "",
-                "img1": "",
-                "img2": "test-2.png",
-                "animation": [],
-                "model0": "padiglione.obj",
-                "model1": "padiglione.obj",
-                "position": {
-                    "img0": "0 0 0",
-                    "img1": "0 0 0.5",
-                    "img2": "1 1 0.5",
-                    "animation": "0 0 0",
-                    "model0": "0 0 0",
-                    "model1": "0 0 0"
-                },
-                "scale": {
-                    "img0": "1 1 1",
-                    "img1": "2.95 2.1 1",
-                    "img2": "2.95 2.1 1",
-                    "animation": "1 1 1",
-                    "model0": "0.05 0.05 0.05",
-                    "model1": "0.05 0.05 0.05"
-                }
-            },
-            "buildings": [
-                {
-                    "title": "Building 1A",
-                    "story": "https://shazarch.com",
-                    "project": {
-                        "introduction": "An overview of Building 1A project.",
-                        "timeline": [
-                            {
-                                "year": "2020",
-                                "details": "Project kickoff for Building 1A.",
-                                "image": "timeline2020A.png"
-                            },
-                            {
-                                "year": "2021",
-                                "details": "First phase of Building 1A completed.",
-                                "image": "timeline2021A.png"
-                            }
-                        ],
-                        "images": [
-                            "project1A.png",
-                            "project2A.png",
-                            "project3A.png"
-                        ]
-                    },
-                    "before": [
-                        {
-                            "title": "Prima - o il testo che voglio",
-                            "text": "Here a text with some details.",
-                            "image": "before.png"
+                            "title": "Padiglione Sottsass",
+                            "text": "",
+                            "image": "media/marker2/Sottsass_7.png"
                         },
                         {
-                            "title": "Dopo - o il testo che voglio",
-                            "text": "Here a text with some details.",
-                            "image": "after.png"
+                            "title": "Padiglione Sottsass",
+                            "text": "",
+                            "image": "media/marker2/Sottsass_8.png"
+                        },
+                        {
+                            "title": "Padiglione Sottsass",
+                            "text": "",
+                            "image": "media/marker2/Sottsass_9.png"
                         }
                     ]
                 }
