@@ -1,15 +1,28 @@
 
 /* Font */
-@import url('https: //fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
 body {
     font-family: "Plus Jakarta Sans", sans-serif;
+    color: #002b49;
+}
+
+a {
+    color: #164331;
 }
 
 /* Overlay styling */
-h1 {
+h1, h2, h3, h4, h5, h6 {
+    color: #164331;
     font-weight: bold;
+}
+
+h1 {
     padding-bottom: 36px;
+}
+
+h3 {
+    color: #002b49;
 }
 
 #overlay {
@@ -30,7 +43,7 @@ h1 {
     position: relative;
     padding-left: 2em;
     cursor: pointer;
-    color: #222;
+    color: #002b49;
     text-decoration: none !important;
 }
 
@@ -94,34 +107,38 @@ h1 {
 
 /* BUTTON STYLE */
 
+.btn {
+    font-size: 1.5rem;
+}
+
 /* Primary Button Override */
 .btn-primary {
-    background-color: #222222;
-    border-color: #222222;
+    background-color: #002b49;
+    border-color: #002b49;
     color: #fff;
 }
 
 /* Hover State */
 .btn-primary:hover,
 .btn-primary:focus {
-    background-color: #000;
-    border-color: #000;
+    background-color: #000d16;
+    border-color: #000d16;
     color: #fff;
 }
 
 /* Active State */
 .btn-primary:active,
 .btn-primary.active {
-    background-color: #000;
-    border-color: #000;
+    background-color: #000d16;
+    border-color: #000d16;
     color: #fff;
 }
 
 /* Disabled State */
 .btn-primary:disabled,
 .btn-primary.disabled {
-    background-color: #555;
-    border-color: #555;
+    background-color: #002b4980;
+    border-color: #002b4980;
     opacity: 0.65;
     color: #fff;
 }

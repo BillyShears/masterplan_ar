@@ -1,20 +1,20 @@
 <!-- templates/project-view.html -->
 <div class="container mt-5">
-    <h1 class="text-center">Il Progetto</h1>
+    <h1 class="text-center">Le sedi</h1>
     <!-- Carousel -->
     <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
         <div class="carousel-inner">
             <!-- Introduction Page -->
             {{#project.introduction}}
             <div class="carousel-item active">
-                <h3>Introduzione</h3>
+                <!--h3>Le sedi</h3-->
                 <p>{{project.introduction}}</p>
             </div>
             {{/project.introduction}}
             {{^project.introduction}}
             <div class="carousel-item active">
-                <h3>Introduzione</h3>
-                <p>No introduction available for this project.</p>
+                <!--h3>Le sedi</h3-->
+                <p>No data available.</p>
             </div>
             {{/project.introduction}}
             

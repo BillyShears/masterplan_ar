@@ -41,6 +41,15 @@
         <!-- Dynamic buttons will be injected here -->
     </div>
 
+    <!-- Open Intro Button -->
+    <div id="openIntroModalButton" style="position: fixed; top: 20px; left: 20px; z-index: 1000;">
+        <div class="d-flex align-items-center">
+            <button id="changeLayerBtn" class="btn btn-primary" aria-label="Change AR Layer">
+                <i class="bi bi-book"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- AR Layer Buttons Container -->
     <!--div id="arLayerButtons"
         style="position: fixed; top: 20px; left: 20px; z-index: 1000; display: none; flex-direction: column;">
@@ -63,11 +72,146 @@
         <!-- Content will be injected dynamically -->
     </div>
 
+    <!-- Intro modal -->
+    <div class="modal fade" id="introModal" tabindex="-1" role="dialog" aria-labelledby="introModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title text-center w-100 fs-1 py-3" id="introModalLabel">
+                        CAMPUS<br>VALENTINO
+                    </h1>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body p-5">
+
+                    <p style="font-size:0.8rem!important;">
+                        <i>Web-app prodotta nell'ambito del progetto finanziato dal Dip. di Architettura e Design del Politecnico di
+                        Torino "Campus Valentino del Politecnico di Torino tra progetto e modello: public engagement e divulgazione" (bando
+                        policy d'Ateneo per l'incentivazione delle missioni dipartimentali - linea 3. public engagement, 2024)</ii>
+                    </p>
+
+                    <div class="text-center my-5">
+                        <img class="img-fluid my-2 mx-3" src="media/images/logo-dad.jpg" style="max-height:80px;">
+                        <img class="my-2 mx-2" src="media/images/logo-masterplan.jpg" style="max-height:60px;">
+                        <img class="my-2 mx-2" src="media/images/logo-modlab.png" style="max-height:60px;">
+                    </div>
+
+                    <p class="my-5">
+                    Il parco secolare del Valentino sul fiume Po, costituisce oggi il connettivo per una serie di
+                    complessi architettonici di differenti epoche (Castello del Valentino, Torino Esposizioni,
+                    Padiglione Morandi). Numerosi manufatti disseminati nell’area ospitano attività del
+                    Politecnico: il Castello stesso, l’Istituto Elettrotecnico Nazionale Galileo Ferraris, la
+                    palazzina in via Morgari.
+                    Il progetto del Campus, a cura di Masterplan del Politecnico di Torino (MPt), prevede la
+                    costituzione di un asse fra il Castello e il complesso di Torino Esposizioni, progettato fra
+                    1936 e 1938 da Ettore Sottsass sr. L’intervento contempla la riqualificazione dei padiglioni
+                    Sottsass e Nervi e la costruzione del padiglione Nuovo per ospitare le scuole di architettura,
+                    design e pianificazione urbanistica e territoriale in connessione con altri spazi culturali della città
+                    (Biblioteca Civica Centrale e Teatro Nuovo).
+                    </p>
+                    <hr class="my-5">
+                    <div class="text-center my-5 mb-3">
+                        <small><strong>Gruppo proponente</strong></small>
+                    </div>
+                    <p class="my-5 mt-3">
+                        Marco Vitali, referente scientifico ModLAB Arch, DAD PoliTO
+                        Roberta Spallone, Enrico Pupi, DAD PoliTO
+                        Antonio De Rossi, coordinatore Masterplan PoliTO, DAD PoliTO
+                        Carlo Deregibus, design manager Masterplan PoliTO, DAD PoliTO
+                        Matteo Tempestini, Masterplan PoliTO, DAD PoliTO
+                        Giulia Bertola, Francesca Ronco, ModLAB Arch, DAD PoliTO
+                    </p>
+                    <div class="text-center my-5">
+                        <p><small><strong>Sviluppo web-AR</strong></small></p>
+                        <a href="https://shazarch.com" target="_blank">
+                            <img class="img-fluid my-2 mx-3" src="media/images/logo-shazarch.png" style="max-height:32px;">
+                        </a>
+                    </div>
+                    <div class="text-center my-5 mb-3">
+                        <small><strong>Partners</strong></small>
+                    </div>
+                    <p class="my-5 mt-3">
+                        <a href="https://www.oato.it/" data-type="link" data-id="https://www.oato.it/" target="_blank">Ordine Architetti Torino</a>
+                        <br>
+                        <a href="https://torino.ordingegneri.it/" data-type="link" data-id="https://torino.ordingegneri.it/" target="_blank">Ordine Ingegneri Torino</a>
+                        <br>
+                        <a href="https://pierluiginervi.org/" data-type="link" data-id="https://pierluiginervi.org/" target="_blank">Pier Luigi Nervi Project Foundation</a>
+                        <br>
+                        <a href="https://siat.torino.it/" data-type="link" data-id="https://siat.torino.it/" target="_blank">Società Ingegneri Architetti Torino (SIAT)</a>
+                        <br>
+                        <a href="https://telearchitettura.polito.it/it/ta" data-type="link" data-id="https://telearchitettura.polito.it/it/ta" target="_blank">TeleArchitettura</a>
+                        <br>
+                        <a href="https://urbanlabtorino.it/" data-type="link" data-id="https://urbanlabtorino.it/" target="_blank">Torino Urban Lab</a>
+                    </p>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                        <div class="fs-3 d-inline">
+                            <i class="bi bi-badge-ar-fill ms-2" font-size:1.8rem!important; ></i>
+                        </div>
+                        <div class="d-inline">
+                            <span class="ms-3 me-2" style="position: relative; top: -1px;">Avvia</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instructions modal -->
+    <div class="modal fade" id="instructionsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen d-flex flex-column justify-content-between"
+            style="background-color: #002b49dd;">
+            <div
+                class="modal-content bg-transparent border-0 flex-grow-1 d-flex flex-column justify-content-center align-items-center">
+                <img class="img-fluid" src="media/images/istruzioni.png" style="max-height:75vh;" alt="Instructions">
+            </div>
+            <div class="modal-footer bg-transparent border-0 justify-content-center">
+                <button id="closeInstructionsModal" class="btn btn-primary" aria-label="Close" data-bs-dismiss="modal"
+                    style="background-color:#fff!important;color:#002b49!important;">
+                    <i class="bi bi-check2-circle"></i> &nbsp;&nbsp;Ho capito
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Include Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Include your custom JavaScript file -->
+    <!-- Custom JS -->
     <script src="scripts.js"></script>
+
+    <!-- Local JS -->
+    <script>
+        // Intro modal
+        const openIntroModalButton = document.getElementById('openIntroModalButton');
+        const introModalElement = document.getElementById('introModal');
+        const instructionsModalElement = document.getElementById('instructionsModal');
+
+        const introModal = new bootstrap.Modal(introModalElement, {
+            keyboard: false 
+        });
+
+        const instructionsModal = new bootstrap.Modal(instructionsModalElement, {
+            keyboard: false
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            introModal.show();
+        });
+
+        openIntroModalButton.addEventListener('click', () => {
+                introModal.show();
+            });
+
+        introModalElement.addEventListener('hidden.bs.modal', () => {
+            instructionsModal.show();
+        });
+    </script>
+
+
+    
 </body>
 
 </html>
