@@ -7,7 +7,7 @@
                 "img1": "",
                 "img2": "",
                 "animation": [],
-                "model0": "accessi.obj",
+                "model0": "flux.obj", //accessi.obj
                 "model1": "DATI_1.obj",
                 "position": {
                     "img0": "0 0 0",
