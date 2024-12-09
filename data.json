@@ -6,16 +6,13 @@
                 "img0": "",
                 "img1": "",
                 "img2": "FLUX.png",
-                "animation": ["percorsi-1.png",
-                "percorsi-2.png",
-                "percorsi-3.png"
-                ],
+                "animation": [],
                 "model0": "accessi.obj",
                 "model1": "DATI_1.obj",
                 "position": {
                     "img0": "0 0 0",
                     "img1": "0 0 0",
-                    "img2": "0 0 0",
+                    "img2": "10 10 10",
                     "animation": "0 0 0",
                     "model0": "0 0 0",
                     "model1": "0 0 0"
