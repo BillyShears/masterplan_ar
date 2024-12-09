@@ -5,8 +5,9 @@
             "augmentedContent": {
                 "img0": "",
                 "img1": "",
-                "img2": "flux-test.png",
-                "animation": [],
+                "img2": "",
+                "animation": [flux-test.png
+                ],
                 "model0": "accessi.obj",
                 "model1": "DATI_1.obj",
                 "position": {
