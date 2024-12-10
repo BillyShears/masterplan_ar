@@ -61,6 +61,15 @@
         </div>
     </div>
 
+    <!-- Reset Button -->
+    <div id="resetButton" style="position: fixed; top: 20px; right: 20px; z-index: 1000;">
+        <div class="d-flex align-items-center">
+            <button class="btn btn-primary" aria-label="Reset AR">
+                <i class="bi bi-arrow-clockwise"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- AR Layer Buttons Container -->
     <!--div id="arLayerButtons"
         style="position: fixed; top: 20px; left: 20px; z-index: 1000; display: none; flex-direction: column;">
@@ -204,22 +213,6 @@
     <script src="js/index.js"></script>
 
     <!-- Local JS -->
-
-    <script>
-        // Orientation alert
-        function checkOrientation() {
-            const alertElement = document.getElementById("orientation-alert");
-
-            if (window.matchMedia("(orientation: landscape)").matches) {
-                alertElement.classList.remove("hidden"); // Show alert
-            } else {
-                alertElement.classList.add("hidden"); // Hide alert
-            }
-        }
-
-        checkOrientation();
-        window.addEventListener("resize", checkOrientation);
-    </script>
 
     
 </body>

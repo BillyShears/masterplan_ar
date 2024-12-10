@@ -208,8 +208,8 @@
                 "img1": "",
                 "img2": "",
                 "animation": [],
-                "model0": "cube.obj",
-                "model1": "cube.obj",
+                "model0": "DATI_3.obj",
+                "model1": "accessi.obj",
                 "model2": "flussi3.obj",
                 "model3": "cube.obj",
                 "position": {
@@ -273,8 +273,8 @@
                 "img1": "",
                 "img2": "",
                 "animation": [],
-                "model0": "cube.obj",
-                "model1": "cube.obj",
+                "model0": "DATI_4.obj",
+                "model1": "accessi.obj",
                 "model2": "flussi4.obj",
                 "model3": "cube.obj",
                 "position": {

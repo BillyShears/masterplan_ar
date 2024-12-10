@@ -146,32 +146,34 @@ document.addEventListener('DOMContentLoaded', function () {
             const aMarker = document.getElementById(marker.id);
             if (aMarker) {
                 console.log(`Initializing listeners for marker: ${marker.id}`);
+                
                 aMarker.addEventListener('markerFound', () => {
-                    currentMarker = marker.id;
-                    currentBuildings = marker.buildings; // Store buildings array
                     console.log(`Marker Found: ${marker.id}`);
 
-                    // Load augmented content for this marker
+                    // Clean up previous marker's content
+                    if (currentMarker && currentMarker !== marker.id) {
+                        console.log(`Switching from marker ${currentMarker} to ${marker.id}`);
+                        resetScene();
+                    }
+
+                    // Set the new current marker
+                    currentMarker = marker.id;
+                    currentBuildings = marker.buildings;
                     currentAugmentedContent = marker.augmentedContent;
 
-                    // Generate dynamic buttons
+                    // Generate buttons and initialize AR layers
                     generateBuildingButtons(currentBuildings);
-
-                    // Generate AR Layer buttons
-                    // generateARLayerButtons();
-
+                    initializeARLayers();
+                    
                     // Show the Change Layer button
                     const arLayerChangeButton = document.getElementById('arLayerChangeButton');
                     arLayerChangeButton.style.display = 'block';
 
-                    // Initialize the AR layers for the current marker
-                    initializeARLayers();
-
-                    // Get the plane and model specific to this marker
+                    // Set the plane and model specific to this marker
                     currentPlane = aMarker.querySelector(`#plane-${marker.id}`);
                     currentModel = aMarker.querySelector(`#model-${marker.id}`);
 
-                    // Set the current AR layer
+                    // Initialize the current AR layer
                     setImageSet(currentARLayer);
                 });
 
