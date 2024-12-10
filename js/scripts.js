@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentBuildings = null; // Store the list of buildings for the current marker
     let currentBuilding = null; // To keep track of the currently selected building
     let currentARLayer = 'model0'; // Default AR layer
-    let currentARLayerIndex = 1; // To keep track of the current layer index
+    let currentARLayerIndex = 0; // To keep track of the current layer index
     let interval = null; // For the animation interval
     let availableARLayers = []; // To store available layers for the current marker
 
@@ -594,8 +594,8 @@ document.addEventListener('DOMContentLoaded', function () {
             'img0': { text: '', icon: 'bi bi-bug' },
             'img1': { text: 'Accessi', icon: 'bi bi-box-arrow-in-right' },
             'img2': { text: 'Flussi', icon: 'bi bi-shuffle' },
-            'model0': { text: 'Accessi', icon: 'bi bi-box-arrow-in-right' },
-            'model1': { text: 'Dati', icon: 'bi bi-bar-chart' },
+            'model0': { text: 'Dati', icon: 'bi bi-bar-chart' },
+            'model1': { text: 'Accessi', icon: 'bi bi-box-arrow-in-right' },
             'model2': { text: 'Flussi', icon: 'bi bi-shuffle' },
             'model3': { text: 'Debug', icon: 'bi bi-bug' },
         };
