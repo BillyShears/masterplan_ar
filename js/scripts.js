@@ -111,7 +111,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function addMarker(marker) {
         const aMarker = document.createElement('a-marker');
         aMarker.setAttribute('preset', 'custom');
-        aMarker.setAttribute('smooth', false);
+        aMarker.setAttribute('smooth', 'false');
+        aMarker.setAttribute('size', '0.15')
         aMarker.setAttribute('type', 'pattern');
         aMarker.setAttribute('url', `media/${marker.id}/pattern.patt`); // Assuming pattern files are named accordingly
         aMarker.setAttribute('id', marker.id);
