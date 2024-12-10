@@ -9,13 +9,15 @@
                 "animation": [],
                 "model0": "padiglione.obj",
                 "model1": "padiglione.obj",
+                "model2": "padiglione.obj",
                 "position": {
                     "img0": "0 0 0",
                     "img1": "0 0 0.5",
                     "img2": "1 1 0.5",
                     "animation": "0 0 0",
                     "model0": "0 0 0",
-                    "model1": "0 0 0"
+                    "model1": "0 0 0",
+                    "model2": "0 0 0"
                 },
                 "scale": {
                     "img0": "1 1 1",
@@ -23,7 +25,8 @@
                     "img2": "2.95 2.1 1",
                     "animation": "1 1 1",
                     "model0": "0.05 0.05 0.05",
-                    "model1": "0.05 0.05 0.05"
+                    "model1": "0.05 0.05 0.05",
+                    "model2": "0.05 0.05 0.05"
                 }
             },
             "buildings": [
@@ -74,13 +77,15 @@
                 "animation": [],
                 "model0": "padiglione.obj",
                 "model1": "padiglione.obj",
+                "model2": "padiglione.obj",
                 "position": {
                     "img0": "0 0 0",
                     "img1": "0 0 0.5",
                     "img2": "1 1 0.5",
                     "animation": "0 0 0",
                     "model0": "0 0 0",
-                    "model1": "0 0 0"
+                    "model1": "0 0 0",
+                    "model2": "0 0 0"
                 },
                 "scale": {
                     "img0": "1 1 1",
@@ -88,7 +93,8 @@
                     "img2": "2.95 2.1 1",
                     "animation": "1 1 1",
                     "model0": "0.05 0.05 0.05",
-                    "model1": "0.05 0.05 0.05"
+                    "model1": "0.05 0.05 0.05",
+                    "model2": "0.05 0.05 0.05"
                 }
             },
             "buildings": [
@@ -139,13 +145,15 @@
                 "animation": [],
                 "model0": "padiglione.obj",
                 "model1": "padiglione.obj",
+                "model2": "padiglione.obj",
                 "position": {
                     "img0": "0 0 0",
                     "img1": "0 0 0.5",
                     "img2": "1 1 0.5",
                     "animation": "0 0 0",
                     "model0": "0 0 0",
-                    "model1": "0 0 0"
+                    "model1": "0 0 0",
+                    "model2": "0 0 0"
                 },
                 "scale": {
                     "img0": "1 1 1",
@@ -153,7 +161,8 @@
                     "img2": "2.95 2.1 1",
                     "animation": "1 1 1",
                     "model0": "0.05 0.05 0.05",
-                    "model1": "0.05 0.05 0.05"
+                    "model1": "0.05 0.05 0.05",
+                    "model2": "0.05 0.05 0.05"
                 }
             },
             "buildings": [
@@ -204,13 +213,15 @@
                 "animation": [],
                 "model0": "padiglione.obj",
                 "model1": "padiglione.obj",
+                "model2": "padiglione.obj",
                 "position": {
                     "img0": "0 0 0",
                     "img1": "0 0 0.5",
                     "img2": "1 1 0.5",
                     "animation": "0 0 0",
                     "model0": "0 0 0",
-                    "model1": "0 0 0"
+                    "model1": "0 0 0",
+                    "model2": "0 0 0"
                 },
                 "scale": {
                     "img0": "1 1 1",
@@ -218,7 +229,8 @@
                     "img2": "2.95 2.1 1",
                     "animation": "1 1 1",
                     "model0": "0.05 0.05 0.05",
-                    "model1": "0.05 0.05 0.05"
+                    "model1": "0.05 0.05 0.05",
+                    "model2": "0.05 0.05 0.05"
                 }
             },
             "buildings": [

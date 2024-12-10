@@ -50,6 +50,15 @@
         </div>
     </div>
 
+    <!-- Open Instructions Button -->
+    <div id="openInstructionsModalButton" style="position: fixed; top: 20px; left: 76px; z-index: 1000;">
+        <div class="d-flex align-items-center">
+            <button class="btn btn-primary" aria-label="Open Instructions">
+                <i class="bi bi-question-circle"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- AR Layer Buttons Container -->
     <!--div id="arLayerButtons"
         style="position: fixed; top: 20px; left: 20px; z-index: 1000; display: none; flex-direction: column;">
@@ -180,36 +189,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom JS -->
-    <script src="scripts.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/camera-hack.js"></script>
+    <script src="js/index.js"></script>
 
     <!-- Local JS -->
-    <script>
-        // Intro modal
-        const openIntroModalButton = document.getElementById('openIntroModalButton');
-        const introModalElement = document.getElementById('introModal');
-        const instructionsModalElement = document.getElementById('instructionsModal');
-
-        const introModal = new bootstrap.Modal(introModalElement, {
-            keyboard: false 
-        });
-
-        const instructionsModal = new bootstrap.Modal(instructionsModalElement, {
-            keyboard: false
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            introModal.show();
-        });
-
-        openIntroModalButton.addEventListener('click', () => {
-                introModal.show();
-            });
-
-        introModalElement.addEventListener('hidden.bs.modal', () => {
-            instructionsModal.show();
-        });
-    </script>
-
+    <!-- ... -->
 
     
 </body>
