@@ -2,9 +2,15 @@
 /* Font */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
-body {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    color: #002b49;
+@media screen and (orientation: portrait) {
+    body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            color: #002b49;
+        }
+
+    body::before {
+        content: "Please rotate your device to landscape mode.";
+    }
 }
 
 a {
