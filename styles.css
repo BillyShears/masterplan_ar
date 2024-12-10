@@ -2,15 +2,9 @@
 /* Font */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
-@media screen and (orientation: portrait) {
-    body {
-            font-family: "Plus Jakarta Sans", sans-serif;
-            color: #002b49;
-        }
-
-    body::before {
-        content: "Please rotate your device to landscape mode.";
-    }
+body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #002b49;
 }
 
 a {
@@ -245,4 +239,31 @@ h3 {
 .modal {
     z-index: 4000;
     /* Higher than overlay */
+}
+
+/* Orientation alert */ 
+#orientation-alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Semi-transparent background */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+    /* Higher than typical content */
+}
+
+#orientation-alert .alert {
+    max-width: 90%;
+    text-align: center;
+}
+
+/* Hidden by default */
+.hidden {
+    display: none !important;
 }

@@ -22,6 +22,7 @@
 </head>
 
 <body style="margin: 0; overflow: hidden; background-color: black;">
+
     <!-- AR Scene -->
     <a-scene embedded arjs="debugUIEnabled: false; sourceType: webcam; trackingMethod: best; detectionMode: mono;" vr-mode-ui="enabled: false">
         <!-- Camera -->
@@ -80,6 +81,14 @@
     <!-- Overlay -->
     <div id="overlay" style="display: none;">
         <!-- Content will be injected dynamically -->
+    </div>
+
+    <!-- Orientation Alert -->
+    <div id="orientation-alert" class="hidden">
+        <div class="alert alert-danger" role="alert">
+            <strong>Errore di orientamento.</strong>
+            <br>Ruota il dispositivo in verticale.
+        </div>
     </div>
 
     <!-- Intro modal -->
@@ -195,7 +204,22 @@
     <script src="js/index.js"></script>
 
     <!-- Local JS -->
-    <!-- ... -->
+
+    <script>
+        // Orientation alert
+        function checkOrientation() {
+            const alertElement = document.getElementById("orientation-alert");
+
+            if (window.matchMedia("(orientation: landscape)").matches) {
+                alertElement.classList.remove("hidden"); // Show alert
+            } else {
+                alertElement.classList.add("hidden"); // Hide alert
+            }
+        }
+
+        checkOrientation();
+        window.addEventListener("resize", checkOrientation);
+    </script>
 
     
 </body>
