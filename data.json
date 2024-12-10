@@ -221,12 +221,12 @@
                     "animation": "1 1 1",
                     "model0": "0.005 0.005 0.005",
                     "model1": "0.005 0.005 0.005",
-                    "model2": "0.005 0.005 0.005"
+                    "model2": "0.01 0.01 0.01"
                 }
             },
             "buildings": [
                 {
-                    "title": "Istituto Elettrotecnico Nazionale Galileo Ferraris, Palazzina di Via Morgari e Tongji Pavilion",
+                    "title": "Istituto Elettrotecnico Nazionale Galileo Ferraris e Palazzina di Via Morgari",
                     "story": "https://shazarch.com",
                     "project": {
                         "introduction": "L’edificio che ospita l’Istituto Elettrotecnico Nazionale Galileo Ferraris, opera di Vittorio Eugenio Ballatore di Rosana, viene realizzato fra 1931 e 1933 ed è riconosciuto come esempio di architettura Art Déco. Al secondo piano ospita alcuni laboratori didattici e di ricerca. La palazzina in via Morgari ospita aule e laboratori didattici e di ricerca. La prima joint school sull’asse Politecnico di Torino-Tongji University di Shanghai avrà sede nel parco del Valentino, in un padiglione collocato nell’area dell’attuale bocciofila. Nella scuola verranno sviluppate tre discipline, l’Ingegneria ambientale, ICT for Smart Society e Design. Il progetto del padiglione sarà curato dalla compagine dell’università cinese, guidata dall’architetto Philip Yuan.",

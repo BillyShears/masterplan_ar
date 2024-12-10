@@ -1,0 +1,4 @@
+dev
+
+# Ignore all .pem files
+*.pem
