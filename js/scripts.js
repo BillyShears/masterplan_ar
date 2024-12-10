@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Add model assets (OBJ)
-        ['model0', 'model1', 'model2'].forEach(key => {
+        ['model0', 'model1', 'model2', 'model3'].forEach(key => {
             if (augmentedContent[key]) {
                 const modelName = augmentedContent[key];
                 const modelSrc = `media/${marker.id}/${modelName}`;
@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function addMarker(marker) {
         const aMarker = document.createElement('a-marker');
         aMarker.setAttribute('preset', 'custom');
+        aMarker.setAttribute('smooth', false);
         aMarker.setAttribute('type', 'pattern');
         aMarker.setAttribute('url', `media/${marker.id}/pattern.patt`); // Assuming pattern files are named accordingly
         aMarker.setAttribute('id', marker.id);
@@ -244,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize AR layers
     
     function initializeARLayers() {
-        const arLayers = ['img0', 'img1', 'img2', 'animation', 'model0', 'model1', 'model2'];
+        const arLayers = ['img0', 'img1', 'img2', 'animation', 'model0', 'model1', 'model2', 'model3'];
 
         availableARLayers = arLayers.filter(layer => {
             const content = currentAugmentedContent[layer];
@@ -316,7 +317,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 console.warn(`No image found for ${set}`);
             }
-        } else if (set === 'model0' || set === 'model1' || set === 'model2') {
+        } else if (set === 'model0' || set === 'model1' || set === 'model2' || set === 'model3') {
             console.log('Switching to model');
             if (currentAugmentedContent[set]) {
                 const modelName = currentAugmentedContent[set];
@@ -337,6 +338,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const scale = currentAugmentedContent.scale[set] || '1 1 1';
                 currentModel.setAttribute('position', position);
                 currentModel.setAttribute('scale', scale);
+                console.log(`SCALE: ${scale}`);
             } else {
                 console.warn('No model found for this marker.');
             }
@@ -593,7 +595,8 @@ document.addEventListener('DOMContentLoaded', function () {
             'img2': { text: 'Flussi', icon: 'bi bi-shuffle' },
             'model0': { text: 'Accessi', icon: 'bi bi-box-arrow-in-right' },
             'model1': { text: 'Dati', icon: 'bi bi-bar-chart' },
-            'model2': { text: 'Altro', icon: 'bi bi-shuffle' },
+            'model2': { text: 'Flussi', icon: 'bi bi-shuffle' },
+            'model3': { text: 'Debug', icon: 'bi bi-bug' },
         };
         // Return the corresponding layer info or default values
         return layerInfo[layer] || { text: 'Change Layer', icon: 'bi bi-layers' };
