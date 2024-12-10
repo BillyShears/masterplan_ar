@@ -111,6 +111,10 @@ h3 {
     font-size: 1.5rem;
 }
 
+#currentLayerIcon {
+    font-size: 1.25rem;
+}
+
 /* Primary Button Override */
 .btn-primary {
     background-color: #002b49;

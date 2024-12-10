@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Update the button label and icon using getLayerLabel
         const layerInfo = getLayerLabel(set);
-        currentLayerIcon.innerHTML = `<i class="${layerInfo.icon} me-2"></i> ${layerInfo.text}`;
+        currentLayerIcon.innerHTML = `<i class="${layerInfo.icon} me-2"></i> &nbsp;&nbsp;${layerInfo.text}`;
     }
 
 
@@ -593,7 +593,7 @@ document.addEventListener('DOMContentLoaded', function () {
             'img2': { text: 'Flussi', icon: 'bi bi-shuffle' },
             'model0': { text: 'Accessi', icon: 'bi bi-box-arrow-in-right' },
             'model1': { text: 'Dati', icon: 'bi bi-bar-chart' },
-            'model2': { text: 'Altro', icon: 'bi bi-bug' },
+            'model2': { text: 'Altro', icon: 'bi bi-shuffle' },
         };
         // Return the corresponding layer info or default values
         return layerInfo[layer] || { text: 'Change Layer', icon: 'bi bi-layers' };
