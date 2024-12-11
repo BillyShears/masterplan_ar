@@ -381,21 +381,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 currentModel.setAttribute('scale', scale);
                 console.log(`SCALE: ${scale}`);
 
-                console.warn('Changing BG.');
-
                 // iPad alignment patch
                 if (isIPad()) {
                     console.log("This device is an iPad");
                     position = {
                         x: position.x || 0,
-                        y: (position.y || 0) + 0.4, // Add 8 to the y-axis
+                        y: (position.y || 0) + 0.15, // Add 8 to the y-axis
                         z: position.z || 0,
                     };
                     currentModel.setAttribute('position', position);
 
                     // Debug display
-                    resetButton.style.backgroundColor = '#002b49';
-                    resetButton.style.borderColor = '#002b49';
+                    resetButton.style.backgroundColor = 'red';
+                    resetButton.style.borderColor = 'red';
                 }
 
             } else {
