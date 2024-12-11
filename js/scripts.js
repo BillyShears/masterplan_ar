@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const sceneEl = document.querySelector('a-scene');
     const assetsContainer = document.getElementById('assetsContainer');
     const changeLayerBtn = document.getElementById('changeLayerBtn');
+    const changeLayerContainer = document.getElementById('arLayerChangeButton');
     const currentLayerIcon = document.getElementById('currentLayerIcon');
 
     console.log('DOM fully loaded and parsed.');
@@ -267,6 +268,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Change layer button
+
+    changeLayerContainer.addEventListener('click', () => {
+        changeLayerBtn.click();
+    });
 
     changeLayerBtn.addEventListener('click', () => {
         if (availableARLayers.length > 0) {
