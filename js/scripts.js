@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let availableARLayers = []; // To store available layers for the current marker
     let arInitialized = false; // To track if AR.js is initialized
     let wasLandscape = null;
+    let resetClickedOnce = false;
 
     const overlay = document.getElementById('overlay');
     const sceneEl = document.querySelector('a-scene');
@@ -682,10 +683,30 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener("resize", checkOrientation);
 
     // Reload the page without intro
-    resetButton.addEventListener('click', () => {
+    function reset() {
         const url = new URL(window.location.href);
         url.searchParams.set('noIntro', '');
         window.location.href = url.toString();
+    }
+
+    // Tooltip
+
+    // Initialize tooltip
+    const tooltipInstance = new bootstrap.Tooltip(resetButton);
+
+    resetButton.addEventListener('click', () => {
+        if (!resetClickedOnce) {
+            tooltipInstance.show(); // Show the tooltip
+            resetClickedOnce = true;
+
+            // Automatically hide tooltip after 2 seconds (optional)
+            setTimeout(() => {
+                tooltipInstance.hide();
+            }, 2000);
+        } else {
+            tooltipInstance.hide(); // Hide the tooltip on the second click
+            reset();
+        }
     });
 
 });
