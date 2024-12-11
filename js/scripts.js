@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         z: position.z || 0,
                     };
                     currentModel.setAttribute('position', position);
-
+                } else {
                     // Debug display
                     resetButton.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
                     resetButton.style.borderColor = 'rgba(0, 0, 0, 0)';
