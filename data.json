@@ -10,7 +10,7 @@
                 "model0": "DATI_1.obj",
                 "model1": "accessi.obj",
                 "model2": "flussi1.obj",
-                "model3": "cube.obj",
+                "model3": "",
                 "position": {
                     "img0": "0 0 0",
                     "img1": "0 0 0",
@@ -125,7 +125,7 @@
                 "model0": "DATI_2.obj",
                 "model1": "accessi.obj",
                 "model2": "flussi2.obj",
-                "model3": "cube.obj",
+                "model3": "",
                 "position": {
                     "img0": "0 0 0",
                     "img1": "0 0 0",
@@ -211,7 +211,7 @@
                 "model0": "DATI_3.obj",
                 "model1": "accessi.obj",
                 "model2": "flussi3.obj",
-                "model3": "cube.obj",
+                "model3": "",
                 "position": {
                     "img0": "0 0 0",
                     "img1": "0 0 0",
@@ -276,7 +276,7 @@
                 "model0": "DATI_4.obj",
                 "model1": "accessi.obj",
                 "model2": "flussi4.obj",
-                "model3": "cube.obj",
+                "model3": "",
                 "position": {
                     "img0": "0 0 0",
                     "img1": "0 0 0",

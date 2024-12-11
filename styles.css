@@ -120,6 +120,11 @@ h3 {
     font-size: 1.25rem;
 }
 
+#resetButton {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-color: transparent;
+}
+
 /* Primary Button Override */
 .btn-primary {
     background-color: #002b49;
