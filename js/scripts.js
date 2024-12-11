@@ -271,10 +271,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Change layer button
 
     changeLayerContainer.addEventListener('click', () => {
-        changeLayerBtn.click();
-    });
-
-    changeLayerBtn.addEventListener('click', () => {
         if (availableARLayers.length > 0) {
             // Move to the next layer
             currentARLayerIndex = (currentARLayerIndex + 1) % availableARLayers.length;
