@@ -16,7 +16,16 @@ const instructionsModal = new bootstrap.Modal(instructionsModalElement, {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    introModal.show();
+    // Check if the URL parameter 'noIntro' is defined
+    const urlParams = new URLSearchParams(window.location.search);
+    const noIntro = urlParams.has('noIntro'); // true if 'noIntro' exists in the URL
+
+    // Show the intro modal if 'noIntro' is NOT defined
+    if (!noIntro) {
+        introModal.show();
+    } else {
+        showInstructions = false;
+    }
 });
 
 openIntroModalButton.addEventListener('click', () => {
@@ -28,42 +37,9 @@ openInstructionsModalButton.addEventListener('click', () => {
 });
 
 introModalElement.addEventListener('hidden.bs.modal', () => {
-    // Show instructions, only once
+    // Show instructions only once, if allowed
     if (showInstructions) {
         instructionsModal.show();
-    };
+    }
     showInstructions = false;
-});
-
-// Orientation alert
-
-const resetButton = document.getElementById('resetButton');
-
-function checkOrientation() {
-    const alertElement = document.getElementById("orientation-alert");
-
-    if (window.matchMedia("(orientation: landscape)").matches) {
-        alertElement.classList.remove("hidden"); // Show alert
-    } else {
-        alertElement.classList.add("hidden"); // Hide alert
-        resetScene(scene);
-    }
-}
-
-checkOrientation();
-window.addEventListener("resize", checkOrientation);
-
-function resetScene(scene) {
-    while (scene.children.length > 0) {
-        scene.remove(scene.children[0]); // Remove all objects
-    }
-}
-
-resetButton.addEventListener('click', () => {
-    console.log("RESET BUTTON");
-    if (typeof scene !== "undefined" && scene instanceof THREE.Scene) {
-        resetScene(scene);
-    } else {
-        console.warn("Scene object is not defined or not a THREE.Scene.");
-    }
 });

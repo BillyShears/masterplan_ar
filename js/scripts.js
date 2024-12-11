@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     let markerData = []; // To store data from data.json
     let currentMarker = null; // To keep track of the currently active marker
+    let currentTrackedMarker = null; // Store the actual <a-marker> element
     let currentAugmentedContent = null; // Store the augmented content for the current marker
     let currentPlane = null; // The plane element for the current marker
     let currentModel = null; // The model element for the current marker
@@ -12,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentARLayerIndex = 0; // To keep track of the current layer index
     let interval = null; // For the animation interval
     let availableARLayers = []; // To store available layers for the current marker
+    let arInitialized = false; // To track if AR.js is initialized
+    let wasLandscape = null;
 
     const overlay = document.getElementById('overlay');
     const sceneEl = document.querySelector('a-scene');
@@ -22,29 +25,32 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log('DOM fully loaded and parsed.');
 
     // Fetch the JSON data
-    fetch('data.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            markerData = data.markers;
-            console.log('Marker Data Loaded:', markerData);
-            initializeScene();
-        })
-        .catch(error => {
-            console.error('Error loading data:', error);
-        });
-
     function initializeScene() {
-        markerData.forEach(marker => {
-            // Add assets
-            addAssets(marker);
 
-            // Add marker to the scene
+        fetch('data.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                markerData = data.markers;
+                initializeData()
+                console.log('Marker Data Loaded:', markerData);
+            })
+            .catch(error => {
+                console.error('Error loading data:', error);
+            });
+    }
+
+    function initializeData() {
+
+        markerData.forEach(marker => {
+            addAssets(marker);
             addMarker(marker);
+
+            arInitialized = true; // Mark AR.js as initialized
         });
 
         // Initialize markers with event listeners
@@ -142,69 +148,98 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize markers with event listeners
     function initializeMarkers() {
-        markerData.forEach(marker => {
-            const aMarker = document.getElementById(marker.id);
-            if (aMarker) {
-                console.log(`Initializing listeners for marker: ${marker.id}`);
-                
-                aMarker.addEventListener('markerFound', () => {
-                    console.log(`Marker Found: ${marker.id}`);
+        document.querySelectorAll('a-marker').forEach((aMarker) => {
+            const markerId = aMarker.id; // Marker ID for easy reference
 
-                    // Clean up previous marker's content
-                    if (currentMarker && currentMarker !== marker.id) {
-                        console.log(`Switching from marker ${currentMarker} to ${marker.id}`);
-                        resetScene();
-                    }
+            // Remove existing listeners to prevent duplicates
+            aMarker.removeEventListener('markerFound', handleMarkerFound);
+            aMarker.removeEventListener('markerLost', handleMarkerLost);
 
-                    // Set the new current marker
-                    currentMarker = marker.id;
-                    currentBuildings = marker.buildings;
-                    currentAugmentedContent = marker.augmentedContent;
+            // Define event handlers as named functions to enable removal
+            function handleMarkerFound() {
+                console.log(`Marker Found: ${markerId}`);
 
-                    // Generate buttons and initialize AR layers
-                    generateBuildingButtons(currentBuildings);
-                    initializeARLayers();
-                    
-                    // Show the Change Layer button
-                    const arLayerChangeButton = document.getElementById('arLayerChangeButton');
-                    arLayerChangeButton.style.display = 'block';
+                // Deactivate previous marker if another is currently tracked
+                if (currentTrackedMarker && currentTrackedMarker !== aMarker) {
+                    console.log(`Deactivating previous marker: ${currentTrackedMarker.id}`);
+                    // Manually trigger 'markerLost' for the old marker
+                    currentTrackedMarker.dispatchEvent(new Event('manualMarkerLost'));
+                }
 
-                    // Set the plane and model specific to this marker
-                    currentPlane = aMarker.querySelector(`#plane-${marker.id}`);
-                    currentModel = aMarker.querySelector(`#model-${marker.id}`);
+                // Set the newly found marker as the current one
+                currentTrackedMarker = aMarker;
 
-                    // Initialize the current AR layer
-                    setImageSet(currentARLayer);
-                });
+                // Custom Logic for Marker Found
+                const thisMarkerData = markerData.find((marker) => marker.id === markerId); // Find marker data
+                if (!thisMarkerData) {
+                    console.warn(`Marker data not found for ID: ${markerId}`);
+                    return;
+                }
 
-                aMarker.addEventListener('markerLost', () => {
-                    console.log(`Marker Lost: ${marker.id}`);
-                    currentMarker = null;
+                // Set global variables for the new marker
+                currentMarker = markerId;
+                currentBuildings = thisMarkerData.buildings;
+                currentAugmentedContent = thisMarkerData.augmentedContent;
 
-                    // Hide the button container
-                    const buttonContainer = document.getElementById('buttonContainer');
-                    buttonContainer.style.display = 'none';
+                // Generate dynamic buttons and AR layers
+                generateBuildingButtons(currentBuildings);
+                initializeARLayers();
 
-                    // Hide AR Layer buttons
-                    // const arLayerButtonsContainer = document.getElementById('arLayerButtons');
-                    // arLayerButtonsContainer.style.display = 'none';
+                // Show the Change Layer button
+                const arLayerChangeButton = document.getElementById('arLayerChangeButton');
+                arLayerChangeButton.style.display = 'block';
 
-                    // Hide the Change Layer button
-                    const arLayerChangeButton = document.getElementById('arLayerChangeButton');
-                    arLayerChangeButton.style.display = 'none';
+                // Set the plane and model specific to this marker
+                currentPlane = aMarker.querySelector(`#plane-${markerId}`);
+                currentModel = aMarker.querySelector(`#model-${markerId}`);
 
-                    // Clear interval and hide elements
-                    clearInterval(interval);
-                    if (currentPlane) {
-                        currentPlane.setAttribute('visible', 'false');
-                    }
-                    if (currentModel) {
-                        currentModel.setAttribute('visible', 'false');
-                    }
-                });
-            } else {
-                console.warn(`Marker element with id "${marker.id}" not found in DOM`);
+                // Initialize the current AR layer
+                setImageSet(currentARLayer);
+
+                console.log(`Marker ${markerId} is now active.`);
             }
+
+            // Listen for when a marker is lost
+            function handleMarkerLost() {
+                console.log(`Marker Lost: ${markerId}`);
+
+                // Ignore markerLost if another marker has already been found
+                if (currentTrackedMarker !== aMarker) {
+                    console.log(`Ignoring markerLost for ${markerId} because a new marker is already active.`);
+                    return;
+                }
+
+                // Clear the current marker tracking
+                console.log(`Stopping tracking for marker: ${markerId}`);
+                currentTrackedMarker = null;
+
+                // Custom Logic for Marker Lost
+                currentMarker = null;
+
+                // Hide the button container
+                const buttonContainer = document.getElementById('buttonContainer');
+                buttonContainer.style.display = 'none';
+
+                // Hide the Change Layer button
+                const arLayerChangeButton = document.getElementById('arLayerChangeButton');
+                arLayerChangeButton.style.display = 'none';
+
+                // Clear interval and hide elements
+                clearInterval(interval);
+                if (currentPlane) {
+                    currentPlane.setAttribute('visible', 'false');
+                }
+                if (currentModel) {
+                    currentModel.setAttribute('visible', 'false');
+                }
+
+                console.log(`Marker ${markerId} deactivated.`);
+            }
+
+            // Add event listeners
+            aMarker.addEventListener('markerFound', handleMarkerFound);
+            aMarker.addEventListener('markerLost', handleMarkerLost);
+
         });
     }
 
@@ -560,7 +595,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.warn('Failed to load image-modal template:', err);
             displayError('There was an error displaying the image.');
         });
-}
+    }
 
     function displayError(message) {
         overlay.innerHTML = `
@@ -604,4 +639,48 @@ document.addEventListener('DOMContentLoaded', function () {
         // Return the corresponding layer info or default values
         return layerInfo[layer] || { text: 'Change Layer', icon: 'bi bi-layers' };
     }
+
+    // ORIENTATION ALERT
+
+    // Track the previous orientation state
+    const resetButton = document.getElementById('resetButton');
+
+    function checkOrientation() {
+        const alertElement = document.getElementById("orientation-alert");
+
+        // Get the current orientation
+        const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+
+        // Only proceed if the orientation has changed
+        if (wasLandscape === isLandscape) {
+            return; // No changes; skip the logic
+        }
+
+        wasLandscape = isLandscape; // Update the tracked orientation state
+
+        if (isLandscape) {
+            console.log("Orientation changed to landscape.");
+            alertElement.classList.remove("hidden"); // Show alert
+        } else {
+            console.log("Orientation changed to portrait.");
+            alertElement.classList.add("hidden"); // Hide alert
+
+            // Initialize AR.js if not already initialized
+            if (!arInitialized) {
+                console.log("Initializing AR.js for portrait mode...");
+                initializeScene();
+            }
+        }
+    }
+
+    // Add event listener for orientation changes
+    window.addEventListener("resize", checkOrientation);
+
+    // Reload the page without intro
+    resetButton.addEventListener('click', () => {
+        const url = new URL(window.location.href);
+        url.searchParams.set('noIntro', '');
+        window.location.href = url.toString();
+    });
+
 });
