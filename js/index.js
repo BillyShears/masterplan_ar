@@ -43,3 +43,12 @@ introModalElement.addEventListener('hidden.bs.modal', () => {
     }
     showInstructions = false;
 });
+
+// Tooltips
+
+document.addEventListener('DOMContentLoaded', () => {
+    const tooltips = document.querySelectorAll('[data-toggle="tooltip"]');
+    tooltips.forEach(tooltipElement => {
+        new bootstrap.Tooltip(tooltipElement);
+    });
+});
