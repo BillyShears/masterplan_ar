@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const changeLayerBtn = document.getElementById('changeLayerBtn');
     const changeLayerContainer = document.getElementById('arLayerChangeButton');
     const currentLayerIcon = document.getElementById('currentLayerIcon');
+    const resetButton = document.getElementById('resetButton');
 
     console.log('DOM fully loaded and parsed.');
 
@@ -374,11 +375,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(`OBJ ID: ${modelObjId}, MTL ID: ${modelMtlId}`);
 
                 // Fix scale and position based on the JSON data
-                const position = currentAugmentedContent.position[set] || '0 0 0';
+                let position = currentAugmentedContent.position[set] || '0 0 0';
                 const scale = currentAugmentedContent.scale[set] || '1 1 1';
                 currentModel.setAttribute('position', position);
                 currentModel.setAttribute('scale', scale);
                 console.log(`SCALE: ${scale}`);
+
+                console.warn('Changing BG.');
+
+                // iPad alignment patch
+                if (isIPad()) {
+                    console.log("This device is an iPad");
+                    position = {
+                        x: position.x || 0,
+                        y: (position.y || 0) + 0.1, // Add 8 to the y-axis
+                        z: position.z || 0,
+                    };
+                    currentModel.setAttribute('position', position);
+
+                    // Debug display
+                    resetButton.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+                    resetButton.style.borderColor = 'rgba(0, 0, 0, 0)';
+                }
+
             } else {
                 console.warn('No model found for this marker.');
             }
@@ -645,8 +664,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // ORIENTATION ALERT
 
     // Track the previous orientation state
-    const resetButton = document.getElementById('resetButton');
-
     function checkOrientation() {
         const alertElement = document.getElementById("orientation-alert");
 
@@ -676,7 +693,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Add event listener for orientation changes
-    window.addEventListener("resize", checkOrientation);
+    window.addEventListener("resize", () => {
+        checkOrientation();
+
+        // Handle resize corrections (iPad issues)
+        const sceneEl = document.querySelector("a-scene");
+        if (sceneEl && sceneEl.camera) {
+            sceneEl.camera.aspect = window.innerWidth / window.innerHeight;
+            sceneEl.camera.updateProjectionMatrix();
+        }
+
+    });
 
     // Reload the page without intro
     function reset() {
@@ -704,5 +731,23 @@ document.addEventListener('DOMContentLoaded', function () {
             reset();
         }
     });
+
+    // Other helper functions
+    function isIPad() {
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        // Detect via User Agent for older and newer iPads
+        const isOldIPad = /iPad/.test(userAgent);
+
+        // Detect iPadOS devices (modern devices, including Apple Silicon)
+        const isModernIPad = (
+            navigator.platform === 'MacIntel' || navigator.platform === 'iPad') &&
+            navigator.maxTouchPoints > 1;
+
+        // Fallback for non-Intel iPads using `userAgentData` if available
+        const isUserAgentDataIPad = navigator.userAgentData?.platform === 'iPad';
+
+        return isOldIPad || isModernIPad || isUserAgentDataIPad;
+    }
 
 });
