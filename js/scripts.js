@@ -375,19 +375,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(`OBJ ID: ${modelObjId}, MTL ID: ${modelMtlId}`);
 
                 // Fix scale and position based on the JSON data
-                const position = currentAugmentedContent.position[set] || '0 0 0';
+                let position = currentAugmentedContent.position[set] || '0 0 0';
                 const scale = currentAugmentedContent.scale[set] || '1 1 1';
                 currentModel.setAttribute('position', position);
                 currentModel.setAttribute('scale', scale);
                 console.log(`SCALE: ${scale}`);
 
                 // iPad alignment patch
-                /*
-                if (isIPad()) {
+                
+                if (true) // (isIPad()) {
                     console.log("This device is an iPad");
                     position = {
                         x: position.x || 0,
-                        y: (position.y || 0) + 10, // Add 8 to the y-axis
+                        y: (position.y || 0) + 0.5, // Add 8 to the y-axis
                         z: position.z || 0,
                     };
                     currentModel.setAttribute('position', position);
@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     resetButton.style.backgroundColor = '#002b49';
                     resetButton.style.borderColor = '#002b49';
                 }
-                */
+                
 
             } else {
                 console.warn('No model found for this marker.');
