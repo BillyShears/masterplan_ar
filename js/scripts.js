@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log("This device is an iPad");
                     position = {
                         x: position.x || 0,
-                        y: (position.y || 0) + 2, // Add 8 to the y-axis
+                        y: (position.y || 0) + 0.7, // Add 8 to the y-axis
                         z: position.z || 0,
                     };
                     currentModel.setAttribute('position', position);
