@@ -10,7 +10,7 @@
                 "animation": [],
                 "model0": "DATI_1.obj",
                 "model1": "accessi.obj",
-                "model2": "flussi1.obj",
+                "model2": "",
                 "model3": "",
                 "position": {
                     "img0": {"x": 0, "y": 0, "z": 0},
@@ -125,7 +125,7 @@
                 "animation": [],
                 "model0": "DATI_2.obj",
                 "model1": "accessi.obj",
-                "model2": "flussi2.obj",
+                "model2": "",
                 "model3": "",
                 "position": {
                     "img0": {"x": 0, "y": 0, "z": 0},
@@ -211,7 +211,7 @@
                 "animation": [],
                 "model0": "DATI_3.obj",
                 "model1": "accessi.obj",
-                "model2": "flussi3.obj",
+                "model2": "",
                 "model3": "",
                 "position": {
                     "img0": {"x": 0, "y": 0, "z": 0},
@@ -276,7 +276,7 @@
                 "animation": [],
                 "model0": "DATI_4.obj",
                 "model1": "accessi.obj",
-                "model2": "flussi4.obj",
+                "model2": "",
                 "model3": "",
                 "position": {
                     "img0": {"x": 0, "y": 0, "z": 0},
